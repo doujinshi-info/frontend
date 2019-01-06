@@ -1,0 +1,49 @@
+self.addEventListener('push', function(event) {
+  if (!(self.Notification && self.Notification.permission === 'granted')) {
+    return;
+  }
+
+  if (event.data) {
+    let data = event.data.json();
+    let title = data.title;
+    let options = {
+      body: data.message || false,
+      icon: data.icon || 'assets/logo.png',
+      badge: 'assets/logo.png',
+      tag: data.tag || 'general',
+      data: data.data || false,
+      timestamp: data.timestamp || false,
+    };
+
+    if (data.image) {
+      options.image = data.image;
+    }
+
+    event.waitUntil(self.registration.showNotification(title, options));
+  }
+});
+
+self.addEventListener('notificationclick', function(event) {
+  event.notification.close();
+
+  event.waitUntil(
+    clients.matchAll({
+        type: 'window',
+    })
+    .then(function(clientList) {
+      for (let i = 0; i < clientList.length; i++) {
+        let client = clientList[i];
+
+        if (client.url == '/' && 'focus' in client) {
+          return client.focus();
+        }
+      }
+
+      if (clients.openWindow) {
+        if (event.notification.data.link != false) {
+          return clients.openWindow(event.notification.data.link);
+        }
+      }
+    })
+  );
+});

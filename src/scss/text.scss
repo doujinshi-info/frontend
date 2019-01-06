@@ -1,0 +1,42 @@
+.truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.book-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0.5rem;
+  font-weight: bold;
+  text-align: left;
+  color: #333;
+  display: flex;
+  margin-top: auto;
+}
+
+.title, .subtitle {
+  line-height: 1.4;
+}
+
+.pull-center {
+  text-align: center;
+}
+
+.tab-shown { display: block; }
+.tab-hidden { display: none; }
+.tab-content { margin: 1rem 0; }
+
+.filter-container {
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.filter-header {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.filter-header a { text-transform: uppercase; }

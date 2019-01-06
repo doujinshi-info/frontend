@@ -1,0 +1,64 @@
+.select { width: 100%; }
+.select select { width: 100%; }
+.checkbox input, .radio input {
+	margin-right: 5px;
+}
+
+.radio + .radio {
+	margin: 0;
+	margin-top: 10px;
+}
+
+.radio { display: block; }
+
+.dropzone {
+	width: 100%;
+	background-color: #edf0f4;
+	border-radius: 6px;
+  border: none;
+}
+
+.dz-message { font-size: 1.5rem; }
+
+.dropzone .dz-preview { margin: 5px; }
+
+.dz-progress { display: none; }
+.dz-filename { display: none; }
+.dz-size { display: none; }
+
+.dz-remove {
+  color: #FFF;
+  position: absolute;
+  z-index: 1000;
+  top: 0.5rem;
+  right: 0.5rem;
+  cursor: pointer;
+}
+
+.dropzone.dz-clickable * {
+  cursor: pointer;
+}
+
+.dropzone .dz-preview.dz-image-preview {
+  background-color: #edf0f4;
+}
+
+.dropzone .dz-preview .dz-image {
+  width: 300px;
+  height: 300px;
+}
+
+.dropzone .dz-preview:hover .dz-image {
+  background: #000;
+}
+
+.dropzone .dz-preview:hover .dz-image img {
+    -webkit-transform: none;
+    z-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
+    -webkit-filter: none;
+    filter: none;
+    opacity: 0.4;
+}

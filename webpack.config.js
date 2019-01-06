@@ -1,0 +1,89 @@
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
+
+module.exports = {
+  entry: { main: './src/js/index.js' },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'app.[chunkhash].js'
+  },
+  resolve: {
+    modules: ['node_modules'],
+    descriptionFiles: ['package.json'],
+    extensions: ['.js', '.json'],
+    alias: {
+      pace: 'pace-progress'
+    }
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader']
+        })
+      },
+      {
+        test: /\.(jpg|png|svg)$/,
+        use: {
+          loader: "file-loader",
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'assets/',
+            publicPath: '/assets/'
+          }
+        }
+      },
+      {
+        test: /.(ttf|otf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'fonts/',    // where the fonts will go
+            publicPath: '/fonts/'       // override the default path
+          }
+        }]
+      },
+    ]
+  },
+  plugins: [
+    new Dotenv({
+      systemvars: true,
+    }),
+    new ExtractTextPlugin({
+      filename: 'style.[chunkhash].css',
+      disable: false,
+      allChunks: true
+    }),
+    new HtmlWebpackPlugin({
+      inject: false,
+      hash: true,
+      template: './src/index.html',
+      filename: 'index.html'
+    }),
+    new ServiceWorkerWebpackPlugin({
+      entry: path.join(__dirname, 'src/js/sw.js'),
+    }),
+    new CleanWebpackPlugin(['dist'])
+  ],
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 8000,
+    publicPath: '/',
+    historyApiFallback: true
+  }
+};
