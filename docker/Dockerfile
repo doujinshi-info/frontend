@@ -1,21 +1,20 @@
-# Build Process
-FROM node:8-jessie AS builder
+FROM node:8-jessie
 
-WORKDIR /app
+RUN apt-get update && \
+    apt-get install -y nginx
 
-COPY . ./
-
-RUN npm install
-RUN npm run build
-
-# Static Nginx
-FROM nginx:stable
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    rm /var/log/lastlog /var/log/faillog
 
 WORKDIR /var/www
 
-COPY --from=builder /app/dist/ /var/www
-COPY ./docker/nginx.conf /etc/nginx/conf.d/default.conf
+COPY . ./
+COPY ./docker/run.sh /
+COPY ./docker/nginx.conf /etc/nginx/sites-enabled/default
+
+RUN npm install
+
+ENTRYPOINT [ "sh", "/run.sh" ]
 
 EXPOSE 80 443
-
-CMD ["nginx", "-g", "daemon off;"]
