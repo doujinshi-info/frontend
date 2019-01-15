@@ -5,4 +5,4 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
-    image: doujinshi-info/frontend:1.0
+    image: doujinshi/frontend:latest

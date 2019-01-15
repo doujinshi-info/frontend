@@ -11,6 +11,8 @@ RUN npm run build
 # Static Nginx
 FROM nginx:stable
 
+WORKDIR /var/www
+
 COPY --from=builder /app/dist/ /var/www
 COPY ./docker/nginx.conf /etc/nginx/conf.d/default.conf
 
