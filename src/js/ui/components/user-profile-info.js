@@ -19,7 +19,7 @@ export default class UserProfileInfo {
 
     if (user) {
       content = [
-        m('h3.title.is-3', user.name),
+        m('h3.title.is-3', user.display_name),
         m('table.table.is-striped.is-fullwidth',
           m('tbody', [
             m('tr', [

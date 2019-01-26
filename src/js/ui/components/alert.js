@@ -3,7 +3,7 @@
 import m from 'mithril';
 import locale from './../locale';
 
-module.exports = {
+export default {
   view: function() {
     if (this.type == false) {
       return false;

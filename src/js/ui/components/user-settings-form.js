@@ -26,10 +26,11 @@ export default class UserSettingsForm {
     this.formAction = vnode.attrs.formAction;
 
     if (this.user) {
-      this.formData.name = this.user.name;
+      this.formData.display_name = this.user.display_name;
+      this.formData.user_name = this.user.user_name;
       this.formData.slug = this.user.slug;
       this.formData.email = this.user.email;
-      this.formData.privacy = this.user.privacy;
+      this.formData.is_private = this.user.is_private;
     }
   }
 
@@ -128,16 +129,32 @@ export default class UserSettingsForm {
         m('.tab-content.tab-shown', {id: 'profile'}, [
           m('.field', [
             m('.control', [
-              m('label.label', locale.t('username')),
+              m('label.label', locale.t('fields.account.display_name')),
               m('input.input', {
                 oninput: m.withAttr('value', (v) => {
-                  this.formData.name = v;
+                  this.formData.display_name = v;
                 }),
-                value: this.formData.name,
+                value: this.formData.display_name,
                 type: 'text',
                 autocomplete: 'off',
                 required: true,
-                placeholder: locale.t('username'),
+                placeholder: locale.t('fields.account.display_name'),
+                disabled: vnode.attrs.isUserSettingBusy,
+              }),
+            ]),
+          ]),
+          m('.field', [
+            m('.control', [
+              m('label.label', locale.t('fields.account.user_name')),
+              m('input.input', {
+                oninput: m.withAttr('value', (v) => {
+                  this.formData.user_name = v;
+                }),
+                value: this.formData.user_name,
+                type: 'text',
+                autocomplete: 'off',
+                required: true,
+                placeholder: locale.t('fields.account.user_name'),
                 disabled: vnode.attrs.isUserSettingBusy,
               }),
             ]),
@@ -164,18 +181,18 @@ export default class UserSettingsForm {
               m('.select', [
                   m('select', {
                     onchange: (e) => {
-                      this.formData.privacy = e.currentTarget.value;
+                      this.formData.is_private = e.currentTarget.value;
                     },
                     required: true,
                     disabled: vnode.attrs.isUserSettingBusy,
                   }, [
                     m('option', {
-                      value: 'public',
-                      selected: (this.formData.privacy === 'public'),
+                      value: 0,
+                      selected: (this.formData.is_private == false),
                     }, locale.t('fields.account.profile_public')),
                     m('option', {
-                      value: 'private',
-                      selected: (this.formData.privacy === 'private'),
+                      value: 1,
+                      selected: (this.formData.is_private == true),
                     }, locale.t('fields.account.profile_private')),
                   ]),
                 ]),

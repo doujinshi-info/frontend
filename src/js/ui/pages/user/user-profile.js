@@ -64,8 +64,8 @@ export default class UserProfile extends BasePage {
    */
   getUser() {
     this.user.getProfile(this.slug).then(() => {
-      this.setTitle(this.user.data.name);
-      this.private = (this.user.data.privacy == 'private' ? true : false);
+      this.setTitle(this.user.data.display_name);
+      this.private = (this.user.data.is_private == true ? true : false);
     });
   }
 

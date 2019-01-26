@@ -94,6 +94,7 @@ module.exports = {
       delete_approved: 'Deletion request has been approved and the object removed.',
       password_requested: 'Your password reset request has been processed. Please check your email inbox.',
       password_reset: 'Your password has been successfully changed.',
+      user_updated: 'Your information has been successfully updated.',
     },
     about: {
       text_about1: 'Doujinshi.info is an information database containing data on self-published works known as doujinshi. The goal of this project is to catalog, tag, and categorize as many doujinshi as possible. With this community driven data, we are able to provide interesting statistics regarding the doujinshi scene as a whole. Such as average page counts, most common themes, average prices, etc. Along with this, users are able to catalog their physical doujinshi collections to keep track of what they own, as well as follow their favorite artists, or tags, to discover newly released doujinshi.',
@@ -215,7 +216,8 @@ module.exports = {
       dmm: 'DMM / FANZA',
     },
     account: {
-      username: 'Username',
+      display_name: 'Display Name',
+      user_name: 'Username',
       email: 'Email',
       password: 'Password',
       password_current: 'Current Password',

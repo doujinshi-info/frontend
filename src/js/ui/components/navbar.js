@@ -13,7 +13,8 @@ export default class NavBar {
    * Inititalize the component.
    */
   constructor() {
-    this.auth = false;
+    this.token = false;
+    this.user = false;
     this.book = false;
     this.notifications = 0;
   }
@@ -40,7 +41,8 @@ export default class NavBar {
    */
   oninit(vnode) {
     this.pathname = vnode.attrs.pathname;
-    this.auth = vnode.attrs.auth;
+    this.user = vnode.attrs.user;
+    this.token = vnode.attrs.token;
     this.book = vnode.attrs.book;
     this.notifications = vnode.attrs.notifications;
 
@@ -105,19 +107,19 @@ export default class NavBar {
             locale.t('navi.tags'),
             this.pathname),
 
-          (!this.auth.token ?
+          (!this.token ?
             this.generateNavLink('/account/create',
               locale.t('navi.register'),
               this.pathname)
           : ''),
 
-          (!this.auth.token ?
+          (!this.token ?
             this.generateNavLink('/account/login',
               locale.t('navi.login'),
               this.pathname)
           : ''),
 
-          (this.auth.token ? [
+          (this.token ? [
               m('.navbar-item.has-dropdown.is-hoverable', [
                 m('a.navbar-link', locale.t('navi.contribute')),
                 m('.navbar-dropdown.is-right', [
@@ -138,19 +140,19 @@ export default class NavBar {
                 m('a.navbar-link', locale.t('navi.account')),
                 m('.navbar-dropdown.is-right', [
                   this.generateNavLink(
-                    '/profile/'+this.auth.user.slug,
+                    '/profile/'+this.user.slug,
                     locale.t('navi.profile'),
                     this.pathname
                   ),
 
                   this.generateNavLink(
-                    '/profile/'+this.auth.user.slug+'/library',
+                    '/profile/'+this.user.slug+'/library',
                     locale.t('navi.library'),
                     this.pathname
                   ),
 
                   this.generateNavLink(
-                    '/profile/'+this.auth.user.slug+'/wishlist',
+                    '/profile/'+this.user.slug+'/wishlist',
                     locale.t('navi.wishlist'),
                     this.pathname
                   ),

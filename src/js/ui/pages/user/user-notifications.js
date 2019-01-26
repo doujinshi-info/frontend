@@ -62,37 +62,42 @@ class UserNotifications extends BasePage {
    * @return {Vnode}
    */
   view() {
-    if (this.notification.data != null && this.notification.data.length) {
-      return m('section.section', [
-        m('h3.title.is-3', locale.t('navi.notifications')),
-
-        m('.field.is-grouped', [
-          m('.control', [
-            m('button.button.is-light', {
-              onclick: this.clickReadAll.bind(this),
-            }, [
-              m('span.icon.is-small', m('i.fa.fa-check')),
-              m('span', locale.t('buttons.mark_all_read')),
-            ]),
-          ]),
-          m('.control', [
-            m(PushNotification),
+    let content = [
+      m('h3.title.is-3', locale.t('navi.notifications')),
+      m('.field.is-grouped', [
+        m('.control', [
+          m('button.button.is-light', {
+            onclick: this.clickReadAll.bind(this),
+          }, [
+            m('span.icon.is-small', m('i.fa.fa-check')),
+            m('span', locale.t('buttons.mark_all_read')),
           ]),
         ]),
+        m('.control', [
+          m(PushNotification),
+        ]),
+      ])
+    ];
 
-        m(NotificationList, {
+    if (this.notification.data != null && this.notification.data.length) {
+      content.push(
+         m(NotificationList, {
           notifications: this.notification.data,
           meta: this.notification.meta,
           fn_read: this.markAsRead.bind(this),
-        }),
-      ]);
+        })
+      );
     } else {
       if (!this.notification.isLoading) {
-        return m('section.section', m('.notification',
-          locale.t('texts.empty.no_notifications')
-        ));
+        content.push(
+          m('.notification',
+            locale.t('texts.empty.no_notifications')
+          )
+        );
       }
     }
+
+    return m('section.section', content);
   }
 }
 

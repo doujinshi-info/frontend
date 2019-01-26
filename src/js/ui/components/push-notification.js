@@ -18,7 +18,7 @@ export default class PushNotification {
   constructor() {
     this.isPushEnabled = false;
     this.swRegistration = false;
-    this.icon = m('i.fa.fa-bell-o');
+    this.icon = m('i.fa.fa-bell');
     this.btnText = locale.t('buttons.enable_push');
 
     this.notification = new Notification();
@@ -169,13 +169,13 @@ export default class PushNotification {
     switch (state) {
       case 'enabled':
         pushButton.disabled = false;
-        this.icon = m('i.fa.fa-bell');
+        this.icon = m('i.fa.fa-bell-slash');
         this.btnText = locale.t('buttons.disable_push');
         this.isPushEnabled = true;
       break;
       case 'disabled':
         pushButton.disabled = false;
-        this.icon = m('i.fa.fa-bell-o');
+        this.icon = m('i.fa.fa-bell');
         this.btnText = locale.t('buttons.enable_push');
         this.isPushEnabled = false;
       break;
@@ -185,7 +185,7 @@ export default class PushNotification {
       break;
       case 'incompatible':
         pushButton.disabled = true;
-        this.icon = m('i.fa.fa-bell-o');
+        this.icon = m('i.fa.fa-bell');
         this.btnText = locale.t('buttons.not_supported');
       break;
       default:

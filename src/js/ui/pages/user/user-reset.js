@@ -17,7 +17,7 @@ export default class UserReset extends BasePage {
    * Initialization of password reset page.
    */
   constructor() {
-    super(locale.t('navi.reset_pass'));
+    super(Locale.t('navi.reset_pass'));
 
     this.token = m.route.param('token');
     this.auth = new Auth();
@@ -36,7 +36,7 @@ export default class UserReset extends BasePage {
    */
   onupdate() {
     if (this.auth.data) {
-      Alert.create('success', locale.t('texts.success.password_reset'));
+      Alert.create('success', Locale.t('texts.success.password_reset'));
     }
   }
 
@@ -56,7 +56,7 @@ export default class UserReset extends BasePage {
    */
   view() {
     return m('section.section', [
-      m('h3.title.is-3', locale.t('navi.reset_pass')),
+      m('h3.title.is-3', Locale.t('navi.reset_pass')),
       m(UserResetForm, {
         token: this.token,
         fn_submit: this.processReset.bind(this),

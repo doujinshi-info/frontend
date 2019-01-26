@@ -71,7 +71,7 @@ export default class ContributionList {
             }, change.amount),
             m('td', m('a', {
               href: '/profile/'+change.user.slug,
-            }, change.user.name)),
+            }, change.user.display_name)),
             m('td', change.created_at),
           ])
         );

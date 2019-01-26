@@ -10,6 +10,7 @@ import {User} from './../../../model/user';
 
 // View Components
 import UserSettingsForm from './../../components/user-settings-form';
+import Alert from './../../components/alert';
 
 /**
  * The user settings page allows users to change their information.
@@ -40,7 +41,10 @@ class UserSettings extends BasePage {
    * @param  {Object} formData The data from the form.
    */
   processSettings(formData) {
-    this.user.updateSettings(this.auth.user.slug, formData);
+    this.user.updateSettings(this.auth.user.slug, formData).then(() => {
+      this.auth.refreshToken();
+      Alert.create('success', locale.t('texts.success.user_updated'));
+    });
   }
 
   /**

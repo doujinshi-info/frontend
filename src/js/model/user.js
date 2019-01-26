@@ -58,6 +58,7 @@ export class User {
 
     return this.api.request('PUT', '/user/'+slug, payload, true)
     .then((response) => {
+      this.data = response;
     })
     .then(() => {
       this.isLoading = false;

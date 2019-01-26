@@ -7,7 +7,7 @@ import Tokenfield from 'tokenfield';
 
 import getTagSet from './../../utils/get-tag-set';
 
-let Dropzone = require('./../../../../node_modules/dropzone/dist/dropzone.js');
+let Dropzone = require('dropzone/dist/dropzone.js');
 
 /**
  * Display a form for adding or modifying a doujinshi.
@@ -230,7 +230,7 @@ export default class BookForm {
 
     this.tokenfields[type]._templates.setItem = '' +
       '<li class="tokenfield-set-item">\n<span class="item-label"></span>\n' +
-      '<a href="#" class="item-remove fa fa-times" tabindex="-1"></a>\n' +
+      '<a href="#" class="item-remove" tabindex="-1"><i class="fa fa-times"></i></a></a>\n' +
       '<input class="item-input" type="hidden" />\n</li>';
 
     this.tokenfields[type].remapData = (data) => {

@@ -2,6 +2,8 @@
 
 import m from 'mithril';
 
+import {Auth} from './../auth';
+
 import LayoutDefault from './layouts/default';
 
 import BookCreate from './pages/book/book-create';
@@ -44,6 +46,8 @@ class Router {
    * Build mithril Vnodes for each specific route.
    */
   constructor() {
+    this.auth = new Auth();
+
     this.routes = {
       '/': this.buildRoute(MiscHome),
       '/about': this.buildRoute(MiscAbout),
@@ -88,13 +92,19 @@ class Router {
   buildRoute(screen, requiresAuth, layout) {
     layout = layout || LayoutDefault;
 
+    let auth = this.auth;
+
     return {
       onmatch: function(args, requestedPath) {
         if (requiresAuth === true) {
+          auth.redirectIfNotLoggedIn();
         }
       },
       render: function() {
-        return m(layout, {pathname: window.location.pathname}, m(screen));
+        return m(layout, {
+          auth: auth,
+          pathname: window.location.pathname
+        }, m(screen));
       },
     };
   }
@@ -108,4 +118,4 @@ class Router {
   }
 }
 
-export let router = new Router();
+export default Router;

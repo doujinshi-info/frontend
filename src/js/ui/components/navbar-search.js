@@ -4,6 +4,7 @@ import m from 'mithril';
 import locale from './../locale';
 import getURLParam from './../../utils/get-url-params';
 import isURLPath from './../../utils/is-path';
+import Search from './../../model/search';
 
 /**
  * The search bar for the navbar.
@@ -37,11 +38,16 @@ export default class NavBarSearch {
         accept: 'image/*',
         id: 'imageUpload',
         type: 'file',
-        onchange: (v) => {
+        oninput: (v) => {
           this.book.imageSearch(v.target.files[0])
           .then(() => {
             if (this.book.data) {
-              m.route.set('/book/'+this.book.data);
+              if (this.book.data.meta.total == 1) {
+                m.route.set('/book/'+this.book.data.data[0].slug);
+              } else {
+                Search.data = this.book.data;
+                m.route.set('/search');
+              }
             }
           });
         },
@@ -68,7 +74,7 @@ export default class NavBarSearch {
                 onclick: function() {
                   document.getElementById('imageUpload').click();
                 },
-              }, m('i.fa.fa-picture-o'))),
+              }, m('i.fa.fa-image'))),
               m('.control', m('a.button.is-primary', {
                 onclick: function() {
                   if (document.getElementById('searchForm').checkValidity()) {

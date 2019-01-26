@@ -7,6 +7,7 @@ import locale from './../../locale';
 
 // Models
 import {Book} from './../../../model/book';
+import Search from './../../../model/search';
 
 // View Components
 import BookList from './../../components/book-list';
@@ -19,7 +20,7 @@ export default class MiscSearch extends BasePage {
    * Initialization of search results page.
    */
   constructor() {
-    super('Search: ' + getURLParam('q'));
+    super('Search' + (getURLParam('q') ? ' : ' + getURLParam('q') : ''));
 
     this.book = new Book();
 
@@ -28,6 +29,8 @@ export default class MiscSearch extends BasePage {
 
     this.books = [];
     this.meta = false;
+
+    this.imageResults = Search.data;
   }
 
   /**
@@ -36,6 +39,11 @@ export default class MiscSearch extends BasePage {
   oninit() {
     if (this.query) {
       this.getBooks(this.page, {query: this.query});
+    }
+
+    if (this.imageResults != false) {
+      this.books = Array.prototype.push.apply(this.books, this.imageResults.data.data);
+      this.meta = this.imageResults.data.meta;
     }
   }
 

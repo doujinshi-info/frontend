@@ -68,15 +68,31 @@ export default class UserResetForm {
       m('.field', [
         m('.control', [
           m('input.input', {
-            name: 'username',
+            name: 'display_name',
             oninput: m.withAttr('value', (v) => {
-              this.formData.name = v;
+              this.formData.display_name = v;
             }),
-            value: this.formData.name,
+            value: this.formData.display_name,
             type: 'text',
             autocomplete: 'off',
             required: true,
-            placeholder: locale.t('fields.account.username'),
+            placeholder: locale.t('fields.account.display_name'),
+            disabled: isBusy,
+          }),
+        ]),
+      ]),
+      m('.field', [
+        m('.control', [
+          m('input.input', {
+            name: 'user_name',
+            oninput: m.withAttr('value', (v) => {
+              this.formData.user_name = v;
+            }),
+            value: this.formData.user_name,
+            type: 'text',
+            autocomplete: 'off',
+            required: true,
+            placeholder: locale.t('fields.account.user_name'),
             disabled: isBusy,
           }),
         ]),

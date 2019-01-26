@@ -84,7 +84,7 @@ export class Book {
    */
   fetch(slug) {
     this.data = null;
-    this.isLoading = null;
+    this.isLoading = true;
 
     return this.api.request('GET', '/book/'+slug)
     .then((response) => {
@@ -106,7 +106,7 @@ export class Book {
    */
   fetchAll(page = 1) {
     this.data = null;
-    this.isLoading = null;
+    this.isLoading = true;
 
     return this.api.request('GET', '/book', {page: page})
     .then((response) => {
@@ -129,7 +129,7 @@ export class Book {
    */
   search(query, page = 1) {
     this.data = null;
-    this.isLoading = null;
+    this.isLoading = true;
 
     return this.api.request('GET', '/search', {q: query, page: page})
     .then((response) => {
@@ -152,9 +152,9 @@ export class Book {
    */
   imageSearch(image, page = 1) {
     this.data = null;
-    this.isLoading = null;
+    this.isLoading = true;
 
-    let payload = toFormData({image: image, page: page});
+    let payload = toFormData({image: image});
 
     return this.api.request('POST', '/search/image', payload)
     .then((response) => {

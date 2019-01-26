@@ -2,7 +2,6 @@
 
 import m from 'mithril';
 
-import {Auth} from './../../auth';
 import {Book} from './../../model/book';
 import {Notification} from './../../model/notification';
 
@@ -19,7 +18,7 @@ class LayoutDefault {
    * Initialize layout and load up auth, book, and notification models.
    */
   constructor() {
-    this.auth = new Auth();
+    this.auth = false;
     this.book = new Book();
     this.notification = new Notification();
   }
@@ -30,6 +29,8 @@ class LayoutDefault {
    * @param  {Vnode} vnode
    */
   oninit(vnode) {
+    this.auth = vnode.attrs.auth;
+
     if (this.auth.token) {
       this.notification.count();
     }
@@ -49,7 +50,8 @@ class LayoutDefault {
 
     return [
       m(NavBar, {
-          auth: this.auth,
+          token: this.auth.token,
+          user: this.auth.user,
           book: this.book,
           notifications: this.notification.data,
           pathname: vnode.attrs.pathname,

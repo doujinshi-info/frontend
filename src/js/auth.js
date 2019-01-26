@@ -193,6 +193,7 @@ export class Auth {
     })
     .then((response) => {
       this.setToken(response.access_token);
+      this.user = this.decodeToken();
     })
     .then(() => {
       this.isLoading = false;

@@ -1,7 +1,7 @@
 'use strict';
 
 import m from 'mithril';
-import * as locale from './../locale';
+import locale from './../locale';
 import paginate from './pagination';
 
 /**
