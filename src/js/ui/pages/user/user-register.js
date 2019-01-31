@@ -17,6 +17,7 @@ export default class UserRegister extends BasePage {
    */
   constructor() {
     super(locale.t('navi.register'));
+    super.setDescription(locale.t('descriptions.user_register'));
     this.auth = new Auth();
   }
 

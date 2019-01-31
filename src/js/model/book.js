@@ -154,7 +154,9 @@ export class Book {
     this.data = null;
     this.isLoading = true;
 
-    let payload = toFormData({image: image});
+    let payload = toFormData({});
+
+    payload.append('image', image);
 
     return this.api.request('POST', '/search/image', payload)
     .then((response) => {

@@ -16,6 +16,8 @@ import StatsBarChart from './../../components/stats-bar-chart';
 import bulmaCalendar from 'bulma-calendar';
 import moment from 'moment';
 
+import setTagMeta from './../../../utils/set-tag-meta';
+
 /**
  * Stats of a specific tag.
  */
@@ -41,7 +43,7 @@ export default class TagStats extends BasePage {
    */
   oninit() {
     this.tag.fetch(this.type, this.slug).then(() => {
-      super.setTitle(locale.name(this.tag.data.name));
+      setTagMeta(this.tag.data, 'descriptions.tag_stats');
       this.fetchStats(this.tag.data.id);
     });
   }

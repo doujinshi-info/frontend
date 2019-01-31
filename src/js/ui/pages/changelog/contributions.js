@@ -26,6 +26,8 @@ export default class ContributionList extends BasePage {
     this.page = Number(getURLParam('page')) || 1;
     this.data = null;
     this.meta = null;
+
+    super.setDescription(locale.t('descriptions.changelog'));
   }
 
   /**

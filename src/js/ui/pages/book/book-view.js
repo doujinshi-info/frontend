@@ -17,6 +17,7 @@ import BookTable from './../../components/book-table';
 import RequestDeletion from './../../components/request-deletion';
 
 import getTagSet from './../../../utils/get-tag-set';
+import setBookMeta from './../../../utils/set-book-meta';
 
 /**
  * View information about a specific book / doujinshi.
@@ -42,62 +43,7 @@ export default class BookView extends BasePage {
    */
   oninit() {
     this.book.fetch(this.slug).then(() => {
-      /*
-      setBookMeta(this.book);
-      let pageTitle = locale.name(this.book.data.name);
-
-      // Categorize tags
-      this.circles = this.book.getTagSet('circle');
-      this.artists = this.book.getTagSet('artist');
-
-      if (this.circles) {
-        pageTitle = '[' + locale.name(this.circles[0].name) + '] ' + pageTitle;
-      }
-
-      super.setTitle(pageTitle);
-      super.setImage(this.book.data.cover);
-
-      super.setDescription(locale.t('descritions.book', {
-        adult: (this.book.data.is_adult ? 'R18 ' : ''),
-        book: locale.name(this.book.data.name),
-        artist: (this.book.data.artists ?
-          locale.name(this.book.data.artists.data[0].name) : ''),
-      }));
-
-      let keywords = [
-        locale.t('doujinshi')
-      ];
-
-      (this.book.data.is_adult) && keywords.push('R18');
-      (this.book.data.is_anthology)
-        && keywords.push(locale.t('fields.book.is_anthology'));
-      (this.book.data.is_copybook)
-        && keywords.push(locale.t('fields.book.is_copybook'));
-      (this.book.data.is_novel)
-        && keywords.push(locale.t('fields.book.is_novel'));
-
-      if (this.book.data.artists) {
-        this.book.data.artists.data.forEach(function(tag) {
-          keywords.push(locale.name(tag.name));
-        });
-      }
-
-      if (this.book.data.circles) {
-        this.book.data.circles.data.forEach(function(tag) {
-          keywords.push(locale.name(tag.name));
-        });
-      }
-
-      if (this.book.data.series) {
-        this.book.data.series.data.forEach(function(tag) {
-          keywords.push(locale.name(tag.name));
-        });
-      }
-
-      super.setKeywords(keywords);
-
-      super.setSocialMeta();
-      */
+      setBookMeta(this.book.data);
     });
   }
 

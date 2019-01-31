@@ -16,7 +16,7 @@ const locale = {
     if (variables == false) {
       return translation;
     } else {
-      return _stringInjector(translation, variables);
+      return this._stringInjector(translation, variables);
     }
   },
 

@@ -38,10 +38,19 @@ module.exports = {
   tag: 'タグ',
   loading: '読み込み中',
   titles: {
-    home: 'Doujinshi Information & Statistics',
+    home: '同人誌の情報と統計',
   },
-  descritions: {
-    book: '{artist}による{adult}同人誌についての情報、{book}',
+  descriptions: {
+    book_info: '{artist}が作成した同人誌「{book}」に関する情報。',
+    book_info_adult: '{artist}が作成したR18同人誌「{book}」に関する情報。',
+    tag_info: '{type}{tag}に関連付けられている同人誌に関する情報。',
+    tag_stats: '{type}{tag}に関連する同人誌に関する統計。',
+    tag_changelog: '{type}{tag}に関連するデータの変更。',
+    user_login: 'あなたの通知をチェックし、あなたのライブラリを管理し、そしてデータベースに貢献するのを助けるためにサインインしてください。',
+    user_register: 'あなたのライブラリー、ウィッシュリストを管理し、データベースに貢献するのを助けるためにサインアップしてください。',
+    user_forgot: '忘れたパスワードを再設定してください。',
+    statistics: 'Doujinshi.infoデータベース全体の統計情報',
+    changelog: 'Doujinshi.infoのレコードに対する最近のすべての変更。',
   },
   navi: {
     about: '約',
@@ -80,9 +89,12 @@ module.exports = {
       no_results: '結果が見つかりません。',
       no_follows: 'あなたは現在、タグを追跡していません。',
       no_notifications: '現在、通知はありません。',
+      no_data: 'No data available.',
     },
     errors: {
       not_found: 'ページが見つかりません',
+      password_mismatch: 'パスワードが一致していません。',
+      required_field: 'この項目は必須です。',
     },
     success: {
       import_success: 'インポートジョブは正常にスケジュールされました。',
@@ -91,6 +103,7 @@ module.exports = {
       delete_approved: '削除要求が承認され、オブジェクトが削除されました。',
       password_requested: 'パスワードリセット要求が処理されました。 メールの受信トレイを確認してください。',
       password_reset: 'あなたのパスワードは正常に変更されました。',
+      user_updated: 'あなたの情報は正常に更新されました。',
     },
     about: {
       text_about1: 'Doujinshi.infoは、同人誌として知られる自己発行の作品に関するデータを含む情報データベースです。 このプロジェクトの目標は、できるだけ多くの同人誌をカタログ化し、タグ付けし、分類することです。 このコミュニティ主導のデータによって、同人誌のシーン全体に関する興味深い統計情報を提供することができます。 平均ページ数、最も一般的なテーマ、平均価格など。これに加えて、ユーザーは自分のものを追跡し、お気に入りのアーティストやタグを追跡して新たに発見するために、物理的同人コレクションをカタログすることができます 同人誌をリリース。',
@@ -138,6 +151,7 @@ module.exports = {
     enable_push: 'プッシュ通知を有効にする',
     disable_push: 'プッシュ通知を無効にする',
     not_supported: 'サポートされていません',
+    filter: 'フィルタ',
   },
   tabs: {
     contributions: '貢献',
@@ -147,6 +161,8 @@ module.exports = {
     changelog: '変更ログ',
     library: 'としょうかん',
     wishlist: 'ウィッシュリスト',
+    security: 'セキュリティ',
+    stats: '統計',
   },
   hyperlinks: {
     account_exists: '既にメンバーですか？ ログイン',
@@ -201,14 +217,24 @@ module.exports = {
       twitter: 'Twitter',
       circlems: 'Circle.ms',
       amazon: 'アマゾン',
+      patreon: 'Patreon',
+      enty: 'エンティ',
+      fantia: 'ファンティア',
+      alice: 'アリスブックス',
+      dlsite: 'DLsite',
+      dmm: 'DMM / FANZA',
     },
     account: {
+      display_name: '表示名',
       username: 'ユーザー名',
       email: '電メール',
       password: 'パスワード',
       password_current: '現在のパスワード',
       password_new: '新しいパスワード',
       password_confirm: 'パスワードを認証する',
+      profile_privacy: 'プロフィールのプライバシー',
+      profile_public: 'パブリック',
+      profile_private: '非公開',
     },
     deletion: {
       id: 'リクエスト＃',

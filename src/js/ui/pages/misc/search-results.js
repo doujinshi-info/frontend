@@ -42,8 +42,8 @@ export default class MiscSearch extends BasePage {
     }
 
     if (this.imageResults != false) {
-      this.books = Array.prototype.push.apply(this.books, this.imageResults.data.data);
-      this.meta = this.imageResults.data.meta;
+      this.books = this.imageResults.data
+      this.meta = this.imageResults.meta;
     }
   }
 

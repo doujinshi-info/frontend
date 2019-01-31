@@ -3,7 +3,7 @@
 import '@fortawesome/fontawesome-free/js/all'
 import './../scss/main.scss';
 
-import pace from 'pace-progress';
+import Pace from 'pace-progress';
 import Router from './ui/router';
 
 import locale from './ui/locale';
@@ -18,6 +18,8 @@ i18next.init({
   },
 });
 
-pace.start();
+Pace.options.ajax.trackMethods = ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'];
+
+Pace.start();
 
 new Router().init();

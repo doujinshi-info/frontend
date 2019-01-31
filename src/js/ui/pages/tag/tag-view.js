@@ -18,6 +18,7 @@ import RequestDeletion from './../../components/request-deletion';
 import TagFollow from './../../components/tag-follow';
 
 import getTagSet from './../../../utils/get-tag-set';
+import setTagMeta from './../../../utils/set-tag-meta';
 
 /**
  * View information about a specific tag.
@@ -61,7 +62,7 @@ export default class TagView extends BasePage {
   oninit() {
     this.getTag(this.page).then(() => {
       this.data = this.tag.data;
-      super.setTitle(locale.name(this.data.name));
+      setTagMeta(this.data, 'descriptions.tag_info');
     });
   }
 

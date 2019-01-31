@@ -17,7 +17,7 @@ export default class UserLogin extends BasePage {
    */
   constructor() {
     super(locale.t('navi.login'));
-
+    super.setDescription(locale.t('descriptions.user_login'));
     this.auth = new Auth();
   }
 

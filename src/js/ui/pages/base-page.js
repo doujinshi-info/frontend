@@ -16,8 +16,8 @@ export default class BasePage {
    */
   constructor(title = '') {
     this.setTitle(title);
-    this.description = '';
-    this.keywords = '';
+    this.setDescription('');
+    this.setKeywords('');
     this.image = '';
   }
 

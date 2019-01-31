@@ -29,6 +29,8 @@ export default class MiscStats extends BasePage {
 
     this.startDate = null;
     this.endDate = null;
+
+    super.setDescription(locale.t('descriptions.statistics'));
   }
 
   /**

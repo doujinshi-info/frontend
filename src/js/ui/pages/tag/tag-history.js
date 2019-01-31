@@ -10,6 +10,7 @@ import {Contribution} from './../../../model/contribution';
 
 // View Components
 import ContentTab from './../../components/content-tabs';
+import setTagMeta from './../../../utils/set-tag-meta';
 
 /**
  * Changelog of a specific tag.
@@ -33,7 +34,7 @@ export default class TagHistory extends BasePage {
    */
   oninit() {
     this.tag.fetch(this.type, this.slug).then(() => {
-      super.setTitle(locale.name(this.tag.data.name));
+      setTagMeta(this.tag.data, 'descriptions.tag_changelog');
     });
 
     this.contribution.fetchTagChanges(this.type, this.slug);

@@ -39,7 +39,7 @@ module.exports = {
         })
       },
       {
-        test: /\.(jpg|png|svg)$/,
+        test: /\.(jpe?g|png|svg|ico|xml|webmanifest)$/,
         use: {
           loader: "file-loader",
           options: {
@@ -64,7 +64,7 @@ module.exports = {
       inject: false,
       hash: true,
       template: './src/index.html',
-      filename: 'index.html'
+      filename: 'index.html',
     }),
     new ServiceWorkerWebpackPlugin({
       entry: path.join(__dirname, 'src/js/sw.js'),

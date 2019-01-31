@@ -5,19 +5,25 @@
  * @param  {Boolean} image       [description]
  */
 export default function(title, description, image = false) {
-  document.head.innerHTML += `
-    <meta property="og:title" content="`+title+`">
-    <meta property="og:description" content="`+description+`">
-    `+(image ? '<meta property="og:image" content="`+image+`">' : '')+`
-    <meta property="og:url" content="`+[
-      location.protocol, '//',
-      location.host,
-      location.pathname,
-      ].join('')+`
-    ">
-    <meta name="twitter:title" content="`+title+`">
-    <meta name="twitter:description" content="`+description+`">
-    `+(image ? '<meta property="twitter:image" content="`+image+`">' : '')+`
-    <meta name="twitter:card" content="summary_large_image">
-  `;
+  let link = [
+    location.protocol, '//',
+    location.host,
+    location.pathname,
+  ].join('');
+
+  let tags = "";
+
+  tags += '<meta property="og:title" content="'+title+'">';
+  tags += '<meta property="og:description" content="'+description+'">';
+  tags += '<meta property="og:url" content="'+link+'">';
+  tags += '<meta name="twitter:title" content="'+title+'">';
+  tags += '<meta name="twitter:description" content="'+description+'">';
+
+  if (image) {
+    tags += '<meta property="og:image" content="'+image+'">';
+    tags += '<meta property="twitter:image" content="'+image+'">';
+    tags += '<meta name="twitter:card" content="summary_large_image">';
+  }
+
+  document.head.innerHTML += tags;
 }

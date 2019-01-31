@@ -17,7 +17,7 @@ export default class UserForgot extends BasePage {
    */
   constructor() {
     super(locale.t('navi.forgot_pass'));
-
+    super.setDescription(locale.t('descriptions.user_forgot'));
     this.auth = new Auth();
   }
 

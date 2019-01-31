@@ -51,7 +51,7 @@ export default class MiscAbout extends BasePage {
         m('.column', [
           m('h6.title.is-5', locale.t('texts.about.title_opensource')),
           m('span.fa-stack.fa-5x', [
-            m('i.fa.fa-github.fa-stack-1x'),
+            m('i.fas.fa-code-branch.fa-stack-1x'),
           ]),
           m('p', m.trust(locale.t('texts.about.text_opensource'))),
         ]),

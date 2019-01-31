@@ -40,8 +40,17 @@ module.exports = {
   titles: {
     home: 'Doujinshi Information & Statistics',
   },
-  descritions: {
-    book: 'Information about the {adult}doujinshi, {book}, by {artist}.',
+  descriptions: {
+    book_info: 'Information about the doujinshi, {book}, by {artist}.',
+    book_info_adult: 'Information about the 18+ doujinshi, {book}, by {artist}.',
+    tag_info: 'Information about doujinshi associated with the {type}, {tag}.',
+    tag_stats: 'Statistics pertaining to doujinshi associated with the {type}, {tag}.',
+    tag_changelog: 'Data changes associated with the {type}, {tag}.',
+    user_login: 'Sign in to check your notifications, manage your library, and help contribute to the database.',
+    user_register: 'Sign up to manage your library, wishlist, and help contribute to the database.',
+    user_forgot: 'Reset your forgotten password.',
+    statistics: 'Statistical information of the overall doujinshi.info database.',
+    changelog: 'All recent changes to the records on doujinshi.info.',
   },
   navi: {
     about: 'About',
