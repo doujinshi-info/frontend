@@ -75,7 +75,7 @@ export default class RequestDeletion {
               deleteDialog.className += ' is-active';
             },
           }, [
-            m('span.icon.is-small', m('i.fa.fa-trash-o')),
+            m('span.icon.is-small', m('i.fa.fa-trash')),
             m('span', locale.t('buttons.request_deletion')),
           ])
         ),

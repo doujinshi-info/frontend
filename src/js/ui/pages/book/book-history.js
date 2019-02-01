@@ -52,23 +52,32 @@ export default class BookHistory extends BasePage {
       this.contribution.data.forEach(function(change) {
         changes.push(
           m('tr', [
-            m('td', m('a', {
+            m('td', {
+              'data-th': locale.t('history.transaction')
+            }, m('a', {
               href: '/changelog/' + change.id,
             }, change.id)),
 
-            m('td', locale.t('history.' + change.type)),
+            m('td', {
+              'data-th': locale.t('history.type')
+            }, locale.t('history.' + change.type)),
 
             m('td', {
+              'data-th': locale.t('history.amount'),
               class: (Math.sign(change.amount) === 1 ?
                 'has-text-success' : 'has-text-danger'
               ),
             }, change.amount),
 
-            m('td', (change.user.slug == 'system' ? change.user.name : m('a', {
+            m('td', {
+              'data-th': locale.t('history.contributor')
+            }, (change.user.slug == 'system' ? change.user.name : m('a', {
               href: '/profile/'+change.user.slug,
             }, change.user.name))),
 
-            m('td', change.created_at),
+            m('td', {
+              'data-th': locale.t('history.created_at')
+            }, change.created_at),
           ])
         );
       });
@@ -76,7 +85,7 @@ export default class BookHistory extends BasePage {
       return [
         m(ContentTab, {type: 'book', slug: this.slug}),
         m('section.section', [
-          m('table.table.is-striped.is-fullwidth.is-responsive', [
+          m('table.table.is-striped.is-fullwidth.responsive-table', [
             m('thead', [
               m('tr', [
                 m('th', locale.t('history.transaction')),

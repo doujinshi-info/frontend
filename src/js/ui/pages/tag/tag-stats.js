@@ -82,7 +82,7 @@ export default class TagStats extends BasePage {
                   filterMenu.classList.toggle('is-hidden');
                 },
               }, [
-                m('span.icon.is-small', m('i.fa.fa-sliders')),
+                m('span.icon.is-small', m('i.fa.fa-sliders-h')),
                 m('span', locale.t('buttons.filter')),
               ]),
             ]),

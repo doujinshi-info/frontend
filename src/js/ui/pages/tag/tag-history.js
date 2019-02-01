@@ -51,12 +51,22 @@ export default class TagHistory extends BasePage {
       this.contribution.data.forEach(function(change) {
         changes.push(
           m('tr', [
-            m('td', m('a', {href: '/changelog/' + change.id}, change.id)),
-            m('td', locale.t('history.' + change.type)),
-            m('td', (change.user.slug == 'system' ? change.user.name : m('a', {
-              href: '/profile/' + change.user.slug,
-            }, change.user.name))),
-            m('td', change.created_at),
+            m('td', {
+              'data-th': locale.t('history.transaction')
+            }, m('a', {href: '/changelog/' + change.id}, change.id)),
+            m('td', {
+              'data-th': locale.t('history.type')
+            }, locale.t('history.' + change.type)),
+            m('td', {
+              'data-th': locale.t('history.contributor')
+            },
+              (change.user.slug == 'system' ? change.user.name : m('a', {
+                href: '/profile/' + change.user.slug,
+              }, change.user.name))
+            ),
+            m('td', {
+              'data-th': locale.t('history.created_at')
+            }, change.created_at),
           ])
         );
       });
@@ -67,13 +77,13 @@ export default class TagHistory extends BasePage {
           slug: this.type + '/' + this.slug,
         }),
         m('section.section', [
-          m('table.table.is-striped.is-fullwidth.is-responsive', [
+          m('table.table.is-striped.is-fullwidth.responsive-table', [
             m('thead', [
               m('tr', [
-                m('th', 'Transaction'),
-                m('th', 'Type'),
-                m('th', 'Contributor'),
-                m('th', 'Created At'),
+                m('th', locale.t('history.transaction')),
+                m('th', locale.t('history.type')),
+                m('th', locale.t('history.contributor')),
+                m('th', locale.t('history.created_at')),
               ]),
             ]),
             m('tbody', changes),

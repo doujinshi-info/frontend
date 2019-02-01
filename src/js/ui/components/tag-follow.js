@@ -63,7 +63,7 @@ export default class TagFollow {
           onclick: this.onButtonClick.bind(this),
         }, [
           m('span.icon.is-medium', (this.isFollowing == true ?
-            m('i.fa.fa-bell') : m('i.fa.fa-bell-o')
+            m('i.fa.fa-bell') : m('i.fa.fa-bell')
           )),
           m('span', (this.isFollowing == true ?
             locale.t('buttons.unfollow') : locale.t('buttons.follow')

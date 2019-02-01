@@ -58,26 +58,31 @@ export default class ContributionList {
 
         tokens.push(
           m('tr', [
-            m('td', m('a', {
-              href: '/changelog/'+change.id,
-            }, change.id)),
-            m('td', (change.tag ? locale.t('tag') : locale.t('doujinshi'))),
-            m('td', object),
-            m('td', locale.t('history.' + change.type)),
+            m('td', {'data-th': locale.t('history.transaction')},
+              m('a', {href: '/changelog/'+change.id}, change.id)
+            ),
+            m('td', {'data-th': locale.t('history.object_type')},
+              (change.tag ? locale.t('tag') : locale.t('doujinshi'))
+            ),
+            m('td', {'data-th': locale.t('history.object')}, object),
+            m('td', {'data-th': locale.t('history.type')},
+              locale.t('history.' + change.type)
+            ),
             m('td', {
+              'data-th': locale.t('history.amount'),
               class: (Math.sign(change.amount) === 1 ?
                 'has-text-success' : 'has-text-danger'
               ),
             }, change.amount),
-            m('td', m('a', {
+            m('td', {'data-th': locale.t('history.contributor')}, m('a', {
               href: '/profile/'+change.user.slug,
             }, change.user.display_name)),
-            m('td', change.created_at),
+            m('td', {'data-th': locale.t('history.created_at')}, change.created_at),
           ])
         );
       });
 
-      content = m('table.table.is-striped.is-fullwidth', [
+      content = m('table.table.is-striped.is-fullwidth.responsive-table', [
         m('thead', [
           m('tr', [
             m('th', locale.t('history.transaction')),

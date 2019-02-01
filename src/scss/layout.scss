@@ -153,4 +153,59 @@ body { padding-top: 52px; }
   .is-responsive.is-bordered tr:last-child th {
     border-width: 1px;
   }
+
+  .responsive-table {
+    margin: 1em 0;
+    min-width: 300px;
+
+    tr {
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      display: none;
+    }
+
+    td {
+      display: block;
+
+      &:first-child {
+        padding-top: .5em;
+      }
+      &:last-child {
+        padding-bottom: .5em;
+        margin-bottom: 1rem;
+      }
+
+      &:before {
+        content: attr(data-th)": ";
+        font-weight: bold;
+
+        width: 6.5em;
+        display: inline-block;
+
+        @media (min-width: 800px) {
+          display: none;
+        }
+      }
+    }
+
+    th, td {
+      text-align: left;
+
+      @media (min-width: 800px) {
+        display: table-cell;
+        padding: .25em .5em;
+
+        &:first-child {
+          padding-left: 0;
+        }
+
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+    }
+  }
 }
