@@ -111,7 +111,7 @@ export default class NavBarSearch {
 
           if (this.book.data) {
             if (this.book.data.meta.total == 1) {
-              m.route.set('/book/'+this.book.data.data[0].slug);
+              document.location = '/book/'+this.book.data.data[0].slug;
             } else {
               Search.data = this.book.data;
               m.route.set('/search');

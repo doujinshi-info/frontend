@@ -236,18 +236,17 @@ export default class BookForm {
     this.tokenfields[type].remapData = (data) => {
       return data.data.map((tag) => {
         let tmpShows = getTagSet('series', tag.tags);
+        let tagName = locale.name(tag.name);
 
+        // Show series character is from in results.
         if (tag.type.slug == 'character' && tmpShows) {
-          return {
-            id: tag.id,
-            name: locale.name(tag.name)+' ('+locale.name(tmpShows[0].name)+')',
-          };
-        } else {
-          return {
-            id: tag.id,
-            name: locale.name(tag.name),
-          };
+          tagName += ' ('+locale.name(tmpShows[0].name)+')';
         }
+
+        return {
+          id: tag.id,
+          name: tagName
+        };
       });
     };
 

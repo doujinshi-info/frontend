@@ -65,7 +65,7 @@ export default class NotificationList {
                     m('figure.image.is-48x48',
                       m('img.is-rounded', {
                         src: notification.book.cover
-                          .replace('.jpg', '_thumb.jpg'),
+                          .replace('.jpg', '-thumb.jpg'),
                       })
                     ),
                   ]),
