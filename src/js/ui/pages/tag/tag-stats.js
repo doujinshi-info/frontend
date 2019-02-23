@@ -92,21 +92,25 @@ export default class TagStats extends BasePage {
                   m('label.label', locale.t('fields.book.release_date')),
                   m('input.input', {
                     oncreate: (e) => {
-                      const calendars = bulmaCalendar.attach('[type="date"]', {
+                      var calendars = bulmaCalendar.attach('[type="date"]', {
                         showHeader: false,
                         isRange: true,
+                        showFooter: false,
+                        dateFormat: 'YYYY-MM-DD',
+                        lang: locale.getLang(),
                       });
 
                       for (let i = 0; i < calendars.length; i++) {
-                        calendars[i].on('date:selected', (date) => {
-                          this.startDate = (date.start ?
-                            moment(date.start).format('YYYY-MM-DD')
-                          : null);
+                        calendars[i].on('select', (date) => {
+                          const [start, end] = calendars[i].value().split(' - ');
+                          this.startDate = (start ? start : null);
+                          this.endDate = (end ? end : null);
+                          this.fetchStats(this.tag.data.id);
+                        });
 
-                          this.endDate = (date.end ?
-                            moment(date.end).format('YYYY-MM-DD')
-                          : null);
-
+                        calendars[i].on('clear', (e) => {
+                          this.startDate = null;
+                          this.endDate = null;
                           this.fetchStats(this.tag.data.id);
                         });
                       }

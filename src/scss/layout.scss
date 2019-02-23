@@ -78,6 +78,14 @@ body { padding-top: 52px; }
   border-left: 4px solid #23d160;
 }
 
+.datetimepicker-dummy .datetimepicker-clear-button {
+  margin: .2rem;
+}
+
+.datetimepicker-dummy.is-primary:before, .datetimepicker-dummy.is-primary::before {
+  background: transparent;
+}
+
 @media screen and (max-width: 800px) {
   .is-responsive {
     width: 100%;

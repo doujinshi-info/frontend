@@ -18,8 +18,8 @@ export default class UserCollectionButtons {
     this.collection = new UserCollection();
 
     this.book = false;
-    this.inLibrary = false;
-    this.inWishlist = false;
+    this.inLibrary = null;
+    this.inWishlist = null;
   }
 
   /**
@@ -77,33 +77,35 @@ export default class UserCollectionButtons {
    * @return {[type]}       [description]
    */
   view(vnode) {
-    return (this.auth.token ? m('.field.has-addons.user-collections', [
-      m('p.control',
-        m('a.button.is-light', {
-          onclick: this.onClickLibrary.bind(this),
-        }, [
-          m('span.icon.is-medium', (this.inLibrary == true ?
-            m('i.fa.fa-bookmark') : m('i.fa.fa-bookmark-o'))
-          ),
-          m('span', (this.inLibrary == false ?
-            locale.t('buttons.library_add') :
-            locale.t('buttons.library_remove'))
-          ),
-        ])
-      ),
-      m('p.control',
-        m('a.button.is-light', {
-          onclick: this.onClickWishlist.bind(this),
-        }, [
-            m('span.icon.is-medium', (this.inWishlist == true ?
-              m('i.fa.fa-star') : m('i.fa.fa-star-o'))
+    if (this.inWishlist != null && this.inLibrary != null) {
+      return (this.auth.token ? m('.field.has-addons.user-collections', [
+        m('p.control',
+          m('a.button.is-light', {
+            onclick: this.onClickLibrary.bind(this),
+          }, [
+            m('span.icon.is-medium', (this.inLibrary == true ?
+              m('i.fas.fa-bookmark') : m('i.far.fa-bookmark'))
             ),
-            m('span', (this.inWishlist == false ?
-              locale.t('buttons.wishlist_add') :
-              locale.t('buttons.wishlist_remove'))
+            m('span', (this.inLibrary == false ?
+              locale.t('buttons.library_add') :
+              locale.t('buttons.library_remove'))
             ),
-        ])
-      ),
-    ]) : '');
+          ])
+        ),
+        m('p.control',
+          m('a.button.is-light', {
+            onclick: this.onClickWishlist.bind(this),
+          }, [
+              m('span.icon.is-medium', (this.inWishlist == true ?
+                m('i.fas.fa-star') : m('i.far.fa-star'))
+              ),
+              m('span', (this.inWishlist == false ?
+                locale.t('buttons.wishlist_add') :
+                locale.t('buttons.wishlist_remove'))
+              ),
+          ])
+        ),
+      ]) : '');
+    }
   }
 }
