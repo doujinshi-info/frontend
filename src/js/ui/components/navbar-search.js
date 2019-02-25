@@ -5,6 +5,7 @@ import locale from './../locale';
 import getURLParam from './../../utils/get-url-params';
 import isURLPath from './../../utils/is-path';
 import Search from './../../model/search';
+import uri from 'urijs';
 
 /**
  * The search bar for the navbar.
@@ -15,6 +16,7 @@ export default class NavBarSearch {
    */
   constructor() {
     this.book = false;
+    this.tagType = false;
   }
 
   /**
@@ -24,6 +26,10 @@ export default class NavBarSearch {
    */
   oninit(vnode) {
     this.book = vnode.attrs.book;
+
+    if (isURLPath('/tag/', false)) {
+      this.tagType = uri().path().split('/')[2];
+    }
   }
 
   /**
@@ -124,6 +130,17 @@ export default class NavBarSearch {
     }
   }
 
+  search(e) {
+    var filter = document.getElementById('search-filter').value;
+    var query  = document.getElementById('search-query').value;
+
+    if (filter == 'book') {
+      m.route.set('/search', {q: query});
+    } else {
+      m.route.set('/tag/'+filter, {q: query});
+    }
+  }
+
   /**
    * Display the search bar.
    *
@@ -139,9 +156,8 @@ export default class NavBarSearch {
         oninput: (v) => { this.imagesearch(v); },
       }),
       m('form.navbar-grow', {
-        action: '/search',
+        onsubmit: () => { this.search(); },
         id: 'searchForm',
-        method: 'GET',
         role: 'search',
       },
         m('.navbar-start',
@@ -153,20 +169,55 @@ export default class NavBarSearch {
                   placeholder: locale.t('navi.search'),
                   type: 'search',
                   required: 'required',
-                  value: (isURLPath('/search') ? getURLParam('q') : ''),
+                  id: 'search-query',
+                  value: ((isURLPath('/search') ||
+                    isURLPath('/tag/', false)
+                  ) ? getURLParam('q') : ''),
                 })
               ),
+              m('.control', m('span.select', [
+                m('select', {id: 'search-filter'}, [
+                  m('option', {
+                    value: 'artist',
+                    selected: (this.tagType == 'artist' ? true : false)
+                  }, locale.t('artists')),
+                  m('option', {
+                    value: 'character',
+                    selected: (this.tagType == 'character' ? true : false)
+                  }, locale.t('characters')),
+                  m('option', {
+                    value: 'circle',
+                    selected: (this.tagType == 'circle' ? true : false)
+                  }, locale.t('circles')),
+                  m('option', {
+                    value: 'content',
+                    selected: (this.tagType == 'content' ? true : false)
+                  }, locale.t('content')),
+                  m('option', {
+                    value: 'convention',
+                    selected: (this.tagType == 'convention' ? true : false)
+                  }, locale.t('conventions')),
+                  m('option', {
+                    value: 'book',
+                    selected: (this.tagType == false ? true : false)
+                  }, locale.t('doujinshi')),
+                  m('option', {
+                    value: 'series',
+                    selected: (this.tagType == 'series' ? true : false)
+                  }, locale.t('series')),
+                ])
+              ])),
               m('.control', m('a.button.is-primary', {
                 onclick: function() {
                   document.getElementById('imageUpload').click();
                 },
               }, m('i.fa.fa-image'))),
               m('.control', m('a.button.is-primary', {
-                onclick: function() {
+                onclick: () => {
                   if (document.getElementById('searchForm').checkValidity()) {
-                      document.getElementById('searchForm').submit();
+                    this.search();
                   } else {
-                     document.getElementById('searchForm').reportValidity();
+                    document.getElementById('searchForm').reportValidity();
                   }
                 },
               }, m('i.fa.fa-search'))),

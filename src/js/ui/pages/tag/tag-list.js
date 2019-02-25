@@ -25,6 +25,7 @@ export default class TagList extends BasePage {
 
     this.type = m.route.param('type') || false;
     this.page = Number(getURLParam('page')) || 1;
+    this.query = getURLParam('q') || false;
 
     const subTitle = (this.type ? ' : ' + locale.t(this.type) : '');
 
@@ -35,7 +36,11 @@ export default class TagList extends BasePage {
    * On initialization fetch all tags.
    */
   oninit() {
-    this.tag.fetchAll(this.type, this.page);
+    if (this.query) {
+      this.tag.search(this.type, this.query, this.page);
+    } else {
+      this.tag.fetchAll(this.type, this.page);
+    }
   }
 
   /**

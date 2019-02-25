@@ -5,6 +5,14 @@ import uri from 'urijs';
  * @param  {[type]}  path [description]
  * @return {Boolean}      [description]
  */
-export default function isPath(path) {
-  return uri().path(true) == path ? true : false;
+export default function isPath(path, strict = true) {
+  if (strict) {
+    return uri().path(true) == path ? true : false;
+  } else {
+    if (window.location.href.indexOf(path) > -1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

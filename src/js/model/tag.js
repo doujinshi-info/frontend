@@ -124,4 +124,21 @@ export class Tag {
       this.isLoading = false;
     });
   }
+
+  search(type, query, page = 1) {
+    this.data = null;
+    this.isLoading = true;
+
+    return this.api.request('GET', '/search/tag/'+type, {q: query, page: page})
+    .then((response) => {
+      this.data = response.data;
+      this.meta = response.meta;
+    })
+    .then(() => {
+      this.isLoading = false;
+    }).catch((e) => {
+      this.error = this.api.error;
+      this.isLoading = false;
+    });
+  }
 }
