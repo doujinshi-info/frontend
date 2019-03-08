@@ -37,6 +37,7 @@ module.exports = {
   no: 'いいえ',
   tag: 'タグ',
   loading: '読み込み中',
+  doujin: '同人',
   titles: {
     home: '同人誌の情報と統計',
   },

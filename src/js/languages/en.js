@@ -37,6 +37,7 @@ module.exports = {
   no: 'No',
   tag: 'Tag',
   loading: 'Loading',
+  doujin: 'Doujin',
   titles: {
     home: 'Doujinshi Information & Statistics',
   },

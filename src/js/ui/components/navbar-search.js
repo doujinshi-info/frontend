@@ -200,7 +200,7 @@ export default class NavBarSearch {
                   m('option', {
                     value: 'book',
                     selected: (this.tagType == false ? true : false)
-                  }, locale.t('doujinshi')),
+                  }, locale.t('doujin')),
                   m('option', {
                     value: 'series',
                     selected: (this.tagType == 'series' ? true : false)
