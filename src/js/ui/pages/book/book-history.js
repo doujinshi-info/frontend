@@ -71,9 +71,9 @@ export default class BookHistory extends BasePage {
 
             m('td', {
               'data-th': locale.t('history.contributor')
-            }, (change.user.slug == 'system' ? change.user.name : m('a', {
+            }, (change.user.slug == 'system' ? change.user.name : (change.user == null ? '' : m('a', {
               href: '/profile/'+change.user.slug,
-            }, change.user.name))),
+            }, change.user.display_name)))),
 
             m('td', {
               'data-th': locale.t('history.created_at')

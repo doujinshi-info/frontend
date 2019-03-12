@@ -74,9 +74,9 @@ export default class ContributionList {
                 'has-text-success' : 'has-text-danger'
               ),
             }, change.amount),
-            m('td', {'data-th': locale.t('history.contributor')}, m('a', {
+            m('td', {'data-th': locale.t('history.contributor')}, (change.user != null ? m('a', {
               href: '/profile/'+change.user.slug,
-            }, change.user.display_name)),
+            }, change.user.display_name) : '')),
             m('td', {'data-th': locale.t('history.created_at')}, change.created_at),
           ])
         );
