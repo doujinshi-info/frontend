@@ -98,9 +98,9 @@ export default class NavBar {
           m('.navbar-item.has-dropdown.is-hoverable', [
             m('a.navbar-link', locale.t('navi.community')),
             m('.navbar-dropdown.is-right', [
-              this.generateNavLink(process.env.DISCORD_URL,
-                locale.t('navi.discord'),
-                this.pathname),
+              m('a.navbar-item', {
+                href: process.env.DISCORD_URL,
+              }, locale.t('navi.discord')),
             ]),
           ]),
 
