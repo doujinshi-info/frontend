@@ -5,6 +5,8 @@ import locale from './../locale';
 import m from 'mithril';
 import Tokenfield from 'tokenfield';
 
+import getTagSet from './../../utils/get-tag-set';
+
 /**
  * Displays a form for inputting tag information.
  */
@@ -13,11 +15,13 @@ export default class TagForm {
    * Inititalize the component.
    */
   constructor() {
+    this.circles = null;
     this.fn_submitTag = null;
     this.formData = {};
-    this.tokenfields = {};
-    this.tag = null;
     this.isLoading = false;
+    this.series = null;
+    this.tag = null;
+    this.tokenfields = {};
     this.types = null;
   }
 
@@ -161,6 +165,8 @@ export default class TagForm {
    */
   oninit(vnode) {
     this.tag = vnode.attrs.tagData;
+    this.series = vnode.attrs.series;
+    this.circles = vnode.attrs.circles;
     this.isLoading = vnode.attrs.isLoading;
     this.types = vnode.attrs.types;
 
@@ -179,12 +185,18 @@ export default class TagForm {
           && this.tag.description.japanese,
         date_start: (this.tag.event) && this.tag.event.date_start,
         date_end: (this.tag.event) && this.tag.event.date_end,
-        circles: (this.tag.circles) && this.tag.circles.data.map((circle) => {
-          return {id: circle.id, name: locale.name(circle.name)};
-        }),
-        series: (this.tag.series) && this.tag.series.data.map((show) => {
-          return {id: show.id, name: locale.name(show.name)};
-        }),
+        circles: (this.circles ? this.circles.map((circle) => {
+          return {
+            id: circle.id,
+            name: locale.name(circle.name),
+          };
+        }) : []),
+        series: (this.series ? this.series.map((show) => {
+          return {
+            id: show.id,
+            name: locale.name(show.name),
+          };
+        }) : []),
         links: {
           pixiv: (this.tag.links && this.tag.links.pixiv)
             && this.tag.links.pixiv,

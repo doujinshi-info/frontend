@@ -12,6 +12,8 @@ import {TagType} from './../../../model/tag-type';
 import ContentTab from './../../components/content-tabs';
 import TagForm from './../../components/tag-form';
 
+import getTagSet from './../../../utils/get-tag-set';
+
 /**
  * Tag modification form.
  */
@@ -66,6 +68,8 @@ export default class TagEdit extends BasePage {
           m(TagForm, {
             types: this.types.data,
             tagData: this.tag.data,
+            circles: getTagSet('circle', this.tag.data.tags),
+            series: getTagSet('series', this.tag.data.tags),
             isCreateTagBusy: this.tag.isLoading,
             fn_submitTag: this.updateTag.bind(this),
           }),
