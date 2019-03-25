@@ -77,6 +77,8 @@ module.exports = {
     forgot_pass: 'Forgot Password',
     reset_pass: 'Reset Password',
     notifications: 'Notifications',
+    community: 'Community',
+    discord: 'Discord',
   },
   settings: {
     settings: 'Settings',

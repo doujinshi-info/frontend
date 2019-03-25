@@ -24,7 +24,7 @@ export default class Footer {
     return m('footer.footer', [
       m('.container-fluid',
         m('.columns.is-mobile', [
-          m('.footer-copyright.column.is-four-fifths',
+          m('.footer-copyright.column',
             m('p', [
               m.trust(process.env.APP_TITLE + ' &copy; ' + Date().substr(11, 4)),
             ])

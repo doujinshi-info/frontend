@@ -77,6 +77,8 @@ module.exports = {
     forgot_pass: 'パスワードをお忘れですか',
     reset_pass: 'パスワードを再設定する',
     notifications: '通知',
+    community: 'コミュニティ',
+    discord: 'Discord',
   },
   settings: {
     settings: '設定',
