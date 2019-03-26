@@ -49,9 +49,13 @@ export default class NavBar {
     // Responsive Menu
     document.addEventListener('DOMContentLoaded', function() {
       let menu = document.querySelectorAll('.navbar-burger');
+      let subMenu = document.querySelectorAll('.navbar-item.has-dropdown');
 
       // Get all 'navbar-burger' elements
       let $navbarBurgers = Array.prototype.slice.call(menu, 0);
+
+      // Get all dropdown menu elements
+      let $navbarDropdowns = Array.prototype.slice.call(subMenu, 0);
 
       // Check if there are any navbar burgers
       if ($navbarBurgers.length > 0) {
@@ -64,6 +68,14 @@ export default class NavBar {
 
             $el.classList.toggle('is-active');
             $target.classList.toggle('is-active');
+          });
+        });
+      }
+
+      if ($navbarDropdowns.length > 0) {
+        $navbarDropdowns.forEach(function($el) {
+          $el.addEventListener('click', function() {
+            $el.classList.toggle('is-active');
           });
         });
       }
@@ -174,9 +186,11 @@ export default class NavBar {
                       m('span.tag.is-primary.menu-badge', this.notifications)
                     : ''),
                   ], this.pathname),
+
                   this.generateNavLink('/account/following',
                     locale.t('navi.following'),
                     this.pathname),
+
                   this.generateNavLink('/account/settings',
                     locale.t('navi.settings'),
                     this.pathname),

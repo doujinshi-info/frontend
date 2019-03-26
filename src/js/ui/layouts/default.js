@@ -45,7 +45,7 @@ class LayoutDefault {
   view(vnode) {
     // Make sure we have notification counts before rendering
     if (this.auth.token && this.notification.data == null) {
-      return false;
+      this.notification.data = 0;
     }
 
     return [
