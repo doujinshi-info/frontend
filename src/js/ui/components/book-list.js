@@ -83,18 +83,14 @@ export default class BookList {
             ]),
           ]);
         })),
-
         m('a', {
           href: uri().setQuery('page', this.page + 1).toString(),
-
           class: 'button is-fullwidth is-primary'
             + (this.isLoading ? ' is-loading' : ''),
-
           disabled: (this.meta.last_page == 0
             || this.page == this.meta.last_page ? true : false
             || this.isLoading
           ),
-
           onclick: (e) => {
             e.preventDefault();
             this.nextPage();

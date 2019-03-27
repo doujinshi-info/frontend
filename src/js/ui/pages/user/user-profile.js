@@ -12,10 +12,11 @@ import {UserCollection} from './../../../model/user-collection';
 import {Contribution} from './../../../model/contribution';
 
 // View Components
+import BookList from './../../components/book-list';
+import ContributionList from './../../components/contribution-list';
 import ProfileTabs from './../../components/user-profile-tabs';
 import UserInfo from './../../components/user-profile-info';
-import UserLibrary from './../../components/user-library';
-import ContributionList from './../../components/contribution-list';
+import UserLibrarySearch from './../../components/user-library-search';
 
 /**
  * The user's personal profile page.
@@ -72,8 +73,8 @@ export default class UserProfile extends BasePage {
   /**
    * Get the user's library.
    */
-  getLibrary() {
-    this.collection.fetch('collection', this.slug, this.page, this.query)
+  getLibrary(page) {
+    return this.collection.fetch('collection', this.slug, page, this.query)
     .then(() => {
       Array.prototype.push.apply(this.books, this.collection.data.data);
       this.meta = this.collection.data.meta;
@@ -83,8 +84,8 @@ export default class UserProfile extends BasePage {
   /**
    * Get the user's wishlist.
    */
-  getWishlist() {
-    this.collection.fetch('wishlist', this.slug, this.page, this.query)
+  getWishlist(page) {
+    return this.collection.fetch('wishlist', this.slug, page, this.query)
     .then(() => {
       Array.prototype.push.apply(this.books, this.collection.data.data);
       this.meta = this.collection.data.meta;
@@ -106,29 +107,46 @@ export default class UserProfile extends BasePage {
     } else {
       return [
         m(ProfileTabs, {slug: this.slug}),
+
         m('section.section', [
           (this.user.data && !this.content)
             && m(UserInfo, {user: this.user.data}),
 
           (this.content == 'library' && this.collection.data && this.meta)
-          && m(UserLibrary, {
-            type: 'library',
-            slug: this.slug,
-            books: this.books,
-            meta: this.meta,
-            fn_nextPage: this.getLibrary.bind(this),
-            isLoading: this.collection.isLoading,
-          }),
+          && [
+            m(UserLibrarySearch, {
+              type: 'library',
+              slug: this.slug,
+              isLoading: this.collection.isLoading,
+            }),
+            (this.meta.total > 0 ? m(BookList, {
+              books: this.books,
+              meta: this.meta,
+              fn_nextPage: this.getLibrary.bind(this),
+              isLoading: this.collection.isLoading,
+            }) :
+            m('.notification.has-text-centered', [
+              locale.t('texts.empty.no_results'),
+            ]))
+          ],
 
           (this.content == 'wishlist' && this.collection.data && this.meta)
-          && m(UserLibrary, {
-            type: 'wishlist',
-            slug: this.slug,
-            books: this.books,
-            meta: this.meta,
-            fn_nextPage: this.getWishlist.bind(this),
-            isLoading: this.collection.isLoading,
-          }),
+          && [
+            m(UserLibrarySearch, {
+              type: 'wishlist',
+              slug: this.slug,
+              isLoading: this.collection.isLoading,
+            }),
+            (this.meta.total > 0 ? m(BookList, {
+              books: this.books,
+              meta: this.meta,
+              fn_nextPage: this.getWishlist.bind(this),
+              isLoading: this.collection.isLoading,
+            }) :
+            m('.notification.has-text-centered', [
+              locale.t('texts.empty.no_results'),
+            ]))
+          ],
 
           (this.content == 'contributions' && this.contribution.data)
           && m(ContributionList, {
