@@ -30,8 +30,14 @@ export default function toFormData(obj, form, namespace) {
         // if it's a string or a File object
         fd.append(formKey, obj[property]);
       }
+    } else {
+      if (obj[property] !== null && obj[property] !== undefined) {
+        fd.append(property, obj[property]);
+      }
     }
   }
+
+
 
   return fd;
 }
