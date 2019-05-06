@@ -52,7 +52,7 @@ export default class ContentTabs {
 
     if (this.book) {
       content = [
-        m('table.table.is-striped.is-fullwidth.book-table',
+        m('table.table.is-striped.is-fullwidth.book-table', [
           m('tbody', [
             m('tr', [
               m('th', locale.t('fields.book.name_original')),
@@ -149,8 +149,8 @@ export default class ContentTabs {
               m('th', locale.t('history.updated_at')),
               m('td', this.book.updated_at),
             ]),
-          ])
-        ),
+          ]),
+        ]),
       ];
     }
 

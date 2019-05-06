@@ -3,11 +3,11 @@
 import formArrayToArray from './../../utils/form-array-to-array';
 import locale from './../locale';
 import m from 'mithril';
-import Tokenfield from 'tokenfield';
+import Tokenfield from 'tokenfield/dist/tokenfield';
 
 import getTagSet from './../../utils/get-tag-set';
 
-let Dropzone = require('dropzone/dist/dropzone.js');
+const Dropzone = require('dropzone/dist/dropzone.js');
 
 /**
  * Display a form for adding or modifying a doujinshi.
@@ -163,37 +163,37 @@ export default class BookForm {
   onCreateButtonClick() {
     if (document.getElementById('book-form').checkValidity()) {
       const circles = formArrayToArray(
-        document.querySelectorAll('[name^=circle_tags]')
+          document.querySelectorAll('[name^=circle_tags]')
       );
 
       const artists = formArrayToArray(
-        document.querySelectorAll('[name^=artist_tags]')
+          document.querySelectorAll('[name^=artist_tags]')
       );
 
       const characters = formArrayToArray(
-        document.querySelectorAll('[name^=character_tags]')
+          document.querySelectorAll('[name^=character_tags]')
       );
 
       const series = formArrayToArray(
-        document.querySelectorAll('[name^=series_tags]')
+          document.querySelectorAll('[name^=series_tags]')
       );
 
       const content = formArrayToArray(
-        document.querySelectorAll('[name^=content_tags]')
+          document.querySelectorAll('[name^=content_tags]')
       );
 
       const convention = formArrayToArray(
-        document.querySelectorAll('[name^=convention_tags]')
+          document.querySelectorAll('[name^=convention_tags]')
       );
 
       this.formData.tags = circles.concat(
-        artists,
-        characters,
-        series,
-        content,
-        convention,
-        this.formData.censoring,
-        this.formData.language
+          artists,
+          characters,
+          series,
+          content,
+          convention,
+          this.formData.censoring,
+          this.formData.language
       );
 
       this.fn_bookAction(this.book, this.formData);
@@ -230,12 +230,13 @@ export default class BookForm {
 
     this.tokenfields[type]._templates.setItem = '' +
       '<li class="tokenfield-set-item">\n<span class="item-label"></span>\n' +
-      '<a href="#" class="item-remove" tabindex="-1"><i class="fa fa-times"></i></a></a>\n' +
+      '<a href="#" class="item-remove" tabindex="-1">'+
+      '<i class="fa fa-times"></i></a></a>\n' +
       '<input class="item-input" type="hidden" />\n</li>';
 
     this.tokenfields[type].remapData = (data) => {
       return data.data.map((tag) => {
-        let tmpShows = getTagSet('series', tag.tags);
+        const tmpShows = getTagSet('series', tag.tags);
         let tagName = locale.name(tag.name);
 
         // Show series character is from in results.
@@ -245,7 +246,7 @@ export default class BookForm {
 
         return {
           id: tag.id,
-          name: tagName
+          name: tagName,
         };
       });
     };
@@ -360,11 +361,11 @@ export default class BookForm {
             m('input.input', {
               oncreate: (e) => {
                 this.tokenize(
-                  e,
-                  'character',
-                  true,
-                  false,
-                  this.formData.characters
+                    e,
+                    'character',
+                    true,
+                    false,
+                    this.formData.characters
                 );
               },
               oninput: m.withAttr('value', (v) => {
@@ -399,11 +400,11 @@ export default class BookForm {
             m('input.input', {
               oncreate: (e) => {
                 this.tokenize(
-                  e,
-                  'content',
-                  true,
-                  false,
-                  this.formData.content
+                    e,
+                    'content',
+                    true,
+                    false,
+                    this.formData.content
                 );
               },
               oninput: m.withAttr('value', (v) => {
@@ -423,11 +424,11 @@ export default class BookForm {
             m('input.input', {
               oncreate: (e) => {
                 this.tokenize(
-                  e,
-                  'convention',
-                  false,
-                  false,
-                  this.formData.convention
+                    e,
+                    'convention',
+                    false,
+                    false,
+                    this.formData.convention
                 );
               },
               oninput: m.withAttr('value', (v) => {
@@ -444,7 +445,7 @@ export default class BookForm {
         m('.field', [
           m('.control', [
             m('label.label', locale.t('fields.book.language')),
-              m('select.input', {
+            m('select.input', {
               onchange: () => {
                 this.formData.language = this.value;
               },
@@ -734,7 +735,7 @@ export default class BookForm {
             m('.dropzone.cover-previews', {
               id: 'coverZone',
               oncreate: () => {
-                let parentNode = this;
+                const parentNode = this;
 
                 new Dropzone('div#coverZone', {
                   url: '#',
@@ -747,11 +748,11 @@ export default class BookForm {
                   thumbnailHeight: 300,
                   init: function() {
                     if (parentNode.cover != null) {
-                      let url = parentNode.cover;
+                      const url = parentNode.cover;
 
-                      let filename = url.substring(url.lastIndexOf('/')+1);
+                      const filename = url.substring(url.lastIndexOf('/')+1);
 
-                      let mockCover = {
+                      const mockCover = {
                         name: filename,
                         size: 1,
                         type: 'image/jpeg',
@@ -760,9 +761,9 @@ export default class BookForm {
 
                       this.emit('addedfile', mockCover);
                       this.options.thumbnail.call(
-                        this,
-                        mockCover,
-                        parentNode.cover
+                          this,
+                          mockCover,
+                          parentNode.cover
                       );
                       this.emit('complete', mockCover);
                       this.files.push(mockCover);
@@ -794,7 +795,7 @@ export default class BookForm {
             m('.dropzone.sample-previews', {
               id: 'samplesZone',
               oncreate: () => {
-                let parentNode = this;
+                const parentNode = this;
 
                 new Dropzone('div#samplesZone', {
                   url: '#',
@@ -807,10 +808,10 @@ export default class BookForm {
                   init: function() {
                     if (parentNode.samples && parentNode.samples.length > 0) {
                       parentNode.samples.map((sample) => {
-                        let url = sample;
-                        let filename = url.substring(url.lastIndexOf('/')+1);
+                        const url = sample;
+                        const filename = url.substring(url.lastIndexOf('/')+1);
 
-                        let mockSample = {
+                        const mockSample = {
                           name: filename,
                           size: 1,
                           type: 'image/jpeg',
@@ -833,10 +834,11 @@ export default class BookForm {
 
                     this.on('removedfile', (file) => {
                       if (!file.existing) {
-                        let removeIndex = parentNode.formData.samples
-                        .map((item) => {
-                          return item.name;
-                        }).indexOf(file.name);
+                        const removeIndex = parentNode.formData.samples
+                            .map((item) => {
+                              return item.name;
+                            })
+                            .indexOf(file.name);
 
                         if (removeIndex >= 0) {
                           parentNode.formData.samples.splice(removeIndex, 1);
@@ -854,9 +856,8 @@ export default class BookForm {
         m('.field', [
           m('.control', [
             m('button', {
-              class: 'button is-primary is-fullwidth'
-                + (this.isLoading ? ' is-loading' : ''
-              ),
+              class: 'button is-primary is-fullwidth' +
+              (this.isLoading ? ' is-loading' : ''),
               onclick: (e) => {
                 e.preventDefault();
                 this.onCreateButtonClick();

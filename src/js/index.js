@@ -1,6 +1,8 @@
 'use strict';
 
-import '@fortawesome/fontawesome-free/js/all'
+import 'core-js';
+
+import '@fortawesome/fontawesome-free/js/all';
 import './../scss/main.scss';
 
 import Pace from 'pace-progress';

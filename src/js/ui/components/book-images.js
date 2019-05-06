@@ -38,9 +38,9 @@ export default class BookImages {
    * @return {[type]}       [description]
    */
   view(vnode) {
-    let content =
+    const content =
       m('.columns.is-multiline.is-mobile', [
-        m('.column.has-text-centered.is-12',
+        m('.column.has-text-centered.is-12', [
           m('a', {
             href: this.cover,
             class: 'image-gallery',
@@ -48,10 +48,10 @@ export default class BookImages {
             m('img', {
               src: (this.cover ? this.cover : '/assets/no_cover.jpg'),
             }),
-          ])
-        ),
+          ]),
+        ]),
         (this.samples ? this.samples.map(function(sample) {
-          return m('.column.is-half',
+          return m('.column.is-half', [
             m('a', {
               href: sample,
               class: 'image-gallery',
@@ -59,8 +59,8 @@ export default class BookImages {
               m('img', {
                 src: sample.replace('.jpg', '-thumb.jpg'),
               }),
-            ])
-          );
+            ]),
+          ]);
         }) : null),
       ]);
 

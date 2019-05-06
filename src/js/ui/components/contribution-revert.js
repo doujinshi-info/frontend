@@ -41,7 +41,7 @@ export default class ChangeRevert {
   view(vnode) {
     return [
       m('.column', [
-        m('p.control.has-text-right',
+        m('p.control.has-text-right', [
           m('a.button.is-danger.is-small'
             + (this.isLoading ? '.is-loading' : ''), {
             onclick: (e) => {
@@ -50,11 +50,10 @@ export default class ChangeRevert {
             },
             disabled: this.isLoading,
           }, [
-              m('span.icon.is-small', m('i.fa.fa-undo')),
-              m('span', locale.t('buttons.history_revert')),
-            ]
-          )
-        ),
+            m('span.icon.is-small', m('i.fa.fa-undo')),
+            m('span', locale.t('buttons.history_revert')),
+          ]),
+        ]),
       ]),
     ];
   }

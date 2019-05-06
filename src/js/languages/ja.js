@@ -38,6 +38,7 @@ module.exports = {
   tag: 'タグ',
   loading: '読み込み中',
   doujin: '同人',
+  old_browser: '<strong>古い</strong>ブラウザを使用しています。 あなたの経験とセキュリティを向上させるために<a href="https://browsehappy.com/?locale=ja">ブラウザをアップグレード</a>してください。',
   titles: {
     home: '同人誌の情報と統計',
   },

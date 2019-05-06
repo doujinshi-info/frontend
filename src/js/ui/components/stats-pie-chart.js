@@ -34,11 +34,11 @@ export default class StatsPieChart {
    * @param  {[type]} records [description]
    */
   createChart(e, records) {
-    let amounts = records.map(function(record) {
+    const amounts = records.map(function(record) {
       return record.amount;
     });
 
-    let names = records.map(function(record) {
+    const names = records.map(function(record) {
       return locale.name(record.name);
     });
 

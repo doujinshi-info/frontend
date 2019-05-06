@@ -63,10 +63,10 @@ export class Auth {
         case 'errors.refresh_token_expired':
           this.removeTokens();
           location.reload();
-        break;
+          break;
         default:
           this.error = e;
-        break;
+          break;
       }
     }
   }
@@ -84,15 +84,12 @@ export class Auth {
     return this._handleRequest('POST', '/auth/login', {
       email: email,
       password: password,
-    })
-    .then((response) => {
+    }).then((response) => {
       this.setToken(response.access_token);
       this.setRefreshToken(response.refresh_token);
-    })
-    .then(() => {
+    }).then(() => {
       this.isLoading = false;
-    })
-    .then(() => {
+    }).then(() => {
       const redirect = window.localStorage.getItem('requestedPath') || null;
 
       if (redirect != null) {
@@ -101,8 +98,7 @@ export class Auth {
       } else {
         document.location = '/';
       }
-    })
-    .catch((e) => {
+    }).catch((e) => {
       Alert.create('error', this.error.message);
       this.isLoading = false;
     });
@@ -118,16 +114,14 @@ export class Auth {
     this.isLoading = true;
 
     return this._handleRequest('POST', '/password/email', {email: email})
-    .then((response) => {
-      this.data = response.data;
-    })
-    .then(() => {
-      this.isLoading = false;
-    })
-    .catch((e) => {
-      Alert.create('error', this.error.message);
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response.data;
+        }).then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          Alert.create('error', this.error.message);
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -140,17 +134,17 @@ export class Auth {
     this.isLoading = true;
 
     return this._handleRequest('POST', '/password/reset', payload)
-    .then((response) => {
-      this.data = response.data;
-    })
-    .then(() => {
-      m.route.set('/account/login');
-      this.isLoading = false;
-    })
-    .catch((e) => {
-      Alert.create('error', this.error.message);
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response.data;
+        })
+        .then(() => {
+          m.route.set('/account/login');
+          this.isLoading = false;
+        })
+        .catch((e) => {
+          Alert.create('error', this.error.message);
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -163,20 +157,20 @@ export class Auth {
     this.isLoading = true;
 
     return this._handleRequest('POST', '/auth/create', payload)
-    .then((response) => {
-      this.setToken(response.access_token);
-      this.setRefreshToken(response.refresh_token);
-    })
-    .then(() => {
-      this.isLoading = false;
-    })
-    .then(() => {
-      document.location = '/';
-    })
-    .catch((e) => {
-      Alert.create('error', this.error.message);
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.setToken(response.access_token);
+          this.setRefreshToken(response.refresh_token);
+        })
+        .then(() => {
+          this.isLoading = false;
+        })
+        .then(() => {
+          document.location = '/';
+        })
+        .catch((e) => {
+          Alert.create('error', this.error.message);
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -191,18 +185,18 @@ export class Auth {
       user: this.user.sub,
       refresh_token: this.refresh,
     })
-    .then((response) => {
-      this.setToken(response.access_token);
-      this.user = this.decodeToken();
-    })
-    .then(() => {
-      this.isLoading = false;
-    })
-    .catch((e) => {
-      this.isLoading = false;
-      this.removeTokens();
-      document.location = '/';
-    });
+        .then((response) => {
+          this.setToken(response.access_token);
+          this.user = this.decodeToken();
+        })
+        .then(() => {
+          this.isLoading = false;
+        })
+        .catch((e) => {
+          this.isLoading = false;
+          this.removeTokens();
+          document.location = '/';
+        });
   }
 
   /**
@@ -255,15 +249,15 @@ export class Auth {
       user: this.user.sub,
       refresh_token: this.refresh,
     }, true)
-    .then((response) => {
-      this.removeTokens();
-    })
-    .then(() => {
-      this.isLoading = false;
-    })
-    .catch((e) => {
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.removeTokens();
+        })
+        .then(() => {
+          this.isLoading = false;
+        })
+        .catch((e) => {
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -284,8 +278,8 @@ export class Auth {
       return false;
     }
 
-    let base64Url = this.token.split('.')[1];
-    let base64 = base64Url.replace('-', '+').replace('_', '/');
+    const base64Url = this.token.split('.')[1];
+    const base64 = base64Url.replace('-', '+').replace('_', '/');
 
     return JSON.parse(window.atob(base64));
   }

@@ -19,7 +19,7 @@ export default class UserFollowing extends BasePage {
   /**
    * Initialization of user's followed tags page.
    */
-   constructor() {
+  constructor() {
     super(locale.t('navi.following'));
 
     this.following = new Following();
@@ -49,7 +49,7 @@ export default class UserFollowing extends BasePage {
     } else {
       if (!this.following.isLoading) {
         return m('section.section', m('.notification',
-          locale.t('texts.empty.no_follows')
+            locale.t('texts.empty.no_follows')
         ));
       }
     }

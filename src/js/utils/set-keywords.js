@@ -11,7 +11,7 @@ export default function setKeywords(keywords) {
       locale.t('doujinshi'),
       locale.t('statistics'),
       locale.t('information'),
-      locale.t('artists')
+      locale.t('artists'),
     ];
   }
 

@@ -5,13 +5,13 @@
  * @param  {Boolean} image       [description]
  */
 export default function(title, description, image = false) {
-  let link = [
+  const link = [
     location.protocol, '//',
     location.host,
     location.pathname,
   ].join('');
 
-  let tags = "";
+  let tags = '';
 
   tags += '<meta property="og:title" content="'+title+'">';
   tags += '<meta property="og:description" content="'+description+'">';

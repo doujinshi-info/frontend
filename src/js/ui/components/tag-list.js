@@ -39,25 +39,25 @@ export default class TagList {
    */
   view(vnode) {
     let content = null;
-    let tokens = [];
+    const tokens = [];
 
     if (this.tags) {
       this.tags.forEach(function(tag) {
         tokens.push(
-          m('tr', [
-            m('td',
-              m('a', {
-                href: '/tag/'+ tag.type.slug +'/'+ tag.slug,
-              }, locale.name(tag.name))
-            ),
-            m('td',
-              m('a', {
-                href: '/tag/'+ tag.type.slug,
-              }, locale.name(tag.type.name))
-            ),
-            m('td', tag.created_at),
-            m('td', tag.updated_at),
-          ])
+            m('tr', [
+              m('td',
+                  m('a', {
+                    href: '/tag/'+ tag.type.slug +'/'+ tag.slug,
+                  }, locale.name(tag.name))
+              ),
+              m('td',
+                  m('a', {
+                    href: '/tag/'+ tag.type.slug,
+                  }, locale.name(tag.type.name))
+              ),
+              m('td', tag.created_at),
+              m('td', tag.updated_at),
+            ])
         );
       });
 

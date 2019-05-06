@@ -36,15 +36,15 @@ export class Notification {
     return this.api.request('GET', '/notifications', {
       page: page,
     }, true)
-    .then((response) => {
-      this.data = response.data;
-      this.meta = response.meta;
-    }).then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response.data;
+          this.meta = response.meta;
+        }).then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -56,14 +56,14 @@ export class Notification {
     this.isLoading = true;
 
     return this.api.request('GET', '/notifications/count', {}, true)
-    .then((response) => {
-      this.data = response.data;
-    }).then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response.data;
+        }).then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -78,14 +78,14 @@ export class Notification {
     return this.api.request('PUT', '/notifications/read', {
       notification: notification,
     }, true)
-    .then((response) => {
-      this.data = response.data;
-    }).then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response.data;
+        }).then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -97,14 +97,14 @@ export class Notification {
     this.isLoading = false;
 
     return this.api.request('PUT', '/notifications/read/all', {}, true)
-    .then((response) => {
-      this.data = response.data;
-    }).then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response.data;
+        }).then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -123,13 +123,13 @@ export class Notification {
       subscription: subscription,
       language: language,
     }, true)
-    .then((response) => {
-      this.data = response.data;
-    }).then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response.data;
+        }).then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 }

@@ -9,10 +9,10 @@
  * @return {[type]}           [description]
  */
 export default function toFormData(obj, form, namespace) {
-  let fd = form || new FormData();
+  const fd = form || new FormData();
   let formKey;
 
-  for (let property in obj) {
+  for (const property in obj) {
     if (obj.hasOwnProperty(property) && obj[property]) {
       if (namespace) {
         formKey = namespace + '[' + property + ']';
@@ -36,8 +36,6 @@ export default function toFormData(obj, form, namespace) {
       }
     }
   }
-
-
 
   return fd;
 }

@@ -1,10 +1,14 @@
 import documentTitle from './document-title';
 import setMetaKeywords from './set-keywords';
 import setMetaDescription from './set-meta-description';
-import setSocialTags from './set-social-tags';
-import getTagSet from './get-tag-set';
 import locale from './../ui/locale';
 
+/**
+ * Sets meta data for tag objects.
+ *
+ * @param {object} data        The tag object.
+ * @param {string} translation The translated string to use.
+ */
 export default function setTagMeta(data, translation) {
   /**
    * Set title
@@ -24,7 +28,7 @@ export default function setTagMeta(data, translation) {
   /**
    * Set description
    */
-  let description = locale.t(translation, {
+  const description = locale.t(translation, {
     tag: locale.name(data.name),
     type: locale.name(data.type.name).toLowerCase(),
   });
@@ -34,7 +38,10 @@ export default function setTagMeta(data, translation) {
   /**
    * Set keywords
    */
-  let keywords = [locale.name(data.name), locale.t('doujinshi'), locale.t('statistics')];
+  const keywords = [
+    locale.name(data.name),
+    locale.t('doujinshi'), locale.t('statistics'),
+  ];
 
   data.tags.data.map((tag) => {
     keywords.push(locale.name(tag.name));

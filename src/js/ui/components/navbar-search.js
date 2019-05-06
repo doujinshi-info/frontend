@@ -39,30 +39,30 @@ export default class NavBarSearch {
    * @return {[type]}          [description]
    */
   resize(settings) {
-    var file = settings.file;
-    var maxSize = settings.maxSize;
-    var reader = new FileReader();
-    var image = new Image();
-    var canvas = document.createElement('canvas');
+    const file = settings.file;
+    const maxSize = settings.maxSize;
+    const reader = new FileReader();
+    const image = new Image();
+    const canvas = document.createElement('canvas');
 
-    var dataURItoBlob = function (dataURI) {
-      var bytes = dataURI.split(',')[0].indexOf('base64') >= 0 ?
-          atob(dataURI.split(',')[1]) :
-          unescape(dataURI.split(',')[1]);
+    const dataURItoBlob = function(dataURI) {
+      const bytes = dataURI.split(',')[0].indexOf('base64') >= 0 ?
+        atob(dataURI.split(',')[1]) : unescape(dataURI.split(',')[1]);
 
-      var mime = dataURI.split(',')[0].split(':')[1].split(';')[0];
-      var max = bytes.length;
-      var ia = new Uint8Array(max);
+      const mime = dataURI.split(',')[0].split(':')[1].split(';')[0];
+      const max = bytes.length;
+      const ia = new Uint8Array(max);
 
-      for (var i = 0; i < max; i++)
+      for (let i = 0; i < max; i++) {
         ia[i] = bytes.charCodeAt(i);
+      }
 
-      return new Blob([ia], { type: mime });
+      return new Blob([ia], {type: mime});
     };
 
-    var resize = function () {
-      var width = image.width;
-      var height = image.height;
+    const resize = function() {
+      let width = image.width;
+      let height = image.height;
 
       if (width > height) {
         if (width > maxSize) {
@@ -80,19 +80,22 @@ export default class NavBarSearch {
       canvas.height = height;
       canvas.getContext('2d').drawImage(image, 0, 0, width, height);
 
-      var dataUrl = canvas.toDataURL('image/jpeg');
+      const dataUrl = canvas.toDataURL('image/jpeg');
 
       return dataURItoBlob(dataUrl);
     };
 
-    return new Promise(function (ok, no) {
+    return new Promise(function(ok, no) {
       if (!file.type.match(/image.*/)) {
-        no(new Error("Not an image"));
+        no(new Error('Not an image'));
         return;
       }
 
-      reader.onload = function (readerEvent) {
-        image.onload = function () { return ok(resize()); };
+      reader.onload = function(readerEvent) {
+        image.onload = function() {
+          return ok(resize());
+        };
+
         image.src = readerEvent.target.result;
       };
 
@@ -104,16 +107,15 @@ export default class NavBarSearch {
    * Perform reverse image search.
    *
    * @param  {[type]} v [description]
-   * @return {[type]}   [description]
    */
   imagesearch(v) {
     if (v.target.files.length) {
       this.resize({
         file: v.target.files[0],
-        maxSize: 500
+        maxSize: 500,
       }).then((resizedImage) => {
         this.book.imageSearch(resizedImage).then(() => {
-          document.getElementById('navBarMain').classList.remove("is-active");
+          document.getElementById('navBarMain').classList.remove('is-active');
 
           if (this.book.data) {
             if (this.book.data.meta.total == 1) {
@@ -130,9 +132,13 @@ export default class NavBarSearch {
     }
   }
 
+  /**
+   * [search description]
+   * @param  {[type]} e [description]
+   */
   search(e) {
-    var filter = document.getElementById('search-filter').value;
-    var query  = document.getElementById('search-query').value;
+    const filter = document.getElementById('search-filter').value;
+    const query = document.getElementById('search-query').value;
 
     if (filter == 'book') {
       m.route.set('/search', {q: query});
@@ -153,17 +159,21 @@ export default class NavBarSearch {
         accept: 'image/*',
         id: 'imageUpload',
         type: 'file',
-        oninput: (v) => { this.imagesearch(v); },
+        oninput: (v) => {
+          this.imagesearch(v);
+        },
       }),
       m('form.navbar-grow', {
-        onsubmit: () => { this.search(); },
+        onsubmit: () => {
+          this.search();
+        },
         id: 'searchForm',
         role: 'search',
-      },
-        m('.navbar-start',
-          m('.navbar-item.navbar-grow',
+      }, [
+        m('.navbar-start', [
+          m('.navbar-item.navbar-grow', [
             m('.field.has-addons.navbar-grow', [
-              m('.control.navbar-grow',
+              m('.control.navbar-grow', [
                 m('input.input.is-expanded', {
                   name: 'q',
                   placeholder: locale.t('navi.search'),
@@ -173,39 +183,39 @@ export default class NavBarSearch {
                   value: ((isURLPath('/search') ||
                     isURLPath('/tag/', false)
                   ) ? getURLParam('q') : ''),
-                })
-              ),
+                }),
+              ]),
               m('.control', m('span.select', [
                 m('select', {id: 'search-filter'}, [
                   m('option', {
                     value: 'artist',
-                    selected: (this.tagType == 'artist' ? true : false)
+                    selected: (this.tagType == 'artist' ? true : false),
                   }, locale.t('artists')),
                   m('option', {
                     value: 'character',
-                    selected: (this.tagType == 'character' ? true : false)
+                    selected: (this.tagType == 'character' ? true : false),
                   }, locale.t('characters')),
                   m('option', {
                     value: 'circle',
-                    selected: (this.tagType == 'circle' ? true : false)
+                    selected: (this.tagType == 'circle' ? true : false),
                   }, locale.t('circles')),
                   m('option', {
                     value: 'content',
-                    selected: (this.tagType == 'content' ? true : false)
+                    selected: (this.tagType == 'content' ? true : false),
                   }, locale.t('content')),
                   m('option', {
                     value: 'convention',
-                    selected: (this.tagType == 'convention' ? true : false)
+                    selected: (this.tagType == 'convention' ? true : false),
                   }, locale.t('conventions')),
                   m('option', {
                     value: 'book',
-                    selected: (this.tagType == false ? true : false)
+                    selected: (this.tagType == false ? true : false),
                   }, locale.t('doujin')),
                   m('option', {
                     value: 'series',
-                    selected: (this.tagType == 'series' ? true : false)
+                    selected: (this.tagType == 'series' ? true : false),
                   }, locale.t('series')),
-                ])
+                ]),
               ])),
               m('.control', m('a.button.is-primary', {
                 onclick: function() {
@@ -221,10 +231,10 @@ export default class NavBarSearch {
                   }
                 },
               }, m('i.fa.fa-search'))),
-            ])
-          )
-        )
-      ),
+            ]),
+          ]),
+        ]),
+      ]),
     ];
   }
 }

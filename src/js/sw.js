@@ -4,9 +4,9 @@ self.addEventListener('push', function(event) {
   }
 
   if (event.data) {
-    let data = event.data.json();
-    let title = data.title;
-    let options = {
+    const data = event.data.json();
+    const title = data.title;
+    const options = {
       body: data.message || false,
       icon: data.icon || 'assets/logo.png',
       badge: 'assets/logo.png',
@@ -26,24 +26,21 @@ self.addEventListener('push', function(event) {
 self.addEventListener('notificationclick', function(event) {
   event.notification.close();
 
-  event.waitUntil(
-    clients.matchAll({
-        type: 'window',
-    })
-    .then(function(clientList) {
-      for (let i = 0; i < clientList.length; i++) {
-        let client = clientList[i];
+  event.waitUntil(clients.matchAll({
+    type: 'window',
+  }).then(function(clientList) {
+    for (let i = 0; i < clientList.length; i++) {
+      const client = clientList[i];
 
-        if (client.url == '/' && 'focus' in client) {
-          return client.focus();
-        }
+      if (client.url == '/' && 'focus' in client) {
+        return client.focus();
       }
+    }
 
-      if (clients.openWindow) {
-        if (event.notification.data.link != false) {
-          return clients.openWindow(event.notification.data.link);
-        }
+    if (clients.openWindow) {
+      if (event.notification.data.link != false) {
+        return clients.openWindow(event.notification.data.link);
       }
-    })
-  );
+    }
+  }));
 });

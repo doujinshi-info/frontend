@@ -5,7 +5,7 @@
  * @return {[type]}     [description]
  */
 export default function(obj) {
-  let result = [];
+  const result = [];
 
   for (let i = 0; i < obj.length; i++) {
     result.push(obj[i].value);

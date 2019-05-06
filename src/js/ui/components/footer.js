@@ -22,14 +22,14 @@ export default class Footer {
     const pathname = vnode.attrs.pathname;
 
     return m('footer.footer', [
-      m('.container-fluid',
+      m('.container-fluid', [
         m('.columns.is-mobile', [
-          m('.footer-copyright.column',
+          m('.footer-copyright.column', [
             m('p', [
-              m.trust(process.env.APP_TITLE + ' &copy; ' + Date().substr(11, 4)),
-            ])
-          ),
-          m('.column.has-text-right',
+              m.trust(process.env.APP_TITLE+' &copy; '+Date().substr(11, 4)),
+            ]),
+          ]),
+          m('.column.has-text-right', [
             (locale.getLang() == 'ja' ?
               m('a.flag-icon.flag-icon-us', {
                 href: process.env.EN_URL + pathname,
@@ -38,10 +38,10 @@ export default class Footer {
               m('a.flag-icon.flag-icon-jp', {
                 href: process.env.JA_URL + pathname,
               })
-            )
-          ),
-        ])
-      ),
+            ),
+          ]),
+        ]),
+      ]),
     ]);
   }
 }

@@ -30,7 +30,7 @@ export default class ContributionDiff {
    */
   view(vnode) {
     if (this.changes && this.changes.changelog.data) {
-      let fields = [];
+      const fields = [];
 
       this.changes.changelog.data.forEach(function(change) {
         let data = locale.t('fields.' + change.type + '.' + change.column);
@@ -93,11 +93,11 @@ export default class ContributionDiff {
         }
 
         if (change.column == 'links') {
-          let oldLinks = (change.old_value ?
+          const oldLinks = (change.old_value ?
             JSON.parse(change.old_value) : {}
           );
 
-          let newLinks = (change.new_value ?
+          const newLinks = (change.new_value ?
             JSON.parse(change.new_value) : {}
           );
 
@@ -153,16 +153,18 @@ export default class ContributionDiff {
             m('tr', [
               m('td', data),
               m('td', (oldValue ? m('img', {
-                  src: oldValue.replace('.jpg', '-thumb.jpg'),
+                src: oldValue.replace('.jpg', '-thumb.jpg'),
               }) : '')),
               m('td', (newValue ? m('img', {
-                  src: newValue.replace('.jpg', '-thumb.jpg'),
+                src: newValue.replace('.jpg', '-thumb.jpg'),
               }) : '')),
             ]),
           ]);
         }
 
-        if (change.column != 'links' && change.column != 'samples' && change.column != 'cover') {
+        if (change.column != 'links' &&
+          change.column != 'samples' &&
+          change.column != 'cover') {
           fields.push([
             m('tr', [
               m('td', data),

@@ -3,9 +3,7 @@
 import formArrayToArray from './../../utils/form-array-to-array';
 import locale from './../locale';
 import m from 'mithril';
-import Tokenfield from 'tokenfield';
-
-import getTagSet from './../../utils/get-tag-set';
+import Tokenfield from 'tokenfield/dist/tokenfield';
 
 /**
  * Displays a form for inputting tag information.
@@ -55,15 +53,15 @@ export default class TagForm {
       case 'content':
         document.getElementById('description_japanese').style.display = 'block';
         document.getElementById('description_english').style.display = 'block';
-      break;
+        break;
       case 'convention':
         document.getElementById('date_start').style.display = 'block';
         document.getElementById('date_end').style.display = 'block';
         document.getElementById('twitter').style.display = 'block';
-      break;
+        break;
       case 'character':
         document.getElementById('series').style.display = 'block';
-      break;
+        break;
       case 'circle':
       case 'artist':
         document.getElementById('circles').style.display = 'block';
@@ -72,7 +70,7 @@ export default class TagForm {
         document.getElementById('patreon').style.display = 'block';
         document.getElementById('enty').style.display = 'block';
         document.getElementById('fantia').style.display = 'block';
-      break;
+        break;
     }
   }
 
@@ -81,7 +79,7 @@ export default class TagForm {
    */
   onCreateButtonClick() {
     if (document.getElementById('tag-form').checkValidity()) {
-      let aliases = document.querySelectorAll('[name^=aliases]');
+      const aliases = document.querySelectorAll('[name^=aliases]');
       let circles = document.querySelectorAll('[name^=circle_tags]');
       let series = document.querySelectorAll('[name^=series_tags]');
 
@@ -124,7 +122,8 @@ export default class TagForm {
 
     this.tokenfields[type]._templates.setItem = '' +
       '<li class="tokenfield-set-item">\n<span class="item-label"></span>\n' +
-      '<a href="#" class="item-remove" tabindex="-1"><i class="fa fa-times"></i></a></a>\n' +
+      '<a href="#" class="item-remove" tabindex="-1">' +
+      '<i class="fa fa-times"></i></a></a>\n' +
       '<input class="item-input" type="hidden" />\n</li>';
 
     this.tokenfields[type].remapData = function(data) {
@@ -239,7 +238,7 @@ export default class TagForm {
   view(vnode) {
     if (this.types) {
       return m('form', {id: 'tag-form'}, [
-        m('.field',
+        m('.field', [
           m('.control', [
             m('label.label', locale.t('fields.tag.type')),
             m('.select', [
@@ -259,10 +258,10 @@ export default class TagForm {
                 }),
               ]),
             ]),
-          ])
-        ),
+          ]),
+        ]),
 
-        m('.field',
+        m('.field', [
           m('.control', [
             m('label.label', locale.t('fields.tag.name_original')),
             m('input.input', {
@@ -275,10 +274,10 @@ export default class TagForm {
               placeholder: locale.t('fields.tag.name_original'),
               disabled: this.isLoading,
             }),
-          ])
-        ),
+          ]),
+        ]),
 
-        m('.field',
+        m('.field', [
           m('.control', [
             m('label.label', locale.t('fields.tag.name_romaji')),
             m('input.input', {
@@ -291,10 +290,10 @@ export default class TagForm {
               placeholder: locale.t('fields.tag.name_romaji'),
               disabled: this.isLoading,
             }),
-          ])
-        ),
+          ]),
+        ]),
 
-        m('.field',
+        m('.field', [
           m('.control', [
             m('label.label', locale.t('fields.tag.name_english')),
             m('input.input', {
@@ -307,10 +306,10 @@ export default class TagForm {
               placeholder: locale.t('fields.tag.name_english'),
               disabled: this.isLoading,
             }),
-          ])
-        ),
+          ]),
+        ]),
 
-        m('.field',
+        m('.field', [
           m('.control', {id: 'aliases'}, [
             m('label.label', locale.t('fields.tag.name_other')),
             m('input.input', {
@@ -323,10 +322,10 @@ export default class TagForm {
               placeholder: locale.t('fields.tag.name_other'),
               disabled: this.isLoading,
             }),
-          ])
-        ),
+          ]),
+        ]),
 
-        m('.field',
+        m('.field', [
           m('.control', {id: 'description_japanese'}, [
             m('label.label', locale.t('fields.tag.description_japanese')),
             m('textarea.textarea', {
@@ -338,10 +337,10 @@ export default class TagForm {
               placeholder: locale.t('fields.tag.description_japanese'),
               disabled: this.isLoading,
             }),
-          ])
-        ),
+          ]),
+        ]),
 
-        m('.field',
+        m('.field', [
           m('.control', {id: 'description_english'}, [
             m('label.label', locale.t('fields.tag.description_english')),
             m('textarea.textarea', {
@@ -353,10 +352,10 @@ export default class TagForm {
               placeholder: locale.t('fields.tag.description_english'),
               disabled: this.isLoading,
             }),
-          ])
-        ),
+          ]),
+        ]),
 
-        m('.field',
+        m('.field', [
           m('.control', {id: 'date_start'}, [
             m('label.label', locale.t('fields.tag.event_start')),
             m('input.input', {
@@ -369,10 +368,10 @@ export default class TagForm {
               placeholder: locale.t('fields.tag.event_start'),
               disabled: this.isLoading,
             }),
-          ])
-        ),
+          ]),
+        ]),
 
-        m('.field',
+        m('.field', [
           m('.control', {id: 'date_end'}, [
             m('label.label', locale.t('fields.tag.event_end')),
             m('input.input', {
@@ -385,10 +384,10 @@ export default class TagForm {
               placeholder: locale.t('fields.tag.event_end'),
               disabled: this.isLoading,
             }),
-          ])
-        ),
+          ]),
+        ]),
 
-        m('.field',
+        m('.field', [
           m('.control', {id: 'circles'}, [
             m('label.label', locale.t('circles')),
             m('input.input', {
@@ -401,10 +400,10 @@ export default class TagForm {
               placeholder: locale.t('circles'),
               disabled: this.isLoading,
             }),
-          ])
-        ),
+          ]),
+        ]),
 
-        m('.field',
+        m('.field', [
           m('.control', {id: 'series'}, [
             m('label.label', locale.t('series')),
             m('input.input', {
@@ -417,10 +416,10 @@ export default class TagForm {
               placeholder: locale.t('series'),
               disabled: this.isLoading,
             }),
-          ])
-        ),
+          ]),
+        ]),
 
-        m('.field',
+        m('.field', [
           m('.control', {id: 'pixiv'}, [
             m('label.label', locale.t('fields.links.pixiv')),
             m('input.input', {
@@ -434,10 +433,10 @@ export default class TagForm {
               placeholder: locale.t('fields.links.pixiv'),
               disabled: this.isLoading,
             }),
-          ])
-        ),
+          ]),
+        ]),
 
-        m('.field',
+        m('.field', [
           m('.control', {id: 'twitter'}, [
             m('label.label', locale.t('fields.links.twitter')),
             m('input.input', {
@@ -451,10 +450,10 @@ export default class TagForm {
               placeholder: locale.t('fields.links.twitter'),
               disabled: this.isLoading,
             }),
-          ])
-        ),
+          ]),
+        ]),
 
-        m('.field',
+        m('.field', [
           m('.control', {id: 'circlems'}, [
             m('label.label', locale.t('fields.links.circlems')),
             m('input.input', {
@@ -468,10 +467,10 @@ export default class TagForm {
               placeholder: locale.t('fields.links.circlems'),
               disabled: this.isLoading,
             }),
-          ])
-        ),
+          ]),
+        ]),
 
-        m('.field',
+        m('.field', [
           m('.control', {id: 'patreon'}, [
             m('label.label', locale.t('fields.links.patreon')),
             m('input.input', {
@@ -485,10 +484,10 @@ export default class TagForm {
               placeholder: locale.t('fields.links.patreon'),
               disabled: this.isLoading,
             }),
-          ])
-        ),
+          ]),
+        ]),
 
-        m('.field',
+        m('.field', [
           m('.control', {id: 'enty'}, [
             m('label.label', locale.t('fields.links.enty')),
             m('input.input', {
@@ -502,10 +501,10 @@ export default class TagForm {
               placeholder: locale.t('fields.links.enty'),
               disabled: this.isLoading,
             }),
-          ])
-        ),
+          ]),
+        ]),
 
-        m('.field',
+        m('.field', [
           m('.control', {id: 'fantia'}, [
             m('label.label', locale.t('fields.links.fantia')),
             m('input.input', {
@@ -519,8 +518,8 @@ export default class TagForm {
               placeholder: locale.t('fields.links.fantia'),
               disabled: this.isLoading,
             }),
-          ])
-        ),
+          ]),
+        ]),
 
         m('.control', [
           m('button', {

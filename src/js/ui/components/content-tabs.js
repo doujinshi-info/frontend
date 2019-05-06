@@ -37,40 +37,32 @@ export default class ContentTabs {
    * @return {[type]}       [description]
    */
   view(vnode) {
-    return m('.tabs.is-fullwidth',
+    return m('.tabs.is-fullwidth', [
       m('ul', [
         m('li', {
           class: (m.route.get() == this.path ? 'is-active' : ''),
-        },
-          m('a', {
-            href: this.path,
-          }, m('span', locale.t('tabs.information')))
-        ),
+        }, m('a', {href: this.path},
+            m('span', locale.t('tabs.information'))
+        )),
 
         (this.type == 'tag' ? m('li', {
           class: (m.route.get() == this.path + '/stats' ? 'is-active' : ''),
-        },
-          m('a', {
-            href: this.path + '/stats',
-          }, m('span', locale.t('tabs.stats')))
-        ) : ''),
+        }, m('a', {href: this.path + '/stats'},
+            m('span', locale.t('tabs.stats'))
+        )) : ''),
 
         m('li', {
           class: (m.route.get() == this.path + '/changelog' ? 'is-active' : ''),
-        },
-          m('a', {
-            href: this.path + '/changelog',
-          }, m('span', locale.t('tabs.changelog')))
-        ),
+        }, m('a', {href: this.path + '/changelog'},
+            m('span', locale.t('tabs.changelog'))
+        )),
 
         (this.auth.token) && m('li', {
           class: (m.route.get() == this.path + '/edit' ? 'is-active' : ''),
-        },
-          m('a', {
-            href: this.path + '/edit',
-          }, m('span', locale.t('tabs.edit')))
-        ),
-      ])
-    );
+        }, m('a', {href: this.path + '/edit'},
+            m('span', locale.t('tabs.edit'))
+        )),
+      ]),
+    ]);
   }
 }

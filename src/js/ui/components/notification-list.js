@@ -52,40 +52,40 @@ export default class NotificationList {
     if (this.notifications) {
       this.notifications.forEach((notification) => {
         this.data.push(
-          m('a', {
-            onclick: (e) => {
-              e.preventDefault();
-              this.onButtonClick(notification);
-            },
-          }, [
-            m('.box' + (notification.is_read == false ? ' unread' : ''), [
-              m('article.media', [
-                (notification.book.cover ? [
-                  m('.media-left', [
-                    m('figure.image.is-48x48',
-                      m('img.is-rounded', {
-                        src: notification.book.cover
-                          .replace('.jpg', '-thumb.jpg'),
-                      })
-                    ),
-                  ]),
-                ] : ''),
+            m('a', {
+              onclick: (e) => {
+                e.preventDefault();
+                this.onButtonClick(notification);
+              },
+            }, [
+              m('.box' + (notification.is_read == false ? ' unread' : ''), [
+                m('article.media', [
+                  (notification.book.cover ? [
+                    m('.media-left', [
+                      m('figure.image.is-48x48', [
+                        m('img.is-rounded', {
+                          src: notification.book.cover
+                              .replace('.jpg', '-thumb.jpg'),
+                        }),
+                      ]),
+                    ]),
+                  ] : ''),
 
-                m('.media-content', [
-                  m('.content', [
-                    m.trust(locale.t('notifications.' + notification.type, {
-                      tag: locale.name(notification.tag.name),
-                      book: locale.name(notification.book.name),
-                    })),
+                  m('.media-content', [
+                    m('.content', [
+                      m.trust(locale.t('notifications.' + notification.type, {
+                        tag: locale.name(notification.tag.name),
+                        book: locale.name(notification.book.name),
+                      })),
 
-                    m('.is-size-7.has-text-grey-light',
-                      notification.created_at
-                    ),
+                      m('.is-size-7.has-text-grey-light', [
+                        notification.created_at,
+                      ]),
+                    ]),
                   ]),
                 ]),
               ]),
-            ]),
-          ])
+            ])
         );
       });
 

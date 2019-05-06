@@ -11,19 +11,22 @@ import locale from './../ui/locale';
  * @param {object} data The book data
  */
 export default function setBookMeta(data) {
-  let artists = getTagSet('artist', data.tags);
-  let circles = getTagSet('circle', data.tags);
-  let series = getTagSet('series', data.tags);
-  let characters = getTagSet('character', data.tags);
-  let contents = getTagSet('content', data.tags);
-  let languages = getTagSet('language', data.tags);
-  let censoring = getTagSet('censoring', data.tags);
-  let convention = getTagSet('convention', data.tags);
+  const circles = getTagSet('circle', data.tags);
+
+  /*
+    const artists = getTagSet('artist', data.tags);
+    const series = getTagSet('series', data.tags);
+    const characters = getTagSet('character', data.tags);
+    const contents = getTagSet('content', data.tags);
+    const languages = getTagSet('language', data.tags);
+    const censoring = getTagSet('censoring', data.tags);
+    const convention = getTagSet('convention', data.tags);
+  */
 
   /**
    * Set title
    */
-  let docTitle = "";
+  let docTitle = '';
 
   if (circles.length) {
     docTitle += '['+locale.name(circles[0].name)+'] ';
@@ -37,7 +40,9 @@ export default function setBookMeta(data) {
   /**
    * Set description
    */
-  let description = locale.t((data.is_adult ? 'descriptions.book_info_adult' : 'descriptions.book_info'), {
+  const description = locale.t((data.is_adult ?
+    'descriptions.book_info_adult' : 'descriptions.book_info'
+  ), {
     book: locale.name(data.name),
     artist: (circles.length ? locale.name(circles[0].name) : ''),
   });
@@ -48,7 +53,9 @@ export default function setBookMeta(data) {
   /**
    * Set keywords
    */
-  let keywords = [locale.name(data.name), locale.t('doujinshi'), locale.t('statistics')];
+  const keywords = [
+    locale.name(data.name), locale.t('doujinshi'), locale.t('statistics'),
+  ];
 
   data.tags.data.map((tag) => {
     keywords.push(locale.name(tag.name));

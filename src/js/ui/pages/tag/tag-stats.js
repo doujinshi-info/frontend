@@ -14,7 +14,6 @@ import ContentTab from './../../components/content-tabs';
 import StatsPieChart from './../../components/stats-pie-chart';
 import StatsBarChart from './../../components/stats-bar-chart';
 import bulmaCalendar from 'bulma-calendar';
-import moment from 'moment';
 
 import setTagMeta from './../../../utils/set-tag-meta';
 
@@ -92,7 +91,7 @@ export default class TagStats extends BasePage {
                   m('label.label', locale.t('fields.book.release_date')),
                   m('input.input', {
                     oncreate: (e) => {
-                      var calendars = bulmaCalendar.attach('[type="date"]', {
+                      const cals = bulmaCalendar.attach('[type="date"]', {
                         showHeader: false,
                         isRange: true,
                         showFooter: false,
@@ -100,15 +99,16 @@ export default class TagStats extends BasePage {
                         lang: locale.getLang(),
                       });
 
-                      for (let i = 0; i < calendars.length; i++) {
-                        calendars[i].on('select', (date) => {
-                          const [start, end] = calendars[i].value().split(' - ');
+                      for (let i = 0; i < cals.length; i++) {
+                        cals[i].on('select', (date) => {
+                          const [start, end] = cals[i].value().split(' - ');
+
                           this.startDate = (start ? start : null);
                           this.endDate = (end ? end : null);
                           this.fetchStats(this.tag.data.id);
                         });
 
-                        calendars[i].on('clear', (e) => {
+                        cals[i].on('clear', (e) => {
                           this.startDate = null;
                           this.endDate = null;
                           this.fetchStats(this.tag.data.id);

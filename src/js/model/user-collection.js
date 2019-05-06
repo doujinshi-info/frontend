@@ -38,14 +38,14 @@ export class UserCollection {
       page: page,
       q: query,
     }, true)
-    .then((response) => {
-      this.data = response;
-    }).then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response;
+        }).then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -59,14 +59,14 @@ export class UserCollection {
     this.isLoading = true;
 
     return this.api.request('POST', '/library/'+type, {book: book}, true)
-    .then((response) => {
-      this.data = response;
-    }).then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response;
+        }).then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -80,14 +80,14 @@ export class UserCollection {
     this.isLoading = true;
 
     return this.api.request('DELETE', '/library/'+type, {book: book}, true)
-    .then((response) => {
-      this.data = response;
-    }).then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response;
+        }).then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -101,13 +101,13 @@ export class UserCollection {
     this.isLoading = true;
 
     return this.api.request('GET', '/library/'+type+'/'+book, {}, true)
-    .then((response) => {
-      this.data = response.data;
-    }).then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response.data;
+        }).then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 }

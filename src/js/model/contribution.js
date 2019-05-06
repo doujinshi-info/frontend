@@ -36,15 +36,15 @@ export class Contribution {
     this.isLoading = true;
 
     return this.api.request('GET', '/book/' + slug + '/changelog')
-    .then((response) => {
-      this.data = response.data;
-    })
-    .then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response.data;
+        })
+        .then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -59,15 +59,15 @@ export class Contribution {
     this.isLoading = true;
 
     return this.api.request('GET', '/tag/'+type+'/'+slug+'/changelog')
-    .then((response) => {
-      this.data = response.data;
-    })
-    .then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response.data;
+        })
+        .then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -84,16 +84,16 @@ export class Contribution {
     return this.api.request('GET', '/user/' + user + '/contributions', {
       page: page,
     })
-    .then((response) => {
-      this.data = response.data;
-      this.meta = response.meta;
-    })
-    .then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response.data;
+          this.meta = response.meta;
+        })
+        .then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -107,16 +107,16 @@ export class Contribution {
     this.isLoading = true;
 
     return this.api.request('GET', '/changelog', {page: page})
-    .then((response) => {
-      this.data = response.data;
-      this.meta = response.meta;
-    })
-    .then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response.data;
+          this.meta = response.meta;
+        })
+        .then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -130,15 +130,15 @@ export class Contribution {
     this.isLoading = true;
 
     return this.api.request('GET', '/changelog/' + contribution)
-    .then((response) => {
-      this.data = response;
-    })
-    .then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response;
+        })
+        .then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -154,14 +154,14 @@ export class Contribution {
     return this.api.request('POST', '/changelog/revert', {
       transaction_id: transaction,
     }, true)
-    .then((response) => {
-      this.data = response;
-    })
-    .then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response;
+        })
+        .then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 }

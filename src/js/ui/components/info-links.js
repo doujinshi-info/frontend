@@ -15,16 +15,17 @@ export default class Link {
    */
   view(vnode) {
     const links = vnode.attrs.links;
-    let tokens = [];
+    const tokens = [];
 
     if (links) {
       for (const type in links) {
         if (links[type]) {
           tokens.push(
-            m('a.tag.is-small.is-link', {
-              href: links[type],
-              target: '_blank',
-            }, locale.t('fields.links.'+type)));
+              m('a.tag.is-small.is-link', {
+                href: links[type],
+                target: '_blank',
+              }, locale.t('fields.links.'+type))
+          );
         }
       }
 

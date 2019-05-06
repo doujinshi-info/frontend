@@ -92,7 +92,7 @@ class Router {
   buildRoute(screen, requiresAuth, layout) {
     layout = layout || LayoutDefault;
 
-    let auth = this.auth;
+    const auth = this.auth;
 
     return {
       onmatch: function(args, requestedPath) {
@@ -103,7 +103,7 @@ class Router {
       render: function() {
         return m(layout, {
           auth: auth,
-          pathname: window.location.pathname
+          pathname: window.location.pathname,
         }, m(screen));
       },
     };

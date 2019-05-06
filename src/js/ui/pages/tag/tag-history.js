@@ -45,29 +45,27 @@ export default class TagHistory extends BasePage {
    * @return {Vnode}
    */
   view() {
-    let changes = [];
+    const changes = [];
 
     if (this.contribution.data && this.contribution.data.length) {
       this.contribution.data.forEach(function(change) {
         changes.push(
-          m('tr', [
-            m('td', {
-              'data-th': locale.t('history.transaction')
-            }, m('a', {href: '/changelog/' + change.id}, change.id)),
-            m('td', {
-              'data-th': locale.t('history.type')
-            }, locale.t('history.' + change.type)),
-            m('td', {
-              'data-th': locale.t('history.contributor')
-            },
-              (change.user.slug == 'system' ? change.user.name : m('a', {
-                href: '/profile/' + change.user.slug,
-              }, change.user.name))
-            ),
-            m('td', {
-              'data-th': locale.t('history.created_at')
-            }, change.created_at),
-          ])
+            m('tr', [
+              m('td', {
+                'data-th': locale.t('history.transaction'),
+              }, m('a', {href: '/changelog/' + change.id}, change.id)),
+              m('td', {
+                'data-th': locale.t('history.type'),
+              }, locale.t('history.' + change.type)),
+              m('td', {'data-th': locale.t('history.contributor')},
+                  (change.user.slug == 'system' ? change.user.name : m('a', {
+                    href: '/profile/' + change.user.slug,
+                  }, change.user.name))
+              ),
+              m('td', {
+                'data-th': locale.t('history.created_at'),
+              }, change.created_at),
+            ])
         );
       });
 
@@ -97,7 +95,7 @@ export default class TagHistory extends BasePage {
           slug: this.type + '/' + this.slug,
         }),
         m('section.section',
-          m('.notification', locale.t('texts.empty.changes'))
+            m('.notification', locale.t('texts.empty.changes'))
         ),
       ];
     }

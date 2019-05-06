@@ -34,7 +34,7 @@ export default class StatsBarChart {
    * @param  {[type]} records [description]
    */
   createChart(e, records) {
-    let colors = [
+    const colors = [
       '#1fc8db',
       '#fce473',
       '#42afe3',
@@ -42,7 +42,7 @@ export default class StatsBarChart {
       '#97cd76',
     ];
 
-    let dataset = records.map(function(record, idx) {
+    const dataset = records.map(function(record, idx) {
       return {
         label: locale.name(record.name),
         data: [record.amount],

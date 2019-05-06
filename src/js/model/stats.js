@@ -30,7 +30,7 @@ export class Stats {
     this.data = null;
     this.isLoading = true;
 
-    let filter = {};
+    const filter = {};
 
     if (startDate) {
       filter.start_date = startDate;
@@ -45,14 +45,14 @@ export class Stats {
     }
 
     return this.api.request('GET', '/', filter)
-    .then((response) => {
-      this.data = response;
-    })
-    .then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response;
+        })
+        .then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 }

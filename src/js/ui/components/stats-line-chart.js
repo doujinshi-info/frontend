@@ -34,11 +34,11 @@ export default class StatsLineChart {
    * @param  {[type]} records [description]
    */
   createChart(e, records) {
-    let amounts = records.map(function(record) {
+    const amounts = records.map(function(record) {
       return record.count;
     });
 
-    let names = records.map(function(record) {
+    const names = records.map(function(record) {
       return record.month;
     });
 

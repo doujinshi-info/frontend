@@ -34,15 +34,15 @@ export class User {
       this.isLoading = true;
 
       return this.api.request('GET', '/auth/user', '', true)
-      .then((response) => {
-        this.data = response;
-      })
-      .then(() => {
-        this.isLoading = false;
-      }).catch((e) => {
-        this.error = this.api.error;
-        this.isLoading = false;
-      });
+          .then((response) => {
+            this.data = response;
+          })
+          .then(() => {
+            this.isLoading = false;
+          }).catch((e) => {
+            this.error = this.api.error;
+            this.isLoading = false;
+          });
     }
   }
 
@@ -57,16 +57,16 @@ export class User {
     this.isLoading = true;
 
     return this.api.request('PUT', '/user/'+slug, payload, true)
-    .then((response) => {
-      this.data = response;
-    })
-    .then(() => {
-      this.isLoading = false;
-    })
-    .catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response;
+        })
+        .then(() => {
+          this.isLoading = false;
+        })
+        .catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -80,14 +80,14 @@ export class User {
     this.isLoading = true;
 
     return this.api.request('GET', '/user/' + slug, '', true)
-    .then((response) => {
-      this.data = response;
-    })
-    .then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response;
+        })
+        .then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 }

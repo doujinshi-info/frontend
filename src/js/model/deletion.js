@@ -33,13 +33,13 @@ export class Deletion {
     payload = toFormData(payload);
 
     return this.api.request('POST', '/deletion', payload, true)
-    .then((response) => {
-      this.data = response;
-    }).then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response;
+        }).then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 }

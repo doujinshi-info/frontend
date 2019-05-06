@@ -6,9 +6,9 @@ const locale = {
   /**
    * Provides the specific localized text.
    *
-   * @param  {string} dict   The key for what text to grab.
-   * @param  {object} variables Values which can be replaced in the specific text.
-   * @return {string}       The localized text.
+   * @param  {string} dict      The key for what text to grab.
+   * @param  {object} variables Values to replace in text.
+   * @return {string}           The localized text.
    */
   t(dict, variables = false) {
     const translation = i18next.t(dict);
@@ -65,7 +65,7 @@ const locale = {
   getLang() {
     const subdomain = window.location.href.split('/')[2].split('.')[0];
     return subdomain == 'ja' ? 'ja' : process.env.DEFAULT_LANGUAGE;
-  }
+  },
 };
 
 export default locale;

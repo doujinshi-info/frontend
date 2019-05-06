@@ -53,52 +53,52 @@ export default class UserResetForm {
   view(vnode) {
     return m('form', {id: 'reset-form'}, [
       m('.field',
-        m('.control', [
-          m('label.label', locale.t('fields.account.email')),
-          m('input.input', {
-            oninput: m.withAttr('value', (v) => {
-              this.formData.email = v;
+          m('.control', [
+            m('label.label', locale.t('fields.account.email')),
+            m('input.input', {
+              oninput: m.withAttr('value', (v) => {
+                this.formData.email = v;
+              }),
+              value: this.formData.email,
+              type: 'email',
+              autocomplete: 'off',
+              required: true,
+              placeholder: locale.t('fields.account.email'),
+              disabled: vnode.attrs.isPasswordResetBusy,
             }),
-            value: this.formData.email,
-            type: 'email',
-            autocomplete: 'off',
-            required: true,
-            placeholder: locale.t('fields.account.email'),
-            disabled: vnode.attrs.isPasswordResetBusy,
-          }),
-        ])
+          ])
       ),
       m('.field',
-        m('.control', [
-          m('label.label', locale.t('fields.account.password_new')),
-          m('input.input', {
-            oninput: m.withAttr('value', (v) => {
-              this.formData.password = v;
+          m('.control', [
+            m('label.label', locale.t('fields.account.password_new')),
+            m('input.input', {
+              oninput: m.withAttr('value', (v) => {
+                this.formData.password = v;
+              }),
+              value: this.formData.password,
+              type: 'password',
+              autocomplete: 'off',
+              required: true,
+              placeholder: locale.t('fields.account.password_new'),
+              disabled: vnode.attrs.isPasswordResetBusy,
             }),
-            value: this.formData.password,
-            type: 'password',
-            autocomplete: 'off',
-            required: true,
-            placeholder: locale.t('fields.account.password_new'),
-            disabled: vnode.attrs.isPasswordResetBusy,
-          }),
-        ])
+          ])
       ),
       m('.field',
-        m('.control', [
-          m('label.label', locale.t('fields.account.password_confirm')),
-          m('input.input', {
-            oninput: m.withAttr('value', (v) => {
-              this.formData.password_confirmation = v;
+          m('.control', [
+            m('label.label', locale.t('fields.account.password_confirm')),
+            m('input.input', {
+              oninput: m.withAttr('value', (v) => {
+                this.formData.password_confirmation = v;
+              }),
+              value: this.formData.password_confirmation,
+              type: 'password',
+              autocomplete: 'off',
+              required: true,
+              placeholder: locale.t('fields.account.password_confirm'),
+              disabled: vnode.attrs.isPasswordResetBusy,
             }),
-            value: this.formData.password_confirmation,
-            type: 'password',
-            autocomplete: 'off',
-            required: true,
-            placeholder: locale.t('fields.account.password_confirm'),
-            disabled: vnode.attrs.isPasswordResetBusy,
-          }),
-        ])
+          ])
       ),
       m('input', {
         type: 'hidden',

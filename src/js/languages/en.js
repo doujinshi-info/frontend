@@ -38,6 +38,7 @@ module.exports = {
   tag: 'Tag',
   loading: 'Loading',
   doujin: 'Doujin',
+  old_browser: 'You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com?locale=en">upgrade your browser</a> to improve your experience and security.',
   titles: {
     home: 'Doujinshi Information & Statistics',
   },

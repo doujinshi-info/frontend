@@ -30,12 +30,10 @@ export default class PushNotification {
    */
   oninit(vnode) {
     if ('serviceWorker' in navigator && 'PushManager' in window) {
-      runtime.register()
-      .then((sw) => {
+      runtime.register().then((sw) => {
         this.swRegistration = sw;
         this.initButton();
-      })
-      .catch((error) => {
+      }).catch((error) => {
         console.warn('Service Worker Error', error);
         this.changePushButtonState('incompatible');
       });
@@ -68,8 +66,7 @@ export default class PushNotification {
     }
 
     if (this.swRegistration) {
-      this.swRegistration.pushManager.getSubscription()
-      .then((subscription) => {
+      this.swRegistration.pushManager.getSubscription().then((subscription) => {
         this.changePushButtonState('disabled');
 
         if (!subscription) {
@@ -79,8 +76,7 @@ export default class PushNotification {
         this.notification.pushSync('update', subscription, locale.getLang());
 
         this.changePushButtonState('enabled');
-      })
-      .catch((error) => {
+      }).catch((error) => {
         console.warn('Failed to get push notification subscription.', error);
       });
     }
@@ -90,7 +86,7 @@ export default class PushNotification {
    * [onButtonClick description]
    */
   onButtonClick() {
-    let pushButton = document.getElementById('push-notifications-btn');
+    const pushButton = document.getElementById('push-notifications-btn');
 
     pushButton.disabled = true;
 
@@ -109,26 +105,24 @@ export default class PushNotification {
 
     if (this.swRegistration) {
       this.swRegistration.pushManager.getSubscription()
-      .then((pushSubscription) => {
-        if (!pushSubscription) {
-          this.changePushButtonState('disabled');
-          return;
-        }
+          .then((pushSubscription) => {
+            if (!pushSubscription) {
+              this.changePushButtonState('disabled');
+              return;
+            }
 
-        const language = locale.getLang();
-        this.notification.pushSync('delete', pushSubscription, language);
+            const language = locale.getLang();
+            this.notification.pushSync('delete', pushSubscription, language);
 
-        pushSubscription.unsubscribe()
-        .then((successful) => {
-          this.changePushButtonState('disabled');
-        })
-        .catch((error) => {
-          this.changePushButtonState('disabled');
-        });
-      })
-      .catch((error) => {
-        console.error('Error', error);
-      });
+            pushSubscription.unsubscribe().then((successful) => {
+              this.changePushButtonState('disabled');
+            }).catch((error) => {
+              this.changePushButtonState('disabled');
+            });
+          })
+          .catch((error) => {
+            console.error('Error', error);
+          });
     } else {
       console.error('Error');
     }
@@ -144,12 +138,10 @@ export default class PushNotification {
       this.swRegistration.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: base64toInt8(process.env.PUSH_KEY),
-      })
-      .then((subscription) => {
+      }).then((subscription) => {
         this.changePushButtonState('enabled');
         this.notification.pushSync('create', subscription, locale.getLang());
-      })
-      .catch((error) => {
+      }).catch((error) => {
         if (Notification.permission === 'denied') {
           this.changePushButtonState('incompatible');
         } else {
@@ -164,7 +156,7 @@ export default class PushNotification {
    * @param  {[type]} state [description]
    */
   changePushButtonState(state) {
-    let pushButton = document.getElementById('push-notifications-btn');
+    const pushButton = document.getElementById('push-notifications-btn');
 
     switch (state) {
       case 'enabled':
@@ -172,25 +164,25 @@ export default class PushNotification {
         this.icon = m('i.fa.fa-bell-slash');
         this.btnText = locale.t('buttons.disable_push');
         this.isPushEnabled = true;
-      break;
+        break;
       case 'disabled':
         pushButton.disabled = false;
         this.icon = m('i.fa.fa-bell');
         this.btnText = locale.t('buttons.enable_push');
         this.isPushEnabled = false;
-      break;
+        break;
       case 'computing':
         pushButton.disabled = true;
         this.btnText = locale.t('loading');
-      break;
+        break;
       case 'incompatible':
         pushButton.disabled = true;
         this.icon = m('i.fa.fa-bell');
         this.btnText = locale.t('buttons.not_supported');
-      break;
+        break;
       default:
         console.error('Unhandled push button state', state);
-      break;
+        break;
     }
   }
 

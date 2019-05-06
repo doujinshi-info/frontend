@@ -34,7 +34,7 @@ export default class UserLibrarySearch {
    * @return {[type]}       [description]
    */
   view(vnode) {
-    let searchForm = document.getElementById('searchLibraryForm');
+    const searchForm = document.getElementById('searchLibraryForm');
 
     if (vnode.attrs.isLoading == false) {
       return m('.field', [
@@ -46,25 +46,25 @@ export default class UserLibrarySearch {
             role: 'search',
           },
           m('.navbar-start',
-            m('.field.has-addons.navbar-grow', [
-              m('.control.navbar-grow',
-                m('input.input.is-expanded', {
-                  name: 'q',
-                  placeholder: locale.t('navi.search'),
-                  type: 'search',
-                  value: getURLParam('q'),
-                })
-              ),
-              m('.control', m('a.button.is-primary', {
-                onclick: () => {
-                  if (searchForm.checkValidity()) {
-                    searchForm.submit();
-                  } else {
-                    searchForm.reportValidity();
-                  }
-                },
-              }, m('i.fa.fa-search'))),
-            ])
+              m('.field.has-addons.navbar-grow', [
+                m('.control.navbar-grow',
+                    m('input.input.is-expanded', {
+                      name: 'q',
+                      placeholder: locale.t('navi.search'),
+                      type: 'search',
+                      value: getURLParam('q'),
+                    })
+                ),
+                m('.control', m('a.button.is-primary', {
+                  onclick: () => {
+                    if (searchForm.checkValidity()) {
+                      searchForm.submit();
+                    } else {
+                      searchForm.reportValidity();
+                    }
+                  },
+                }, m('i.fa.fa-search'))),
+              ])
           )),
         ]),
       ]);

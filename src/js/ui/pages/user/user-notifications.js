@@ -20,7 +20,7 @@ class UserNotifications extends BasePage {
   /**
    * Initialization of user notifications page.
    */
-   constructor() {
+  constructor() {
     super(locale.t('navi.notifications'));
 
     this.auth = new Auth();
@@ -62,7 +62,7 @@ class UserNotifications extends BasePage {
    * @return {Vnode}
    */
   view() {
-    let content = [
+    const content = [
       m('h3.title.is-3', locale.t('navi.notifications')),
       m('.field.is-grouped', [
         m('.control', [
@@ -76,23 +76,21 @@ class UserNotifications extends BasePage {
         m('.control', [
           m(PushNotification),
         ]),
-      ])
+      ]),
     ];
 
     if (this.notification.data != null && this.notification.data.length) {
       content.push(
-         m(NotificationList, {
-          notifications: this.notification.data,
-          meta: this.notification.meta,
-          fn_read: this.markAsRead.bind(this),
-        })
+          m(NotificationList, {
+            notifications: this.notification.data,
+            meta: this.notification.meta,
+            fn_read: this.markAsRead.bind(this),
+          })
       );
     } else {
       if (!this.notification.isLoading) {
         content.push(
-          m('.notification',
-            locale.t('texts.empty.no_notifications')
-          )
+            m('.notification', locale.t('texts.empty.no_notifications'))
         );
       }
     }

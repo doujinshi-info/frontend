@@ -42,7 +42,7 @@ export default class MiscSearch extends BasePage {
     }
 
     if (this.imageResults != false) {
-      this.books = this.imageResults.data
+      this.books = this.imageResults.data;
       this.meta = this.imageResults.meta;
     }
   }
@@ -81,7 +81,7 @@ export default class MiscSearch extends BasePage {
       } else {
         return m('section.section', [
           m('.notification.has-text-centered',
-            locale.t('texts.empty.no_results')
+              locale.t('texts.empty.no_results')
           ),
         ]);
       }

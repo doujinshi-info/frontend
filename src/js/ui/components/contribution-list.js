@@ -40,7 +40,7 @@ export default class ContributionList {
   view(vnode) {
     let object = null;
     let content = null;
-    let tokens = [];
+    const tokens = [];
 
     if (this.changes) {
       this.changes.forEach(function(change) {
@@ -57,28 +57,32 @@ export default class ContributionList {
         }
 
         tokens.push(
-          m('tr', [
-            m('td', {'data-th': locale.t('history.transaction')},
-              m('a', {href: '/changelog/'+change.id}, change.id)
-            ),
-            m('td', {'data-th': locale.t('history.object_type')},
-              (change.tag ? locale.t('tag') : locale.t('doujinshi'))
-            ),
-            m('td', {'data-th': locale.t('history.object')}, object),
-            m('td', {'data-th': locale.t('history.type')},
-              locale.t('history.' + change.type)
-            ),
-            m('td', {
-              'data-th': locale.t('history.amount'),
-              class: (Math.sign(change.amount) === 1 ?
-                'has-text-success' : 'has-text-danger'
+            m('tr', [
+              m('td', {'data-th': locale.t('history.transaction')},
+                  m('a', {href: '/changelog/'+change.id}, change.id)
               ),
-            }, change.amount),
-            m('td', {'data-th': locale.t('history.contributor')}, (change.user != null ? m('a', {
-              href: '/profile/'+change.user.slug,
-            }, change.user.display_name) : '')),
-            m('td', {'data-th': locale.t('history.created_at')}, change.created_at),
-          ])
+              m('td', {'data-th': locale.t('history.object_type')},
+                  (change.tag ? locale.t('tag') : locale.t('doujinshi'))
+              ),
+              m('td', {'data-th': locale.t('history.object')}, object),
+              m('td', {'data-th': locale.t('history.type')},
+                  locale.t('history.' + change.type)
+              ),
+              m('td', {
+                'data-th': locale.t('history.amount'),
+                'class': (Math.sign(change.amount) === 1 ?
+                  'has-text-success' : 'has-text-danger'
+                ),
+              }, change.amount),
+              m('td', {
+                'data-th': locale.t('history.contributor'),
+              }, (change.user != null ? m('a', {
+                href: '/profile/'+change.user.slug,
+              }, change.user.display_name) : '')),
+              m('td', {
+                'data-th': locale.t('history.created_at'),
+              }, change.created_at),
+            ])
         );
       });
 

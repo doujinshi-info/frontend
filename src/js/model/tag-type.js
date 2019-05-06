@@ -28,14 +28,14 @@ export class TagType {
     this.isLoading = true;
 
     return this.api.request('GET', '/tag/types')
-    .then((response) => {
-      this.data = response.data;
-    })
-    .then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response.data;
+        })
+        .then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 }

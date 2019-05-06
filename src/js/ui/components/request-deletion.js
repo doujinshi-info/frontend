@@ -68,7 +68,7 @@ export default class RequestDeletion {
 
     return [
       m('.column', [
-        m('p.control.has-text-right',
+        m('p.control.has-text-right', [
           m('a.button.is-light.is-small', {
             onclick: function(e) {
               e.preventDefault();
@@ -77,8 +77,8 @@ export default class RequestDeletion {
           }, [
             m('span.icon.is-small', m('i.fa.fa-trash')),
             m('span', locale.t('buttons.request_deletion')),
-          ])
-        ),
+          ]),
+        ]),
       ]),
 
       m('.modal', {id: 'deleteDialog'}, [
@@ -105,20 +105,20 @@ export default class RequestDeletion {
             ]),
 
             m('footer.card-footer', [
-              m('p.card-footer-item',
+              m('p.card-footer-item', [
                 m('button.button.is-light.is-fullwidth', {
                   onclick: function(e) {
                     e.preventDefault();
                     deleteDialog.classList.remove('is-active');
                   },
-                }, locale.t('buttons.cancel'))
-              ),
-              m('p.card-footer-item',
+                }, locale.t('buttons.cancel')),
+              ]),
+              m('p.card-footer-item', [
                 m('button.button.is-primary.is-fullwidth', {
                   onclick: this.onSubmitButtonClick.bind(this),
                   disabled: this.deletion.isLoading,
-                }, locale.t('buttons.submit'))
-              ),
+                }, locale.t('buttons.submit')),
+              ]),
             ]),
           ]),
         ]),

@@ -35,7 +35,7 @@ export default class Pagination {
    * @return {[type]}      [description]
    */
   createPages(meta) {
-    let pages = [];
+    const pages = [];
 
     if (meta.last_page > 7) {
       for (let i = 1; i <= meta.last_page; i++) {
@@ -46,17 +46,15 @@ export default class Pagination {
             }
 
             if (i === 6) {
-              pages.push(
-                m('li', m('span.pagination-ellipsis', m.trust('&hellip;')))
-              );
+              pages.push(m('li', [
+                m('span.pagination-ellipsis', m.trust('&hellip;')),
+              ]));
             } else {
-              pages.push(
-                this.renderPage(
+              pages.push(this.renderPage(
                   meta.current_page,
                   meta.last_page,
                   meta.last_page
-                )
-              );
+              ));
             }
           } else {
             pages.push(this.renderPage(meta.current_page, i, i));
@@ -66,9 +64,9 @@ export default class Pagination {
         ) {
           if (i < 3) {
             if (i === 2) {
-              pages.push(
-                m('li', m('span.pagination-ellipsis', m.trust('&hellip;')))
-              );
+              pages.push(m('li', [
+                m('span.pagination-ellipsis', m.trust('&hellip;')),
+              ]));
             } else {
               pages.push(this.renderPage(meta.current_page, 1, 1));
             }
@@ -85,9 +83,9 @@ export default class Pagination {
 
           if (i > meta.last_page - 2) {
             if (meta.last_page - 1 === i) {
-              pages.push(
-                m('li', m('span.pagination-ellipsis', m.trust('&hellip;')))
-              );
+              pages.push(m('li', [
+                m('span.pagination-ellipsis', m.trust('&hellip;')),
+              ]));
             } else {
               pages.push(this.renderPage(meta.current_page, i, i));
             }
@@ -98,9 +96,9 @@ export default class Pagination {
           pages.push(this.renderPage(meta.current_page, i, i));
         } else if (meta.current_page > meta.last_page - 4) {
           if (i < 3) {
-            pages.push(
-              m('li', m('span.pagination-ellipsis', m.trust('&hellip;')))
-            );
+            pages.push(m('li', [
+              m('span.pagination-ellipsis', m.trust('&hellip;')),
+            ]));
           }
 
           if (i >= meta.last_page - 4) {

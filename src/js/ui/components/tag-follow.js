@@ -58,7 +58,7 @@ export default class TagFollow {
    */
   view(vnode) {
     return m('.field.has-addons', [
-      m('p.control',
+      m('p.control', [
         m('a.button.is-light', {
           onclick: this.onButtonClick.bind(this),
         }, [
@@ -68,8 +68,8 @@ export default class TagFollow {
           m('span', (this.isFollowing == true ?
             locale.t('buttons.unfollow') : locale.t('buttons.follow')
           )),
-        ])
-      ),
+        ]),
+      ]),
     ]);
   }
 }

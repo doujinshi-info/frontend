@@ -46,39 +46,41 @@ export default class BookHistory extends BasePage {
    * @return {Vnode} [description]
    */
   view() {
-    let changes = [];
+    const changes = [];
 
     if (this.contribution.data) {
       this.contribution.data.forEach(function(change) {
         changes.push(
-          m('tr', [
-            m('td', {
-              'data-th': locale.t('history.transaction')
-            }, m('a', {
-              href: '/changelog/' + change.id,
-            }, change.id)),
+            m('tr', [
+              m('td', {
+                'data-th': locale.t('history.transaction'),
+              }, m('a', {
+                href: '/changelog/' + change.id,
+              }, change.id)),
 
-            m('td', {
-              'data-th': locale.t('history.type')
-            }, locale.t('history.' + change.type)),
+              m('td', {
+                'data-th': locale.t('history.type'),
+              }, locale.t('history.' + change.type)),
 
-            m('td', {
-              'data-th': locale.t('history.amount'),
-              class: (Math.sign(change.amount) === 1 ?
-                'has-text-success' : 'has-text-danger'
+              m('td', {
+                'data-th': locale.t('history.amount'),
+                'class': (Math.sign(change.amount) === 1 ?
+                  'has-text-success' : 'has-text-danger'
+                ),
+              }, change.amount),
+
+              m('td', {'data-th': locale.t('history.contributor')},
+                  (change.user.slug == 'system' ? change.user.name :
+                    (change.user == null ? '' : m('a', {
+                      href: '/profile/'+change.user.slug,
+                    }, change.user.display_name))
+                  )
               ),
-            }, change.amount),
 
-            m('td', {
-              'data-th': locale.t('history.contributor')
-            }, (change.user.slug == 'system' ? change.user.name : (change.user == null ? '' : m('a', {
-              href: '/profile/'+change.user.slug,
-            }, change.user.display_name)))),
-
-            m('td', {
-              'data-th': locale.t('history.created_at')
-            }, change.created_at),
-          ])
+              m('td', {
+                'data-th': locale.t('history.created_at'),
+              }, change.created_at),
+            ])
         );
       });
 

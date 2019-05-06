@@ -19,7 +19,7 @@ class UserSettings extends BasePage {
   /**
    * Initialization of User Settings page.
    */
-   constructor() {
+  constructor() {
     super(locale.t('settings.settings'));
 
     this.user = new User();

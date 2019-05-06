@@ -6,6 +6,7 @@ import {Book} from './../../model/book';
 import {Notification} from './../../model/notification';
 
 // View Components
+import OldBrowser from './../components/old-browser';
 import NavBar from './../components/navbar';
 import Footer from './../components/footer';
 import Alert from './../components/alert';
@@ -49,12 +50,13 @@ class LayoutDefault {
     }
 
     return [
+      m(OldBrowser),
       m(NavBar, {
-          token: this.auth.token,
-          user: this.auth.user,
-          book: this.book,
-          notifications: this.notification.data,
-          pathname: vnode.attrs.pathname,
+        token: this.auth.token,
+        user: this.auth.user,
+        book: this.book,
+        notifications: this.notification.data,
+        pathname: vnode.attrs.pathname,
       }),
       m('main', [
         Alert.view(),

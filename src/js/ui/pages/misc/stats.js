@@ -13,7 +13,6 @@ import StatsPieChart from './../../components/stats-pie-chart';
 import StatsBarChart from './../../components/stats-bar-chart';
 import StatsLineChart from './../../components/stats-line-chart';
 import bulmaCalendar from 'bulma-calendar';
-import moment from 'moment';
 
 /**
  * Statistical information on the data.
@@ -62,7 +61,7 @@ export default class MiscStats extends BasePage {
             m('a.button.is-white', {
               onclick: function(e) {
                 e.preventDefault();
-                var filterMenu = document.getElementById('filterMenu');
+                const filterMenu = document.getElementById('filterMenu');
                 filterMenu.classList.toggle('is-hidden');
               },
             }, [
@@ -76,7 +75,7 @@ export default class MiscStats extends BasePage {
                 m('label.label', locale.t('fields.book.release_date')),
                 m('input.input', {
                   oncreate: (e) => {
-                    var calendars = bulmaCalendar.attach('[type="date"]', {
+                    const calendars = bulmaCalendar.attach('[type="date"]', {
                       showHeader: false,
                       isRange: true,
                       showFooter: false,

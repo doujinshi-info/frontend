@@ -6,7 +6,7 @@
  * @return {array}           The array containing only tags of the type.
  */
 export default function(category, tags) {
-  let results = tags.data.map((tag) => {
+  const results = tags.data.map((tag) => {
     if (tag.type.slug == category) {
       return tag;
     }

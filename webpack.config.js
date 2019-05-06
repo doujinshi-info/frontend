@@ -19,15 +19,28 @@ module.exports = {
       pace: 'pace-progress'
     }
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
         test: /\.m?js$/,
         exclude: /node_modules/,
+        include: [
+          path.resolve('src'),
+          path.resolve('node_modules/tokenfield')
+        ],
         use: {
           loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env']
+            presets: [
+              ['@babel/preset-env', {
+                targets: {
+                  ie: 11
+                },
+                useBuiltIns: 'usage',
+                debug: true
+              }]
+            ]
           }
         }
       },

@@ -46,7 +46,7 @@ export default class BookList {
     this.page = this.page + 1;
 
     window.history.pushState('', '',
-      uri().setQuery('page', this.page).toString()
+        uri().setQuery('page', this.page).toString()
     );
 
     this.fn_nextPage(this.page, this.payload);
@@ -62,27 +62,28 @@ export default class BookList {
 
     if (this.books) {
       return [
-        m('.book-list.columns.is-multiline.is-mobile',
-        this.books.map((book) => {
-          return m('.column.is-half-mobile.is-4-tablet.is-2-desktop', [
-            m('.book-block', [
-              m('a', {
-                href: '/book/' + book.slug,
-                title: locale.name(book.name),
-              }, [
-                m('figure.image', [
-                  m('img', {
-                    src: (book.cover ?
-                      book.cover.replace('.jpg', '-thumb.jpg')
-                      : '/assets/no_cover.jpg'
-                    ),
-                  }),
+        m('.book-list.columns.is-multiline.is-mobile', [
+          this.books.map((book) => {
+            return m('.column.is-half-mobile.is-4-tablet.is-2-desktop', [
+              m('.book-block', [
+                m('a', {
+                  href: '/book/' + book.slug,
+                  title: locale.name(book.name),
+                }, [
+                  m('figure.image', [
+                    m('img', {
+                      src: (book.cover ?
+                        book.cover.replace('.jpg', '-thumb.jpg')
+                        : '/assets/no_cover.jpg'
+                      ),
+                    }),
+                  ]),
+                  m('.book-title', locale.name(book.name)),
                 ]),
-                m('.book-title', locale.name(book.name)),
               ]),
-            ]),
-          ]);
-        })),
+            ]);
+          }),
+        ]),
         m('a', {
           href: uri().setQuery('page', this.page + 1).toString(),
           class: 'button is-fullwidth is-primary'

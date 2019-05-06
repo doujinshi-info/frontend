@@ -30,16 +30,16 @@ export default class TagLabels {
    * @return {[type]}       [description]
    */
   view(vnode) {
-    let tokens = [];
+    const tokens = [];
 
     if (this.tags != false) {
       this.tags.forEach(function(tag) {
         tokens.push(
-          m(Link, {
-            className: 'tag is-small is-link',
-            to: '/tag/'+ tag.type.slug +'/'+ tag.slug,
-          }, locale.name(tag.name)))
-        ;
+            m(Link, {
+              className: 'tag is-small is-link',
+              to: '/tag/'+ tag.type.slug +'/'+ tag.slug,
+            }, locale.name(tag.name))
+        );
       });
 
       return m('.tags', tokens);

@@ -82,10 +82,10 @@ export class Api {
       case 'errors.refresh_token_expired':
         this.auth.removeTokens();
         location.reload();
-      break;
+        break;
       default:
         this.error = e;
-      break;
+        break;
     }
   }
 }

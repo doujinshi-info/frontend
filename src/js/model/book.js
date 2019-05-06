@@ -43,14 +43,14 @@ export class Book {
     payload = toFormData(payload);
 
     return this.api.request('POST', '/book', payload, true)
-    .then((response) => {
-      this.data = response;
-    }).then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response;
+        }).then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -66,14 +66,14 @@ export class Book {
     payload = toFormData(payload);
 
     return this.api.request('POST', '/book/'+slug, payload, true)
-    .then((response) => {
-      this.data = response;
-    }).then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response;
+        }).then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -87,15 +87,15 @@ export class Book {
     this.isLoading = true;
 
     return this.api.request('GET', '/book/'+slug)
-    .then((response) => {
-      this.data = response;
-    })
-    .then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response;
+        })
+        .then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -109,15 +109,15 @@ export class Book {
     this.isLoading = true;
 
     return this.api.request('GET', '/book', {page: page})
-    .then((response) => {
-      this.data = response;
-    })
-    .then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response;
+        })
+        .then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -132,15 +132,15 @@ export class Book {
     this.isLoading = true;
 
     return this.api.request('GET', '/search', {q: query, page: page})
-    .then((response) => {
-      this.data = response;
-    })
-    .then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response;
+        })
+        .then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -154,20 +154,20 @@ export class Book {
     this.data = null;
     this.isLoading = true;
 
-    let payload = toFormData({});
+    const payload = toFormData({});
 
     payload.append('image', image);
 
     return this.api.request('POST', '/search/image', payload)
-    .then((response) => {
-      this.data = response;
-    })
-    .then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response;
+        })
+        .then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -180,13 +180,13 @@ export class Book {
     this.isLoading = true;
 
     return this.api.request('POST', '/import', {url: url}, true)
-    .then((response) => {
-      this.data = response;
-    }).then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response;
+        }).then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 }

@@ -42,7 +42,7 @@ export default class UserLoginForm {
    * @return {[type]}       [description]
    */
   view(vnode) {
-    let isBusy = vnode.attrs.isUserLoginBusy;
+    const isBusy = vnode.attrs.isUserLoginBusy;
 
     return m('form', {id: 'login-form'}, [
       m('.field', [

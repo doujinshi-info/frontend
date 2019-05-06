@@ -34,16 +34,16 @@ export class Tag {
     this.isLoading = true;
 
     return this.api.request('POST', '/tag', payload, true)
-    .then((response) => {
-      this.data = response;
-    })
-    .then(() => {
-      this.isLoading = false;
-    })
-    .catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response;
+        })
+        .then(() => {
+          this.isLoading = false;
+        })
+        .catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -57,22 +57,17 @@ export class Tag {
   update(type, slug, payload) {
     this.isLoading = true;
 
-    return this.api.request(
-      'PUT',
-      '/tag/' + type + '/' + slug,
-      payload,
-      true
-    )
-    .then((response) => {
-      this.data = response;
-    })
-    .then(() => {
-      this.isLoading = false;
-    })
-    .catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+    return this.api.request('PUT', '/tag/'+type+'/'+slug, payload, true)
+        .then((response) => {
+          this.data = response;
+        })
+        .then(() => {
+          this.isLoading = false;
+        })
+        .catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -88,15 +83,15 @@ export class Tag {
     this.isLoading = true;
 
     return this.api.request('GET', '/tag/'+type+'/'+slug, {page: page})
-    .then((response) => {
-      this.data = response;
-    })
-    .then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response;
+        })
+        .then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
   /**
@@ -113,32 +108,40 @@ export class Tag {
     type = (type ? '/'+type : '');
 
     return this.api.request('GET', '/tag'+type, {page: page})
-    .then((response) => {
-      this.data = response.data;
-      this.meta = response.meta;
-    })
-    .then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response.data;
+          this.meta = response.meta;
+        })
+        .then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 
+  /**
+   * Searches for a specific tag.
+   *
+   * @param  {string} type  The tag type.
+   * @param  {string} query The search query.
+   * @param  {Number} page  Pagination page number.
+   * @return {Promise}
+   */
   search(type, query, page = 1) {
     this.data = null;
     this.isLoading = true;
 
     return this.api.request('GET', '/search/tag/'+type, {q: query, page: page})
-    .then((response) => {
-      this.data = response.data;
-      this.meta = response.meta;
-    })
-    .then(() => {
-      this.isLoading = false;
-    }).catch((e) => {
-      this.error = this.api.error;
-      this.isLoading = false;
-    });
+        .then((response) => {
+          this.data = response.data;
+          this.meta = response.meta;
+        })
+        .then(() => {
+          this.isLoading = false;
+        }).catch((e) => {
+          this.error = this.api.error;
+          this.isLoading = false;
+        });
   }
 }

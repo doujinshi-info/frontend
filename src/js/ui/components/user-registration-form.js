@@ -31,14 +31,17 @@ export default class UserResetForm {
     this.formAction = vnode.attrs.formAction;
   }
 
+  /**
+   * Make sure password confirmation matches password.
+   */
   checkPasswords() {
-    let password = document.getElementById('password');
-    let passwordConfirm = document.getElementById('password_confirmation');
+    const password = document.getElementById('password');
+    const passConfirm = document.getElementById('password_confirmation');
 
-    if (passwordConfirm.value != password.value) {
-      passwordConfirm.setCustomValidity(locale.t('texts.errors.password_mismatch'));
+    if (passConfirm.value != password.value) {
+      passConfirm.setCustomValidity(locale.t('texts.errors.password_mismatch'));
     } else {
-      passwordConfirm.setCustomValidity('');
+      passConfirm.setCustomValidity('');
     }
   }
 
@@ -62,7 +65,7 @@ export default class UserResetForm {
    * @return {[type]}       [description]
    */
   view(vnode) {
-    let isBusy = vnode.attrs.isUserRegistrationBusy;
+    const isBusy = vnode.attrs.isUserRegistrationBusy;
 
     return m('form', {id: 'registration-form'}, [
       m('.field', [

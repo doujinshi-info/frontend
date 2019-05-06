@@ -50,47 +50,46 @@ export default class ContributionDiff extends BasePage {
    * @return {Vnode}
    */
   view() {
-    if (this.contribution.data && (this.contribution.data.tag || this.contribution.data.book)) {
+    if (this.contribution.data
+      && (this.contribution.data.tag || this.contribution.data.book)) {
       return m('section.section', [
-        m('nav.breadcrumb',
-          m('ul', [
-            // Tags
-            (this.contribution.data.tag ? m('li', m('a', {
-              href: '/tag',
-            }, locale.t('navi.tags'))) : ''),
+        m('nav.breadcrumb', m('ul', [
+          // Tags
+          (this.contribution.data.tag ? m('li', m('a', {
+            href: '/tag',
+          }, locale.t('navi.tags'))) : ''),
 
-            (this.contribution.data.tag ? m('li', m('a', {
-              href: '/tag/'+this.contribution.data.tag.type.slug,
-            }, locale.name(this.contribution.data.tag.type.name))) : ''),
+          (this.contribution.data.tag ? m('li', m('a', {
+            href: '/tag/'+this.contribution.data.tag.type.slug,
+          }, locale.name(this.contribution.data.tag.type.name))) : ''),
 
-            (this.contribution.data.tag ? m('li', m('a', {
-              href: '/tag/' + this.contribution.data.tag.type.slug + '/'
-              + this.contribution.data.tag.slug,
-            }, locale.name(this.contribution.data.tag.name))) : ''),
+          (this.contribution.data.tag ? m('li', m('a', {
+            href: '/tag/' + this.contribution.data.tag.type.slug + '/'
+            + this.contribution.data.tag.slug,
+          }, locale.name(this.contribution.data.tag.name))) : ''),
 
-            (this.contribution.data.tag ? m('li', m('a', {
-              href: '/tag/' + this.contribution.data.tag.type.slug + '/'
-              + this.contribution.data.tag.slug+'/changelog',
-            }, locale.t('tabs.changelog'))) : ''),
+          (this.contribution.data.tag ? m('li', m('a', {
+            href: '/tag/' + this.contribution.data.tag.type.slug + '/'
+            + this.contribution.data.tag.slug+'/changelog',
+          }, locale.t('tabs.changelog'))) : ''),
 
-            // Doujinshi
-            (this.contribution.data.book ? m('li', m('a', {
-              href: '/',
-            }, locale.t('doujinshi'))) : ''),
+          // Doujinshi
+          (this.contribution.data.book ? m('li', m('a', {
+            href: '/',
+          }, locale.t('doujinshi'))) : ''),
 
-            (this.contribution.data.book ? m('li', m('a', {
-              href: '/book/'+this.contribution.data.book.slug,
-            }, locale.name(this.contribution.data.book.name))) : ''),
+          (this.contribution.data.book ? m('li', m('a', {
+            href: '/book/'+this.contribution.data.book.slug,
+          }, locale.name(this.contribution.data.book.name))) : ''),
 
-            (this.contribution.data.book ? m('li', m('a', {
-              href: '/book/'+this.contribution.data.book.slug+'/changelog',
-            }, locale.t('tabs.changelog'))) : ''),
+          (this.contribution.data.book ? m('li', m('a', {
+            href: '/book/'+this.contribution.data.book.slug+'/changelog',
+          }, locale.t('tabs.changelog'))) : ''),
 
-            m('li.is-active', m('a', {
-              href: '#',
-            }, this.contribution.data.id)),
-          ])
-        ),
+          m('li.is-active', m('a', {
+            href: '#',
+          }, this.contribution.data.id)),
+        ])),
 
         m('h3.title.is-3', locale.t('history.differences')),
 

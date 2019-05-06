@@ -37,14 +37,14 @@ export default class UserFollowing {
       this.tags.forEach((tag) => {
         this.data.push(m('tr', [
           m('td',
-            m('a', {
-              href: '/tag/'+ tag.type.slug +'/'+ tag.slug,
-            }, locale.name(tag.name))
+              m('a', {
+                href: '/tag/'+ tag.type.slug +'/'+ tag.slug,
+              }, locale.name(tag.name))
           ),
           m('td',
-            m('a', {
-              href: '/tag/'+ tag.type.slug,
-            }, locale.name(tag.type.name))
+              m('a', {
+                href: '/tag/'+ tag.type.slug,
+              }, locale.name(tag.type.name))
           ),
         ]));
       });

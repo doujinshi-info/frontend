@@ -51,10 +51,13 @@ export default class UserSettingsForm {
     }
   }
 
+  /**
+   * Checks that new password is not the same as old password.
+   */
   checkPasswords() {
-    let passwordOld = document.getElementById('password');
-    let password = document.getElementById('password_new');
-    let passwordConfirm = document.getElementById('password_new_confirmation');
+    const passwordOld = document.getElementById('password');
+    const password = document.getElementById('password_new');
+    const passConfirm = document.getElementById('password_new_confirmation');
 
     if (password.value.length) {
       if (!passwordOld.value.length) {
@@ -63,10 +66,12 @@ export default class UserSettingsForm {
         passwordOld.setCustomValidity('');
       }
 
-      if (passwordConfirm.value != password.value) {
-        passwordConfirm.setCustomValidity(locale.t('texts.errors.password_mismatch'));
+      if (passConfirm.value != password.value) {
+        passConfirm.setCustomValidity(
+            locale.t('texts.errors.password_mismatch')
+        );
       } else {
-        passwordConfirm.setCustomValidity('');
+        passConfirm.setCustomValidity('');
       }
     }
   }
@@ -77,19 +82,19 @@ export default class UserSettingsForm {
    * @param  {string} tabName The ID for which content to show.
    */
   openTab(tabName) {
-    let x = document.getElementsByClassName('tab-content');
+    const x = document.getElementsByClassName('tab-content');
 
     for (let i = 0; i < x.length; i++) {
       x[i].className = x[i].className.replace('tab-shown', 'tab-hidden');
     }
 
-    let tablinks = document.getElementsByClassName('tab');
+    const tablinks = document.getElementsByClassName('tab');
 
     for (let i = 0; i < x.length; i++) {
       tablinks[i].className = tablinks[i].className.replace(' is-active', '');
     }
 
-    let element = document.getElementById(tabName);
+    const element = document.getElementById(tabName);
 
     if (element) {
       element.className = element.className.replace('tab-hidden', 'tab-shown');
@@ -104,26 +109,20 @@ export default class UserSettingsForm {
    */
   view(vnode) {
     return m('form', {id: 'settings-form'}, [
-      m('.tabs.is-fullwidth',
-        m('ul', [
-          m('li.tab.is-active', {
-            onclick: (e) => {
-              e.currentTarget.className += ' is-active';
-              this.openTab('profile');
-            },
+      m('.tabs.is-fullwidth', m('ul', [
+        m('li.tab.is-active', {
+          onclick: (e) => {
+            e.currentTarget.className += ' is-active';
+            this.openTab('profile');
           },
-            m('a', m('span', locale.t('tabs.profile')))
-          ),
-          m('li.tab', {
-            onclick: (e) => {
-              e.currentTarget.className += ' is-active';
-              this.openTab('security');
-            },
+        }, m('a', m('span', locale.t('tabs.profile')))),
+        m('li.tab', {
+          onclick: (e) => {
+            e.currentTarget.className += ' is-active';
+            this.openTab('security');
           },
-            m('a', m('span', locale.t('tabs.security')))
-          ),
-        ])
-      ),
+        }, m('a', m('span', locale.t('tabs.security')))),
+      ])),
 
       m('.tab-container', [
         m('.tab-content.tab-shown', {id: 'profile'}, [
@@ -179,23 +178,23 @@ export default class UserSettingsForm {
             m('.control', [
               m('label.label', locale.t('fields.account.profile_privacy')),
               m('.select', [
-                  m('select', {
-                    onchange: (e) => {
-                      this.formData.is_private = e.currentTarget.value;
-                    },
-                    required: true,
-                    disabled: vnode.attrs.isUserSettingBusy,
-                  }, [
-                    m('option', {
-                      value: 0,
-                      selected: (this.formData.is_private == false),
-                    }, locale.t('fields.account.profile_public')),
-                    m('option', {
-                      value: 1,
-                      selected: (this.formData.is_private == true),
-                    }, locale.t('fields.account.profile_private')),
-                  ]),
+                m('select', {
+                  onchange: (e) => {
+                    this.formData.is_private = e.currentTarget.value;
+                  },
+                  required: true,
+                  disabled: vnode.attrs.isUserSettingBusy,
+                }, [
+                  m('option', {
+                    value: 0,
+                    selected: (this.formData.is_private == false),
+                  }, locale.t('fields.account.profile_public')),
+                  m('option', {
+                    value: 1,
+                    selected: (this.formData.is_private == true),
+                  }, locale.t('fields.account.profile_private')),
                 ]),
+              ]),
             ]),
           ]),
         ]),

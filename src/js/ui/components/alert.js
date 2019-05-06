@@ -14,16 +14,16 @@ export default {
     switch (this.type) {
       case 'error':
         className = '.is-danger';
-      break;
+        break;
       case 'success':
         className = '.is-success';
-      break;
+        break;
       case 'info':
         className = '.is-info';
-      break;
+        break;
       case 'warning':
         className = '.is-warning';
-      break;
+        break;
     }
 
     return (this.message ? m('.alert-message', [
@@ -49,9 +49,9 @@ export default {
     const translation = locale.t(message);
 
     if (translation == message) {
-        message = message;
+      message = message;
     } else {
-        message = translation;
+      message = translation;
     }
 
     this.type = type;

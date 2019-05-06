@@ -80,22 +80,22 @@ export default class UserCollectionButtons {
     if (this.inWishlist != null && this.inLibrary != null) {
       return (this.auth.token ? m('.field.has-addons.user-collections', [
         m('p.control',
-          m('a.button.is-light', {
-            onclick: this.onClickLibrary.bind(this),
-          }, [
-            m('span.icon.is-medium', (this.inLibrary == true ?
-              m('i.fas.fa-bookmark') : m('i.far.fa-bookmark'))
-            ),
-            m('span', (this.inLibrary == false ?
-              locale.t('buttons.library_add') :
-              locale.t('buttons.library_remove'))
-            ),
-          ])
+            m('a.button.is-light', {
+              onclick: this.onClickLibrary.bind(this),
+            }, [
+              m('span.icon.is-medium', (this.inLibrary == true ?
+                m('i.fas.fa-bookmark') : m('i.far.fa-bookmark'))
+              ),
+              m('span', (this.inLibrary == false ?
+                locale.t('buttons.library_add') :
+                locale.t('buttons.library_remove'))
+              ),
+            ])
         ),
         m('p.control',
-          m('a.button.is-light', {
-            onclick: this.onClickWishlist.bind(this),
-          }, [
+            m('a.button.is-light', {
+              onclick: this.onClickWishlist.bind(this),
+            }, [
               m('span.icon.is-medium', (this.inWishlist == true ?
                 m('i.fas.fa-star') : m('i.far.fa-star'))
               ),
@@ -103,7 +103,7 @@ export default class UserCollectionButtons {
                 locale.t('buttons.wishlist_add') :
                 locale.t('buttons.wishlist_remove'))
               ),
-          ])
+            ])
         ),
       ]) : '');
     }

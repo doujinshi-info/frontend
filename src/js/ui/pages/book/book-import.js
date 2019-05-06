@@ -27,11 +27,11 @@ export default class BookImport extends BasePage {
    */
   onSubmitImport() {
     if (document.getElementById('import-form').checkValidity()) {
-    this.book.importBook(this.url).then(() => {
+      this.book.importBook(this.url).then(() => {
         Alert.create('success', locale.t('texts.success.import_success'));
         this.url = null;
       });
-  } else {
+    } else {
       document.getElementById('import-form').reportValidity();
     }
   }

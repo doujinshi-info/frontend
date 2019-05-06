@@ -72,24 +72,30 @@ export default class UserProfile extends BasePage {
 
   /**
    * Get the user's library.
+   *
+   * @param  {integer} page [description]
+   * @return {[type]}      [description]
    */
   getLibrary(page) {
     return this.collection.fetch('collection', this.slug, page, this.query)
-    .then(() => {
-      Array.prototype.push.apply(this.books, this.collection.data.data);
-      this.meta = this.collection.data.meta;
-    });
+        .then(() => {
+          Array.prototype.push.apply(this.books, this.collection.data.data);
+          this.meta = this.collection.data.meta;
+        });
   }
 
   /**
    * Get the user's wishlist.
+   *
+   * @param  {integer} page [description]
+   * @return {[type]}      [description]
    */
   getWishlist(page) {
     return this.collection.fetch('wishlist', this.slug, page, this.query)
-    .then(() => {
-      Array.prototype.push.apply(this.books, this.collection.data.data);
-      this.meta = this.collection.data.meta;
-    });
+        .then(() => {
+          Array.prototype.push.apply(this.books, this.collection.data.data);
+          this.meta = this.collection.data.meta;
+        });
   }
 
   /**
@@ -127,7 +133,7 @@ export default class UserProfile extends BasePage {
             }) :
             m('.notification.has-text-centered', [
               locale.t('texts.empty.no_results'),
-            ]))
+            ])),
           ],
 
           (this.content == 'wishlist' && this.collection.data && this.meta)
@@ -145,7 +151,7 @@ export default class UserProfile extends BasePage {
             }) :
             m('.notification.has-text-centered', [
               locale.t('texts.empty.no_results'),
-            ]))
+            ])),
           ],
 
           (this.content == 'contributions' && this.contribution.data)
