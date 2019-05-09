@@ -11,6 +11,8 @@ import NavBar from './../components/navbar';
 import Footer from './../components/footer';
 import Alert from './../components/alert';
 
+import setLocaleMeta from './../../utils/set-locale-meta';
+
 /**
  * Default layout that is extended by pages.
  */
@@ -30,6 +32,8 @@ class LayoutDefault {
    * @param  {Vnode} vnode
    */
   oninit(vnode) {
+    setLocaleMeta(vnode.attrs.pathname);
+
     this.auth = vnode.attrs.auth;
 
     if (this.auth.token) {
