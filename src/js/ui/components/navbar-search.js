@@ -218,11 +218,13 @@ export default class NavBarSearch {
                 ]),
               ])),
               m('.control', m('a.button.is-primary', {
+                'aria-label': locale.t('accessibility.img_search'),
                 onclick: function() {
                   document.getElementById('imageUpload').click();
                 },
               }, m('i.fa.fa-image'))),
               m('.control', m('a.button.is-primary', {
+                'aria-label': locale.t('accessibility.search'),
                 onclick: () => {
                   if (document.getElementById('searchForm').checkValidity()) {
                     this.search();

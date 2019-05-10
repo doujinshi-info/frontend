@@ -32,10 +32,12 @@ export default class Footer {
           m('.column.has-text-right', [
             (locale.getLang() == 'ja' ?
               m('a.flag-icon.flag-icon-us', {
+                'aria-label': locale.t('accessibility.switch_lang'),
                 href: process.env.EN_URL + pathname,
               })
               :
               m('a.flag-icon.flag-icon-jp', {
+                'aria-label': locale.t('accessibility.switch_lang'),
                 href: process.env.JA_URL + pathname,
               })
             ),

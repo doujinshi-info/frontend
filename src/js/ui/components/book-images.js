@@ -2,6 +2,7 @@
 
 import {LuminousGallery} from 'luminous-lightbox';
 import m from 'mithril';
+import locale from './../locale';
 
 /**
  * Display images of a doujinshi.
@@ -46,6 +47,7 @@ export default class BookImages {
             class: 'image-gallery',
           }, [
             m('img', {
+              alt: locale.t('accessibility.cover_art'),
               src: (this.cover ? this.cover : '/assets/no_cover.jpg'),
             }),
           ]),
@@ -57,6 +59,7 @@ export default class BookImages {
               class: 'image-gallery',
             }, [
               m('img', {
+                alt: locale.t('accessibility.sample_page'),
                 src: sample.replace('.jpg', '-thumb.jpg'),
               }),
             ]),

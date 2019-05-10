@@ -72,6 +72,7 @@ export default class BookList {
                 }, [
                   m('figure.image', [
                     m('img', {
+                      alt: locale.t('accessibility.cover_art'),
                       src: (book.cover ?
                         book.cover.replace('.jpg', '-thumb.jpg')
                         : '/assets/no_cover.jpg'

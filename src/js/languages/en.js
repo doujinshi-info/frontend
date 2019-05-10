@@ -42,6 +42,14 @@ module.exports = {
   titles: {
     home: 'Doujinshi Information & Statistics',
   },
+  accessibility: {
+    cover_art: 'Cover Art',
+    sample_page: 'Sample Page',
+    img_search: 'Image Search',
+    search: 'Keyword Search',
+    menu: 'Navigation',
+    switch_lang: '日本語版に切り替えます。',
+  },
   descriptions: {
     book_info: 'Information about the doujinshi, {book}, by {artist}.',
     book_info_adult: 'Information about the 18+ doujinshi, {book}, by {artist}.',

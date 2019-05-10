@@ -42,6 +42,14 @@ module.exports = {
   titles: {
     home: '同人誌の情報と統計',
   },
+  accessibility: {
+    cover_art: 'カバーアート',
+    sample_page: 'サンプルページ',
+    img_search: '画像検索',
+    search: 'キーワード検索',
+    menu: 'ナビゲーション',
+    switch_lang: 'Switch to Japanese language version.',
+  },
   descriptions: {
     book_info: '{artist}が作成した同人誌「{book}」に関する情報。',
     book_info_adult: '{artist}が作成したR18同人誌「{book}」に関する情報。',

@@ -93,8 +93,12 @@ export default class NavBar {
       role: 'navigation',
     }, [
       m('.navbar-brand', [
-        m('a.navbar-item[href="/"]', m('img', {src: logo})),
-        m('button.button.navbar-burger[data-target="navBarMain"]', [
+        m('a.navbar-item[href="/"]', {
+          'aria-label': locale.t('home'),
+        }, m('img', {alt: '', src: logo})),
+        m('button.button.navbar-burger[data-target="navBarMain"]', {
+          'aria-label': locale.t('accessibility.menu'),
+        }, [
           m('span'),
           m('span'),
           m('span'),
