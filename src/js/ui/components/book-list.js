@@ -4,6 +4,7 @@ import locale from './../locale';
 import m from 'mithril';
 import uri from 'urijs';
 import getURLParam from './../../utils/get-url-params';
+import noCoverImgThumb from './../../../img/now_printing_thumb.jpg';
 
 /**
  * Used to display a list of books with a pagination button.
@@ -75,7 +76,7 @@ export default class BookList {
                       alt: locale.t('accessibility.cover_art'),
                       src: (book.cover ?
                         book.cover.replace('.jpg', '-thumb.jpg')
-                        : '/assets/no_cover.jpg'
+                        : noCoverImgThumb
                       ),
                     }),
                   ]),

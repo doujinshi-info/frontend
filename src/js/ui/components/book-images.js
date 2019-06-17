@@ -3,6 +3,8 @@
 import {LuminousGallery} from 'luminous-lightbox';
 import m from 'mithril';
 import locale from './../locale';
+import noCoverImgThumb from './../../../img/now_printing_thumb.jpg';
+import noCoverImg from './../../../img/now_printing.jpg';
 
 /**
  * Display images of a doujinshi.
@@ -43,12 +45,12 @@ export default class BookImages {
       m('.columns.is-multiline.is-mobile', [
         m('.column.has-text-centered.is-12', [
           m('a', {
-            href: this.cover,
+            href: (this.cover ? this.cover : noCoverImg),
             class: 'image-gallery',
           }, [
             m('img', {
               alt: locale.t('accessibility.cover_art'),
-              src: (this.cover ? this.cover : '/assets/no_cover.jpg'),
+              src: (this.cover ? this.cover : noCoverImgThumb),
             }),
           ]),
         ]),
