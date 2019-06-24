@@ -7,6 +7,10 @@ import isURLPath from './../../utils/is-path';
 import Search from './../../model/search';
 import uri from 'urijs';
 
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { faSearch } from "@fortawesome/free-solid-svg-icons/faSearch";
+import { faImage } from "@fortawesome/free-solid-svg-icons/faImage";
+
 /**
  * The search bar for the navbar.
  */
@@ -17,6 +21,9 @@ export default class NavBarSearch {
   constructor() {
     this.book = false;
     this.tagType = false;
+
+    library.add(faSearch, faImage);
+    dom.watch();
   }
 
   /**

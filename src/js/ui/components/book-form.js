@@ -7,7 +7,8 @@ import Tokenfield from 'tokenfield/dist/tokenfield';
 
 import getTagSet from './../../utils/get-tag-set';
 
-const Dropzone = require('dropzone/dist/dropzone.js');
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
 
 /**
  * Display a form for adding or modifying a doujinshi.
@@ -34,6 +35,9 @@ export default class BookForm {
     this.censorings = null;
 
     this.isLoading = false;
+
+    library.add(faTimes);
+    dom.watch();
   }
 
   /**
@@ -737,53 +741,55 @@ export default class BookForm {
               oncreate: () => {
                 const parentNode = this;
 
-                new Dropzone('div#coverZone', {
-                  url: '#',
-                  previewsContainer: '.cover-previews',
-                  autoProcessQueue: false,
-                  addRemoveLinks: true,
-                  maxFiles: 1,
-                  dictRemoveFile: '<i class="delete is-large"></i>',
-                  thumbnailWidth: 300,
-                  thumbnailHeight: 300,
-                  init: function() {
-                    if (parentNode.cover != null) {
-                      const url = parentNode.cover;
+                import('dropzone').then(module => {
+                  new module.default('div#coverZone', {
+                    url: '#',
+                    previewsContainer: '.cover-previews',
+                    autoProcessQueue: false,
+                    addRemoveLinks: true,
+                    maxFiles: 1,
+                    dictRemoveFile: '<i class="delete is-large"></i>',
+                    thumbnailWidth: 300,
+                    thumbnailHeight: 300,
+                    init: function() {
+                      if (parentNode.cover != null) {
+                        const url = parentNode.cover;
 
-                      const filename = url.substring(url.lastIndexOf('/')+1);
+                        const filename = url.substring(url.lastIndexOf('/')+1);
 
-                      const mockCover = {
-                        name: filename,
-                        size: 1,
-                        type: 'image/jpeg',
-                        existing: true,
-                      };
+                        const mockCover = {
+                          name: filename,
+                          size: 1,
+                          type: 'image/jpeg',
+                          existing: true,
+                        };
 
-                      this.emit('addedfile', mockCover);
-                      this.options.thumbnail.call(
-                          this,
-                          mockCover,
-                          parentNode.cover
-                      );
-                      this.emit('complete', mockCover);
-                      this.files.push(mockCover);
+                        this.emit('addedfile', mockCover);
+                        this.options.thumbnail.call(
+                            this,
+                            mockCover,
+                            parentNode.cover
+                        );
+                        this.emit('complete', mockCover);
+                        this.files.push(mockCover);
 
-                      mockCover._removeLink.innerHTML =
-                        this.options.dictRemoveFile;
-                    }
-
-                    this.on('addedfile', (file) => {
-                      if (this.files[1] != null) {
-                        this.removeFile(this.files[0]);
+                        mockCover._removeLink.innerHTML =
+                          this.options.dictRemoveFile;
                       }
 
-                      parentNode.formData.cover = file;
-                    });
+                      this.on('addedfile', (file) => {
+                        if (this.files[1] != null) {
+                          this.removeFile(this.files[0]);
+                        }
 
-                    this.on('removedfile', (file) => {
-                      parentNode.formData.cover = null;
-                    });
-                  },
+                        parentNode.formData.cover = file;
+                      });
+
+                      this.on('removedfile', (file) => {
+                        parentNode.formData.cover = null;
+                      });
+                    },
+                  });
                 });
               },
             }, ''),
@@ -797,57 +803,59 @@ export default class BookForm {
               oncreate: () => {
                 const parentNode = this;
 
-                new Dropzone('div#samplesZone', {
-                  url: '#',
-                  previewsContainer: '.sample-previews',
-                  autoProcessQueue: false,
-                  addRemoveLinks: true,
-                  dictRemoveFile: '<i class="delete is-large"></i>',
-                  thumbnailWidth: 300,
-                  thumbnailHeight: 300,
-                  init: function() {
-                    if (parentNode.samples && parentNode.samples.length > 0) {
-                      parentNode.samples.map((sample) => {
-                        const url = sample;
-                        const filename = url.substring(url.lastIndexOf('/')+1);
+                import('dropzone').then(module => {
+                  new module.default('div#samplesZone', {
+                    url: '#',
+                    previewsContainer: '.sample-previews',
+                    autoProcessQueue: false,
+                    addRemoveLinks: true,
+                    dictRemoveFile: '<i class="delete is-large"></i>',
+                    thumbnailWidth: 300,
+                    thumbnailHeight: 300,
+                    init: function() {
+                      if (parentNode.samples && parentNode.samples.length > 0) {
+                        parentNode.samples.map((sample) => {
+                          const url = sample;
+                          const filename = url.substring(url.lastIndexOf('/')+1);
 
-                        const mockSample = {
-                          name: filename,
-                          size: 1,
-                          type: 'image/jpeg',
-                          existing: true,
-                        };
+                          const mockSample = {
+                            name: filename,
+                            size: 1,
+                            type: 'image/jpeg',
+                            existing: true,
+                          };
 
-                        this.emit('addedfile', mockSample);
-                        this.options.thumbnail.call(this, mockSample, sample);
-                        this.emit('complete', mockSample);
-                        this.files.push(mockSample);
+                          this.emit('addedfile', mockSample);
+                          this.options.thumbnail.call(this, mockSample, sample);
+                          this.emit('complete', mockSample);
+                          this.files.push(mockSample);
 
-                        mockSample._removeLink.innerHTML =
-                          this.options.dictRemoveFile;
-                      });
-                    }
-
-                    this.on('addedfile', (file) => {
-                      parentNode.formData.samples.push(file);
-                    });
-
-                    this.on('removedfile', (file) => {
-                      if (!file.existing) {
-                        const removeIndex = parentNode.formData.samples
-                            .map((item) => {
-                              return item.name;
-                            })
-                            .indexOf(file.name);
-
-                        if (removeIndex >= 0) {
-                          parentNode.formData.samples.splice(removeIndex, 1);
-                        }
-                      } else {
-                        parentNode.formData.removed_samples.push(file.name);
+                          mockSample._removeLink.innerHTML =
+                            this.options.dictRemoveFile;
+                        });
                       }
-                    });
-                  },
+
+                      this.on('addedfile', (file) => {
+                        parentNode.formData.samples.push(file);
+                      });
+
+                      this.on('removedfile', (file) => {
+                        if (!file.existing) {
+                          const removeIndex = parentNode.formData.samples
+                              .map((item) => {
+                                return item.name;
+                              })
+                              .indexOf(file.name);
+
+                          if (removeIndex >= 0) {
+                            parentNode.formData.samples.splice(removeIndex, 1);
+                          }
+                        } else {
+                          parentNode.formData.removed_samples.push(file.name);
+                        }
+                      });
+                    },
+                  });
                 });
               },
             }, ''),

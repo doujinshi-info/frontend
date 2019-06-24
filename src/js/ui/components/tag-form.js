@@ -5,6 +5,9 @@ import locale from './../locale';
 import m from 'mithril';
 import Tokenfield from 'tokenfield/dist/tokenfield';
 
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
+
 /**
  * Displays a form for inputting tag information.
  */
@@ -21,6 +24,9 @@ export default class TagForm {
     this.tag = null;
     this.tokenfields = {};
     this.types = null;
+
+    library.add(faTimes);
+    dom.watch();
   }
 
   /**

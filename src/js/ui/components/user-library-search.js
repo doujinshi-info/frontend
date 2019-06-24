@@ -4,6 +4,10 @@ import locale from './../locale';
 import m from 'mithril';
 import getURLParam from './../../utils/get-url-params';
 
+
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { faSearch } from "@fortawesome/free-solid-svg-icons/faSearch";
+
 /**
  * User library book lists
  */
@@ -15,6 +19,9 @@ export default class UserLibrarySearch {
     this.isLoading = false;
     this.slug = false;
     this.type = false;
+
+    library.add(faSearch);
+    dom.watch();
   }
 
   /**

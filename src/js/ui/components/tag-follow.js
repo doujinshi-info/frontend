@@ -5,6 +5,9 @@ import m from 'mithril';
 
 import {Following} from './../../model/following';
 
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { faBell } from "@fortawesome/free-solid-svg-icons/faBell";
+
 /**
  * Displays a button for allowing a user to follow/unfollow a tag.
  */
@@ -16,6 +19,9 @@ export default class TagFollow {
     this.following = new Following();
     this.isFollowing = false;
     this.tag = false;
+
+    library.add(faBell);
+    dom.watch();
   }
 
   /**

@@ -2,7 +2,6 @@
 
 import locale from './../locale';
 import m from 'mithril';
-import Chart from 'chart.js';
 
 /**
  * Creates a bar chart.
@@ -15,6 +14,7 @@ export default class StatsBarChart {
     this.id = false;
     this.data = false;
     this.graph = false;
+    this.chartjs = false;
   }
 
   /**
@@ -50,11 +50,13 @@ export default class StatsBarChart {
       };
     });
 
-    this.graph = new Chart(e, {
-      type: 'bar',
-      data: {
-        datasets: dataset,
-      },
+    import('chart.js').then(module => {
+      this.graph = new module.default(e, {
+        type: 'bar',
+        data: {
+          datasets: dataset,
+        },
+      });
     });
   }
 

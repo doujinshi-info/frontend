@@ -2,7 +2,6 @@
 
 import locale from './../locale';
 import m from 'mithril';
-import Chart from 'chart.js';
 
 /**
  * Creates a pie chart
@@ -42,21 +41,23 @@ export default class StatsPieChart {
       return locale.name(record.name);
     });
 
-    this.graph = new Chart(e, {
-      type: 'pie',
-      data: {
-        datasets: [{
-          data: amounts,
-          backgroundColor: [
-            '#1fc8db',
-            '#fce473',
-            '#42afe3',
-            '#ed6c63',
-            '#97cd76',
-          ],
-        }],
-        labels: names,
-      },
+    import('chart.js').then(module => {
+      this.graph = new module.default(e, {
+        type: 'pie',
+        data: {
+          datasets: [{
+            data: amounts,
+            backgroundColor: [
+              '#1fc8db',
+              '#fce473',
+              '#42afe3',
+              '#ed6c63',
+              '#97cd76',
+            ],
+          }],
+          labels: names,
+        },
+      });
     });
   }
 

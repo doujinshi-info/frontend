@@ -1,8 +1,9 @@
 'use strict';
 
+import m from 'mithril';
+
 import BasePage from './../base-page';
 import locale from './../../locale';
-import m from 'mithril';
 
 // Models
 import {Tag} from './../../../model/tag';
@@ -13,9 +14,11 @@ import StatsTable from './../../components/stats-table';
 import ContentTab from './../../components/content-tabs';
 import StatsPieChart from './../../components/stats-pie-chart';
 import StatsBarChart from './../../components/stats-bar-chart';
-import bulmaCalendar from 'bulma-calendar';
 
 import setTagMeta from './../../../utils/set-tag-meta';
+
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { faSlidersH } from "@fortawesome/free-solid-svg-icons/faSlidersH";
 
 /**
  * Stats of a specific tag.
@@ -35,6 +38,9 @@ export default class TagStats extends BasePage {
 
     this.startDate = null;
     this.endDate = null;
+
+    library.add(faSlidersH);
+    dom.watch();
   }
 
   /**
@@ -91,29 +97,30 @@ export default class TagStats extends BasePage {
                   m('label.label', locale.t('fields.book.release_date')),
                   m('input.input', {
                     oncreate: (e) => {
-                      const cals = bulmaCalendar.attach('[type="date"]', {
-                        showHeader: false,
-                        isRange: true,
-                        showFooter: false,
-                        dateFormat: 'YYYY-MM-DD',
-                        lang: locale.getLang(),
+                      import('flatpickr').then(module => {
+                        module.default(e.dom, {
+                          mode: "range",
+                          onChange: (selectedDates, dateStr, instance) => {
+                            if (selectedDates[0] !== undefined) {
+                              this.startDate = selectedDates[0]
+                                .toISOString()
+                              .slice(0,10);
+                            } else {
+                              this.startDate = null;
+                            }
+
+                            if (selectedDates[1] !== undefined) {
+                              this.endDate = selectedDates[1]
+                                .toISOString()
+                              .slice(0,10);
+                            } else {
+                              this.endDate = null;
+                            }
+
+                            this.fetchStats(this.tag.data.id);
+                          }
+                        });
                       });
-
-                      for (let i = 0; i < cals.length; i++) {
-                        cals[i].on('select', (date) => {
-                          const [start, end] = cals[i].value().split(' - ');
-
-                          this.startDate = (start ? start : null);
-                          this.endDate = (end ? end : null);
-                          this.fetchStats(this.tag.data.id);
-                        });
-
-                        cals[i].on('clear', (e) => {
-                          this.startDate = null;
-                          this.endDate = null;
-                          this.fetchStats(this.tag.data.id);
-                        });
-                      }
                     },
                     type: 'date',
                     autocomplete: 'off',

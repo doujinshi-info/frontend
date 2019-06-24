@@ -8,6 +8,10 @@ import {Notification} from './../../model/notification';
 
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { faBell } from "@fortawesome/free-solid-svg-icons/faBell";
+import { faBellSlash } from "@fortawesome/free-solid-svg-icons/faBellSlash";
+
 /**
  * Displays a button which enables / disables push notifications.
  */
@@ -22,6 +26,9 @@ export default class PushNotification {
     this.btnText = locale.t('buttons.enable_push');
 
     this.notification = new Notification();
+
+    library.add(faBell, faBellSlash);
+    dom.watch();
   }
 
   /**

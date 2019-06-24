@@ -3,6 +3,9 @@
 import locale from './../locale';
 import m from 'mithril';
 
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { faUndo } from "@fortawesome/free-solid-svg-icons/faUndo";
+
 /**
  * Displays a button that allows change reverting.
  */
@@ -13,6 +16,9 @@ export default class ChangeRevert {
   constructor() {
     this.fn_submit = false;
     this.isLoading = false;
+
+    library.add(faUndo);
+    dom.watch();
   }
 
   /**

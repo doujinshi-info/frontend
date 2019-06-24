@@ -18,7 +18,7 @@
         <meta name="msapplication-TileColor" content="#2d89ef">
         <meta name="theme-color" content="#ffffff">
 
-        <link href="/<%=htmlWebpackPlugin.files.chunks.main.css %>" rel="stylesheet">
+        <link href="<%=htmlWebpackPlugin.files.chunks.main.css %>" rel="stylesheet">
         <script async src="https://www.googletagmanager.com/gtag/js?id=<%= process.env.GA_ID %>"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
@@ -28,5 +28,6 @@
         </script>
     </head>
     <body></body>
-    <script src="/<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
+    <script src="<%= htmlWebpackPlugin.files.chunks.vendor.entry %>"></script>
+    <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 </html>

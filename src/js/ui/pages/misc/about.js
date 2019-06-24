@@ -5,6 +5,13 @@ import locale from './../../locale';
 import m from 'mithril';
 import logo from './../../../../img/logo_large.png';
 
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+
+import { faDownload } from "@fortawesome/free-solid-svg-icons/faDownload";
+import { faBan } from "@fortawesome/free-solid-svg-icons/faBan";
+import { faUsers } from "@fortawesome/free-solid-svg-icons/faUsers";
+import { faCodeBranch } from "@fortawesome/free-solid-svg-icons/faCodeBranch";
+
 /**
  *
  */
@@ -14,6 +21,9 @@ export default class MiscAbout extends BasePage {
    */
   constructor() {
     super(locale.t('navi.about'));
+
+    library.add(faDownload, faBan, faUsers, faCodeBranch);
+    dom.watch();
   }
 
   /**

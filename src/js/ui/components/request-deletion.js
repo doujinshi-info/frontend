@@ -6,6 +6,9 @@ import m from 'mithril';
 import {Deletion} from './../../model/deletion';
 import Alert from './alert';
 
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
+
 /**
  * Displays a form for submitting a deletion request.
  */
@@ -16,6 +19,9 @@ export default class RequestDeletion {
   constructor() {
     this.deletion = new Deletion();
     this.formData = {};
+
+    library.add(faTrash);
+    dom.watch();
   }
 
   /**

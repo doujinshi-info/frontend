@@ -6,10 +6,14 @@ const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: { main: './src/js/index.js' },
+  entry: {
+    main: './src/js/index.js'
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'app.[chunkhash].js'
+    filename: '[name].[chunkhash].js',
+    chunkFilename: '[name].[chunkhash].js',
+    publicPath: '/'
   },
   resolve: {
     modules: ['node_modules'],
@@ -19,7 +23,6 @@ module.exports = {
       pace: 'pace-progress'
     }
   },
-  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -40,8 +43,11 @@ module.exports = {
                 useBuiltIns: 'usage',
                 debug: true
               }]
+            ],
+            plugins: [
+              ['@babel/plugin-syntax-dynamic-import']
             ]
-          }
+          },
         }
       },
       {
@@ -63,6 +69,21 @@ module.exports = {
         }
       }
     ]
+  },
+  externals: {
+    moment: 'moment'
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /node_modules/,
+          chunks: 'initial',
+          name: 'vendor',
+          enforce: true
+        }
+      }
+    }
   },
   plugins: [
     new Dotenv({
@@ -90,5 +111,6 @@ module.exports = {
     port: 8000,
     publicPath: '/',
     historyApiFallback: true
-  }
+  },
+  devtool: 'source-map'
 };

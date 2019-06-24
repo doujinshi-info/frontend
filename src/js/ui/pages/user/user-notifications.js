@@ -13,6 +13,9 @@ import {Notification} from './../../../model/notification';
 import NotificationList from './../../components/notification-list';
 import PushNotification from './../../components/push-notification';
 
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
+
 /**
  * Display a list of notifications to the user.
  */
@@ -27,6 +30,9 @@ class UserNotifications extends BasePage {
     this.notification = new Notification();
 
     this.page = Number(getURLParam('page')) || 1;
+
+    library.add(faCheck);
+    dom.watch();
   }
 
   /**

@@ -1,8 +1,12 @@
 'use strict';
 
+import m from 'mithril';
+
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { faSlidersH } from "@fortawesome/free-solid-svg-icons/faSlidersH";
+
 import BasePage from './../base-page';
 import locale from './../../locale';
-import m from 'mithril';
 
 // Models
 import {Stats} from './../../../model/stats';
@@ -12,7 +16,6 @@ import StatsTable from './../../components/stats-table';
 import StatsPieChart from './../../components/stats-pie-chart';
 import StatsBarChart from './../../components/stats-bar-chart';
 import StatsLineChart from './../../components/stats-line-chart';
-import bulmaCalendar from 'bulma-calendar';
 
 /**
  * Statistical information on the data.
@@ -30,6 +33,9 @@ export default class MiscStats extends BasePage {
     this.endDate = null;
 
     super.setDescription(locale.t('descriptions.statistics'));
+
+    library.add(faSlidersH);
+    dom.watch();
   }
 
   /**
@@ -75,30 +81,32 @@ export default class MiscStats extends BasePage {
                 m('label.label', locale.t('fields.book.release_date')),
                 m('input.input', {
                   oncreate: (e) => {
-                    const calendars = bulmaCalendar.attach('[type="date"]', {
-                      showHeader: false,
-                      isRange: true,
-                      showFooter: false,
-                      dateFormat: 'YYYY-MM-DD',
-                      lang: locale.getLang(),
+                    import('flatpickr').then(module => {
+                      module.default(e.dom, {
+                        mode: "range",
+                        onChange: (selectedDates, dateStr, instance) => {
+                          if (selectedDates[0] !== undefined) {
+                            this.startDate = selectedDates[0]
+                              .toISOString()
+                            .slice(0,10);
+                          } else {
+                            this.startDate = null;
+                          }
+
+                          if (selectedDates[1] !== undefined) {
+                            this.endDate = selectedDates[1]
+                              .toISOString()
+                            .slice(0,10);
+                          } else {
+                            this.endDate = null;
+                          }
+
+                          this.fetchStats();
+                        }
+                      });
                     });
-
-                    for (let i = 0; i < calendars.length; i++) {
-                      calendars[i].on('select', (e) => {
-                        const [start, end] = calendars[i].value().split(' - ');
-                        this.startDate = (start ? start : null);
-                        this.endDate = (end ? end : null);
-                        this.fetchStats();
-                      });
-
-                      calendars[i].on('clear', (e) => {
-                        this.startDate = null;
-                        this.endDate = null;
-                        this.fetchStats();
-                      });
-                    }
                   },
-                  type: 'date',
+                  type: 'text',
                   autocomplete: 'off',
                   placeholder: locale.t('fields.book.release_date'),
                 }),

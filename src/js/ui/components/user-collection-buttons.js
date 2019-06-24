@@ -6,6 +6,10 @@ import locale from './../locale';
 import {Auth} from './../../auth';
 import {UserCollection} from './../../model/user-collection';
 
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { faBookmark } from "@fortawesome/free-solid-svg-icons/faBookmark";
+import { faStar } from "@fortawesome/free-solid-svg-icons/faStar";
+
 /**
  * User library buttons for adding or removing from libraries.
  */
@@ -20,6 +24,9 @@ export default class UserCollectionButtons {
     this.book = false;
     this.inLibrary = null;
     this.inWishlist = null;
+
+    library.add(faBookmark, faStar);
+    dom.watch();
   }
 
   /**

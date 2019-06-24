@@ -2,7 +2,6 @@
 
 import locale from './../locale';
 import m from 'mithril';
-import Chart from 'chart.js';
 
 /**
  * Creates a line chart.
@@ -42,21 +41,23 @@ export default class StatsLineChart {
       return record.month;
     });
 
-    this.graph = new Chart(e, {
-      type: 'line',
-      data: {
-        datasets: [{
-          data: amounts,
-          backgroundColor: '#1fc8db',
-          borderColor: '#1fc8db',
-        }],
-        labels: names,
-      },
-      options: {
-        legend: {
-          display: false,
+    import('chart.js').then(module => {
+      this.graph = new module.default(e, {
+        type: 'line',
+        data: {
+          datasets: [{
+            data: amounts,
+            backgroundColor: '#1fc8db',
+            borderColor: '#1fc8db',
+          }],
+          labels: names,
         },
-      },
+        options: {
+          legend: {
+            display: false,
+          },
+        },
+      });
     });
   }
 
