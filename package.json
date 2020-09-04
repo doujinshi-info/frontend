@@ -54,7 +54,7 @@
     "i18next": "^13.1.5",
     "luminous-lightbox": "^2.3.2",
     "mithril": "^1.1.6",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "pace-progress": "^1.0.2",
     "sass-loader": "^7.1.0",
     "serviceworker-webpack-plugin": "^1.0.1",
